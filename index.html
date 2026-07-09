@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Newsletter Builder V3</title>
+  <title>Newsletter Builder V0.1.0</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -54,6 +54,7 @@
       --shadow-lg: 0 24px 64px rgba(26, 31, 46, 0.12);
       --shadow-xl: 0 32px 80px rgba(26, 31, 46, 0.16);
       --shadow-paper: 0 1px 1px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.08);
+      --shadow-floating: 0 12px 32px rgba(26, 31, 46, 0.18);
 
       --radius-sm: 8px;
       --radius-md: 12px;
@@ -811,9 +812,9 @@
     }
 
     .assistant-panel {
-      width: 340px;
-      min-width: 280px;
-      max-width: 440px;
+      width: 380px;
+      min-width: 320px;
+      max-width: 480px;
       display: flex;
       flex-direction: column;
       background: var(--bg-secondary);
@@ -902,7 +903,9 @@
     .assistant-content {
       flex: 1;
       overflow-y: auto;
-      padding: 16px
+      overflow-x: hidden;
+      padding: 12px;
+      min-width: 0
     }
 
     .assistant-page {
@@ -914,14 +917,99 @@
     }
 
     .assistant-section {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       background: var(--bg-tertiary);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 18px;
+      padding: 14px;
       box-shadow: var(--shadow-sm);
-      transition: box-shadow .2s ease
+      transition: box-shadow .2s ease;
+      max-width: 100%;
+      overflow: hidden
     }
+
+    .inspect-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 12px;
+      flex-wrap: wrap
+    }
+    .inspect-toolbar .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 600
+    }
+    .inspect-toolbar .theme-toggle input { accent-color: var(--accent); width: 16px; height: 16px }
+    .dark-preview-active .canvas-sheet {
+      background: #0f1218 !important;
+      color: #e8e9ec !important
+    }
+    .dark-preview-active .canvas-sheet * {
+      color: inherit !important;
+      border-color: #2a2e3a !important
+    }
+    .a11y-report { margin-top: 12px; font-size: 12px }
+    .a11y-pass { color: var(--success); font-weight: 600; padding: 12px; background: rgba(47,133,90,0.12); border-radius: var(--radius-sm) }
+    .a11y-summary { margin-bottom: 12px; color: var(--text-secondary); font-weight: 600 }
+    .a11y-group { margin-bottom: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden }
+    .a11y-group-title { padding: 8px 12px; font-weight: 700; color: white }
+    .a11y-fail-aa .a11y-group-title { background: var(--error) }
+    .a11y-fail-aaa .a11y-group-title { background: var(--warning) }
+    .a11y-item { padding: 10px 12px; border-top: 1px solid var(--border-subtle) }
+    .a11y-item-head { font-weight: 600; color: var(--text-primary); margin-bottom: 4px }
+    .a11y-item-detail { color: var(--text-muted); margin-bottom: 6px }
+    .a11y-item-fix { color: var(--accent); font-family: var(--font-mono); font-size: 11px }
+    .history-timeline {
+      max-height: 260px;
+      overflow-y: auto;
+      padding-right: 4px
+    }
+    .history-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 4px;
+      border-bottom: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: background-color .15s ease
+    }
+    .history-item:hover { background: var(--bg-secondary) }
+    .history-item img {
+      width: 56px;
+      height: 40px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      flex-shrink: 0
+    }
+    .history-item-info { flex: 1; min-width: 0 }
+    .history-item-time {
+      font-size: 11px;
+      color: var(--text-primary);
+      font-weight: 600
+    }
+    .history-item-meta {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px
+    }
+    .history-item-delete {
+      opacity: 0;
+      transition: opacity .15s ease;
+      padding: 2px 6px;
+      background: transparent;
+      border: none;
+      color: var(--error);
+      cursor: pointer;
+      font-size: 12px
+    }
+    .history-item:hover .history-item-delete { opacity: 1 }
 
     .assistant-section:hover {
       box-shadow: var(--shadow-md)
@@ -1063,31 +1151,38 @@
     }
 
     .slider-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) 40px;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 12px
+      gap: 6px;
+      margin-bottom: 12px;
+      width: 100%;
+      min-width: 0
     }
 
     .slider-row label {
       font-size: 12px;
       color: var(--text-muted);
-      min-width: 70px;
-      font-weight: 600
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
     }
 
     .slider-row input[type="range"] {
-      flex: 1;
+      width: 100%;
+      min-width: 0;
       accent-color: var(--accent)
     }
 
     .slider-row span {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-primary);
-      min-width: 36px;
       text-align: right;
       font-weight: 700;
-      font-family: var(--font-mono)
+      font-family: var(--font-mono);
+      white-space: nowrap;
+      overflow: hidden
     }
 
     .preset-btn {
@@ -2418,6 +2513,198 @@
       justify-content: center
     }
 
+    /* ===== Welcome Modal ===== */
+    .welcome-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(26, 31, 46, 0.6);
+      backdrop-filter: blur(6px);
+      z-index: 3100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .25s ease;
+      pointer-events: none
+    }
+
+    .welcome-overlay.open {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .welcome-dialog {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: min(560px, calc(100vw - 32px));
+      max-width: 560px;
+      box-shadow: var(--shadow-xl);
+      transform: scale(0.94);
+      transition: transform .25s ease;
+      position: relative;
+      overflow: hidden
+    }
+
+    .welcome-overlay.open .welcome-dialog {
+      transform: scale(1)
+    }
+
+    .welcome-dialog::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), var(--gold))
+    }
+
+    .welcome-body {
+      padding: 32px 34px 26px
+    }
+
+    .welcome-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .welcome-title .version {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-family: var(--font-sans)
+    }
+
+    .welcome-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 24px
+    }
+
+    .welcome-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px
+    }
+
+    .welcome-feature {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 12px;
+      text-align: center;
+      transition: transform .15s ease, box-shadow .15s ease
+    }
+
+    .welcome-feature:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md)
+    }
+
+    .welcome-feature-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(30, 58, 95, 0.12), rgba(212, 175, 55, 0.12));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 10px
+    }
+
+    .welcome-feature-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px
+    }
+
+    .welcome-feature-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.45
+    }
+
+    .welcome-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .welcome-actions-main {
+      display: flex;
+      gap: 10px
+    }
+
+    .welcome-actions .btn {
+      justify-content: center
+    }
+
+    .welcome-actions .btn-group {
+      height: 36px
+    }
+
+    .welcome-actions .btn-group .btn {
+      height: 30px;
+      padding: 0 12px;
+      font-size: 12px
+    }
+
+    .welcome-tip {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .welcome-tip code {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-secondary)
+    }
+
+    @media(max-width:640px) {
+      .welcome-features {
+        grid-template-columns: 1fr
+      }
+      .welcome-actions {
+        flex-direction: column;
+        align-items: stretch
+      }
+      .welcome-actions-main {
+        flex-direction: column
+      }
+      .welcome-actions .btn-group {
+        align-self: center
+      }
+    }
+
     /* Responsive */
     @media(max-width:1024px) {
       .toolbar {
@@ -2430,8 +2717,8 @@
       }
 
       .assistant-panel {
-        width: 320px;
-        min-width: 280px
+        width: 360px;
+        min-width: 320px
       }
 
       .canvas-component-draghandle {
@@ -2592,7 +2879,7 @@
       <img class="logo" src="https://pub.mdpi-res.com/img/design/mdpi-pub-logo-black-small1.svg?da3a8dcae975a41c?1782821685" alt="MDPI">
       <div class="brand-text">
         <span class="brand-name">Newsletter Builder</span>
-        <span class="brand-badge">V3</span>
+        <span class="brand-badge">V0.1.0</span>
       </div>
     </div>
 
@@ -2718,115 +3005,119 @@
           <div class="assistant-section">
             <div class="assistant-section-title">内置模板</div>
             <div class="template-grid">
-              <div class="template-card" onclick="loadTemplate('general')">
+              <div class="template-card" onclick="loadTemplate('template_1')">
                 <div class="template-thumb"><svg viewBox="0 0 120 84" preserveAspectRatio="xMidYMid slice">
                     <rect width="120" height="84" fill="var(--bg-tertiary)" />
-                    <rect x="12" y="14" width="96" height="14" rx="3" fill="var(--border)" />
-                    <rect x="12" y="36" width="72" height="6" rx="2" fill="var(--line-highlight)" />
-                    <rect x="12" y="48" width="84" height="6" rx="2" fill="var(--line-highlight)" />
-                    <rect x="12" y="60" width="56" height="6" rx="2" fill="var(--line-highlight)" />
-                    <rect x="12" y="74" width="28" height="8" rx="3" fill="var(--accent-soft)" />
+                    <rect x="0" y="0" width="120" height="28" rx="2" fill="var(--border)" />
+                    <rect x="8" y="34" width="60" height="6" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="44" width="54" height="18" rx="2" fill="var(--accent-soft)" />
+                    <rect x="74" y="34" width="38" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="74" y="42" width="34" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="74" y="50" width="36" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="74" y="66" width="24" height="14" rx="2" fill="var(--accent-soft)" />
                   </svg></div>
                 <div class="template-info">
-                  <div class="template-name">通用 Newsletter</div>
-                  <div class="template-desc">标题 + 正文 + CTA</div>
+                  <div class="template-name">Template 1</div>
+                  <div class="template-desc">Canidae 侧边栏精选</div>
 </div>
 </div>
-              <div class="template-card" onclick="loadTemplate('ecommerce')">
+              <div class="template-card" onclick="loadTemplate('template_2')">
                 <div class="template-thumb"><svg viewBox="0 0 120 84" preserveAspectRatio="xMidYMid slice">
                     <rect width="120" height="84" fill="var(--bg-tertiary)" />
-                    <rect x="0" y="0" width="120" height="36" fill="var(--border)" />
-                    <rect x="12" y="46" width="24" height="24" rx="3" fill="var(--line-highlight)" />
-                    <rect x="42" y="46" width="24" height="24" rx="3" fill="var(--line-highlight)" />
-                    <rect x="72" y="46" width="24" height="24" rx="3" fill="var(--line-highlight)" />
-                    <rect x="12" y="75" width="90" height="5" rx="2" fill="var(--line-highlight)" />
+                    <rect x="0" y="0" width="120" height="24" rx="2" fill="var(--border)" />
+                    <rect x="8" y="28" width="104" height="6" rx="2" fill="var(--accent-soft)" />
+                    <rect x="8" y="38" width="24" height="18" rx="2" fill="var(--line-highlight)" />
+                    <rect x="36" y="38" width="76" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="36" y="46" width="56" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="60" width="104" height="6" rx="2" fill="var(--accent-soft)" />
+                    <rect x="8" y="70" width="48" height="4" rx="2" fill="var(--line-highlight)" />
                   </svg></div>
                 <div class="template-info">
-                  <div class="template-name">电商促销</div>
-                  <div class="template-desc">Banner + 产品 + 优惠</div>
+                  <div class="template-name">Template 2</div>
+                  <div class="template-desc">Coatings 封面 + 图文论文</div>
 </div>
 </div>
-              <div class="template-card" onclick="loadTemplate('education')">
+              <div class="template-card" onclick="loadTemplate('template_3_1')">
                 <div class="template-thumb"><svg viewBox="0 0 120 84" preserveAspectRatio="xMidYMid slice">
                     <rect width="120" height="84" fill="var(--bg-tertiary)" />
-                    <rect x="8" y="12" width="48" height="24" rx="3" fill="var(--accent-soft)" />
-                    <rect x="8" y="42" width="100" height="6" rx="2" fill="var(--line-highlight)" />
-                    <rect x="8" y="54" width="80" height="6" rx="2" fill="var(--line-highlight)" />
-                    <rect x="8" y="66" width="56" height="6" rx="2" fill="var(--line-highlight)" />
-                    <circle cx="90" cy="22" r="10" fill="var(--border)" />
+                    <rect x="0" y="0" width="120" height="24" rx="2" fill="var(--border)" />
+                    <rect x="8" y="28" width="104" height="6" rx="2" fill="var(--accent-soft)" />
+                    <rect x="8" y="38" width="104" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="46" width="86" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="54" width="104" height="6" rx="2" fill="var(--accent-soft)" />
+                    <rect x="8" y="64" width="104" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="72" width="64" height="4" rx="2" fill="var(--line-highlight)" />
                   </svg></div>
                 <div class="template-info">
-                  <div class="template-name">教育课程</div>
-                  <div class="template-desc">课程列表 + 报名</div>
+                  <div class="template-name">Template 3.1</div>
+                  <div class="template-desc">Coatings 封面 + 论文列表</div>
 </div>
 </div>
-              <div class="template-card" onclick="loadTemplate('saas')">
+              <div class="template-card" onclick="loadTemplate('template_3_2')">
                 <div class="template-thumb"><svg viewBox="0 0 120 84" preserveAspectRatio="xMidYMid slice">
                     <rect width="120" height="84" fill="var(--bg-tertiary)" />
-                    <rect x="8" y="6" width="104" height="56" rx="4" fill="var(--border)" />
-                    <rect x="16" y="14" width="88" height="6" rx="2" fill="var(--bg-tertiary)" />
-                    <rect x="16" y="26" width="60" height="4" rx="2" fill="var(--bg-tertiary)" />
-                    <rect x="16" y="34" width="40" height="4" rx="2" fill="var(--bg-tertiary)" />
-                    <rect x="16" y="42" width="52" height="4" rx="2" fill="var(--bg-tertiary)" />
-                    <rect x="8" y="68" width="104" height="8" rx="2" fill="var(--accent-soft)" />
+                    <rect x="0" y="0" width="120" height="24" rx="2" fill="var(--border)" />
+                    <rect x="8" y="28" width="104" height="6" rx="2" fill="var(--accent-soft)" />
+                    <rect x="8" y="38" width="104" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="46" width="92" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="54" width="86" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="62" width="96" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="70" width="70" height="4" rx="2" fill="var(--line-highlight)" />
                   </svg></div>
                 <div class="template-info">
-                  <div class="template-name">SaaS 更新</div>
-                  <div class="template-desc">功能更新 + 使用技巧</div>
+                  <div class="template-name">Template 3.2</div>
+                  <div class="template-desc">Coatings Research Digest</div>
 </div>
 </div>
-              <div class="template-card" onclick="loadTemplate('festival')">
+              <div class="template-card" onclick="loadTemplate('template_4')">
                 <div class="template-thumb"><svg viewBox="0 0 120 84" preserveAspectRatio="xMidYMid slice">
                     <rect width="120" height="84" fill="var(--bg-tertiary)" />
-                    <rect x="60" y="20" width="50" height="50" rx="4" fill="var(--accent-soft)" transform="rotate(45 85 45)" />
-                    <rect x="8" y="60" width="60" height="6" rx="2" fill="var(--line-highlight)" />
-                    <rect x="8" y="70" width="40" height="6" rx="2" fill="var(--line-highlight)" />
+                    <rect x="0" y="0" width="120" height="16" rx="2" fill="var(--border)" />
+                    <rect x="8" y="20" width="104" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="28" width="104" height="6" rx="2" fill="var(--accent-soft)" />
+                    <rect x="8" y="38" width="24" height="18" rx="2" fill="var(--line-highlight)" />
+                    <rect x="36" y="38" width="76" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="36" y="46" width="56" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="60" width="104" height="6" rx="2" fill="var(--accent-soft)" />
+                    <rect x="8" y="70" width="48" height="4" rx="2" fill="var(--line-highlight)" />
                   </svg></div>
                 <div class="template-info">
-                  <div class="template-name">节日活动</div>
-                  <div class="template-desc">节日氛围 + 活动</div>
+                  <div class="template-name">Template 4</div>
+                  <div class="template-desc">会议横幅 + 图文论文</div>
 </div>
 </div>
-              <div class="template-card" onclick="loadTemplate('academic_journal')">
+              <div class="template-card" onclick="loadTemplate('template_5_1')">
                 <div class="template-thumb"><svg viewBox="0 0 120 84" preserveAspectRatio="xMidYMid slice">
                     <rect width="120" height="84" fill="var(--bg-tertiary)" />
-                    <rect x="8" y="8" width="40" height="52" rx="3" fill="var(--border)" />
-                    <rect x="56" y="12" width="56" height="4" rx="2" fill="var(--line-highlight)" />
-                    <rect x="56" y="22" width="48" height="4" rx="2" fill="var(--line-highlight)" />
-                    <rect x="56" y="32" width="52" height="4" rx="2" fill="var(--line-highlight)" />
-                    <rect x="56" y="42" width="40" height="4" rx="2" fill="var(--line-highlight)" />
-                    <rect x="8" y="66" width="68" height="6" rx="2" fill="var(--accent-soft)" />
+                    <rect x="0" y="0" width="120" height="16" rx="2" fill="var(--border)" />
+                    <rect x="8" y="20" width="104" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="28" width="104" height="6" rx="2" fill="var(--accent-soft)" />
+                    <rect x="8" y="38" width="104" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="46" width="86" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="54" width="104" height="6" rx="2" fill="var(--accent-soft)" />
+                    <rect x="8" y="64" width="104" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="72" width="64" height="4" rx="2" fill="var(--line-highlight)" />
                   </svg></div>
                 <div class="template-info">
-                  <div class="template-name">学术期刊</div>
-                  <div class="template-desc">Research Digest + CFP</div>
+                  <div class="template-name">Template 5.1</div>
+                  <div class="template-desc">会议横幅 + 论文列表</div>
 </div>
 </div>
-              <div class="template-card" onclick="loadTemplate('quarterly_journal')">
+              <div class="template-card" onclick="loadTemplate('template_5_2')">
                 <div class="template-thumb"><svg viewBox="0 0 120 84" preserveAspectRatio="xMidYMid slice">
                     <rect width="120" height="84" fill="var(--bg-tertiary)" />
-                    <rect x="0" y="0" width="120" height="28" fill="var(--border)" />
-                    <rect x="8" y="36" width="50" height="36" rx="3" fill="var(--line-highlight)" />
-                    <rect x="66" y="36" width="46" height="16" rx="3" fill="var(--line-highlight)" />
-                    <rect x="66" y="56" width="46" height="16" rx="3" fill="var(--line-highlight)" />
+                    <rect x="0" y="0" width="120" height="16" rx="2" fill="var(--border)" />
+                    <rect x="8" y="20" width="104" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="28" width="104" height="6" rx="2" fill="var(--accent-soft)" />
+                    <rect x="8" y="38" width="104" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="46" width="92" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="54" width="86" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="62" width="96" height="4" rx="2" fill="var(--line-highlight)" />
+                    <rect x="8" y="70" width="70" height="4" rx="2" fill="var(--line-highlight)" />
                   </svg></div>
                 <div class="template-info">
-                  <div class="template-name">季度通讯</div>
-                  <div class="template-desc">封面+编委+研究+会议</div>
-</div>
-</div>
-              <div class="template-card" onclick="loadTemplate('quarterly_empty')">
-                <div class="template-thumb"><svg viewBox="0 0 120 84" preserveAspectRatio="xMidYMid slice">
-                    <rect width="120" height="84" fill="var(--bg-tertiary)" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 4" />
-                    <rect x="20" y="12" width="80" height="6" rx="3" fill="var(--line-highlight)" />
-                    <rect x="20" y="24" width="80" height="6" rx="3" fill="var(--border)" />
-                    <rect x="20" y="40" width="60" height="4" rx="2" fill="var(--line-highlight)" />
-                    <rect x="20" y="50" width="70" height="4" rx="2" fill="var(--line-highlight)" />
-                    <rect x="20" y="66" width="40" height="6" rx="3" fill="var(--accent-soft)" />
-                  </svg></div>
-                <div class="template-info">
-                  <div class="template-name">季度空骨架</div>
-                  <div class="template-desc">从零填充的季度模板</div>
+                  <div class="template-name">Template 5.2</div>
+                  <div class="template-desc">会议横幅 + Research Digest</div>
 </div>
 </div>
 </div>
@@ -2864,18 +3155,18 @@
           <div class="assistant-section">
             <div class="assistant-section-title">预设配色</div>
             <div class="color-grid" id="presetColors">
-              <div class="color-swatch selected" style="background:linear-gradient(135deg,#667eea,#764ba2)" onclick="applyPreset('tech')" title="科技蓝紫"></div>
-              <div class="color-swatch" style="background:linear-gradient(135deg,#ff6b6b,#ee5a5a)" onclick="applyPreset('ecommerce')" title="电商红"></div>
-              <div class="color-swatch" style="background:linear-gradient(135deg,#10b981,#059669)" onclick="applyPreset('education')" title="教育绿"></div>
-              <div class="color-swatch" style="background:linear-gradient(135deg,#f59e0b,#d97706)" onclick="applyPreset('festival')" title="节日橙"></div>
-              <div class="color-swatch" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)" onclick="applyPreset('saas')" title="SaaS蓝"></div>
-              <div class="color-swatch" style="background:linear-gradient(135deg,#ec4899,#db2777)" onclick="applyPreset('creative')" title="创意粉"></div>
-              <div class="color-swatch" style="background:linear-gradient(135deg,#6366f1,#4f46e5)" onclick="applyPreset('indigo')" title="靛蓝"></div>
-              <div class="color-swatch" style="background:linear-gradient(135deg,#14b8a6,#0d9488)" onclick="applyPreset('teal')" title="青绿"></div>
-              <div class="color-swatch" style="background:linear-gradient(135deg,#f97316,#ea580c)" onclick="applyPreset('orange')" title="活力橙"></div>
-              <div class="color-swatch" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)" onclick="applyPreset('violet')" title="紫罗兰"></div>
-              <div class="color-swatch" style="background:linear-gradient(135deg,#06b6d4,#0891b2)" onclick="applyPreset('cyan')" title="青色"></div>
-              <div class="color-swatch" style="background:linear-gradient(135deg,#84cc16,#65a30d)" onclick="applyPreset('lime')" title="柠檬绿"></div>
+              <div class="color-swatch selected" data-preset="tech" style="background:linear-gradient(135deg,#667eea,#764ba2)" onclick="applyPreset('tech')" title="科技蓝紫"></div>
+              <div class="color-swatch" data-preset="ecommerce" style="background:linear-gradient(135deg,#ff6b6b,#ee5a5a)" onclick="applyPreset('ecommerce')" title="电商红"></div>
+              <div class="color-swatch" data-preset="education" style="background:linear-gradient(135deg,#10b981,#059669)" onclick="applyPreset('education')" title="教育绿"></div>
+              <div class="color-swatch" data-preset="festival" style="background:linear-gradient(135deg,#f59e0b,#d97706)" onclick="applyPreset('festival')" title="节日橙"></div>
+              <div class="color-swatch" data-preset="saas" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)" onclick="applyPreset('saas')" title="SaaS蓝"></div>
+              <div class="color-swatch" data-preset="creative" style="background:linear-gradient(135deg,#ec4899,#db2777)" onclick="applyPreset('creative')" title="创意粉"></div>
+              <div class="color-swatch" data-preset="indigo" style="background:linear-gradient(135deg,#6366f1,#4f46e5)" onclick="applyPreset('indigo')" title="靛蓝"></div>
+              <div class="color-swatch" data-preset="teal" style="background:linear-gradient(135deg,#14b8a6,#0d9488)" onclick="applyPreset('teal')" title="青绿"></div>
+              <div class="color-swatch" data-preset="orange" style="background:linear-gradient(135deg,#f97316,#ea580c)" onclick="applyPreset('orange')" title="活力橙"></div>
+              <div class="color-swatch" data-preset="violet" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)" onclick="applyPreset('violet')" title="紫罗兰"></div>
+              <div class="color-swatch" data-preset="cyan" style="background:linear-gradient(135deg,#06b6d4,#0891b2)" onclick="applyPreset('cyan')" title="青色"></div>
+              <div class="color-swatch" data-preset="lime" style="background:linear-gradient(135deg,#84cc16,#65a30d)" onclick="applyPreset('lime')" title="柠檬绿"></div>
 </div>
 </div>
           <div class="assistant-section">
@@ -2884,7 +3175,6 @@
             <button class="preset-btn" onclick="generateHarmony('complementary')">互补色</button>
             <button class="preset-btn" onclick="generateHarmony('triadic')">三角色</button>
             <div style="margin-top:8px;font-size:11px;color:var(--text-muted)">基于当前主色自动生成协调配色</div>
-</div>
 </div>
           <div class="assistant-section">
             <div class="assistant-section-title">字体栈</div>
@@ -2928,6 +3218,14 @@
 
         <!-- Inspect Page -->
         <div class="assistant-page" data-page="inspect">
+            <div class="inspect-toolbar">
+              <label class="theme-toggle">
+                <input type="checkbox" id="darkPreviewToggle" onchange="toggleDarkPreview()">
+                <span>邮件暗色客户端预览</span>
+              </label>
+              <button class="preset-btn" onclick="runAccessibilityAudit()">WCAG-AA 审计</button>
+            </div>
+            <div id="a11yReport" class="a11y-report"></div>
           <div class="assistant-section">
             <div class="assistant-section-title">发送前检查</div>
             <div class="check-list" id="checkList">
@@ -2971,9 +3269,17 @@
           <div class="assistant-section">
             <button class="btn btn-primary" style="width:100%" onclick="runPreflight(event)">运行检查</button>
 </div>
+            <div class="assistant-section">
+              <div class="assistant-section-title">
+                版本历史
+                <button class="tool-btn" style="float:right" onclick="clearHistory()" title="清空历史">🗑</button>
+              </div>
+              <div id="historyTimeline" class="history-timeline"></div>
+            </div>
 </div>
       </div>
-    </div>
+</div>
+      </div>
 
       <!-- Design Canvas -->
       <div class="design-canvas">
@@ -3055,6 +3361,55 @@
 </div>
 </div>
 
+  <!-- Welcome Modal -->
+  <div class="welcome-overlay" id="welcomeOverlay">
+    <div class="welcome-dialog" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+      <div class="welcome-body">
+        <div class="welcome-title" id="welcomeTitle">
+          欢迎使用 Newsletter Builder
+          <span class="version">V0.1.0</span>
+        </div>
+        <div class="welcome-subtitle">
+          为学术期刊与学术邮件场景打造的可视化排版工具。拖拽组件、套用预设、一键导出邮件 HTML，无需手写代码即可生成专业的学术快讯。
+        </div>
+
+        <div class="welcome-features">
+          <div class="welcome-feature">
+            <div class="welcome-feature-icon">🧩</div>
+            <div class="welcome-feature-title">可视化组件</div>
+            <div class="welcome-feature-desc">拖拽排序，实时预览，轻松组合标题、论文卡片、事件列表等学术组件。</div>
+          </div>
+          <div class="welcome-feature">
+            <div class="welcome-feature-icon">🎨</div>
+            <div class="welcome-feature-title">主题预设</div>
+            <div class="welcome-feature-desc">内置多套学术期刊配色，一键切换字体、间距与品牌色。</div>
+          </div>
+          <div class="welcome-feature">
+            <div class="welcome-feature-icon">📤</div>
+            <div class="welcome-feature-title">导出即用</div>
+            <div class="welcome-feature-desc">一键导出兼容邮件客户端的 HTML 代码，或全屏预览最终效果。</div>
+          </div>
+        </div>
+
+        <div class="welcome-actions">
+          <div class="welcome-actions-main">
+            <button class="btn btn-primary" id="welcomeLoadDemo">加载示例模板</button>
+            <button class="btn" id="welcomeStartBlank">新建空白画布</button>
+          </div>
+          <div class="btn-group">
+            <button class="btn" id="welcomeCloseOnce" type="button">本次关闭</button>
+            <button class="btn" id="welcomeCloseToday" type="button">今日关闭</button>
+          </div>
+        </div>
+
+        <div class="welcome-tip">
+          <span>💡</span>
+          <span>快捷键：<code>/</code> 呼出组件面板，<code>Ctrl+Enter</code> 刷新预览，<code>Ctrl+Z</code> 撤销</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Queue -->
   <div class="toast-queue" id="toastQueue"></div>
 <script>
@@ -3069,6 +3424,261 @@
       u = u.trim();
       if (/^javascript:/i.test(u) || /^data:/i.test(u)) return '#';
       return u;
+    }
+
+    const IDLE_BUDGET_MS = 3;
+    function scheduleIdle(task, opts) {
+      if (window.requestIdleCallback) {
+        window.requestIdleCallback(task, { timeout: (opts && opts.timeout) || 1000 });
+      } else {
+        setTimeout(task, 16);
+      }
+    }
+    const A11Y_THRESHOLDS = { AA: 4.5, AA_LARGE: 3.0, AAA: 7.0, AAA_LARGE: 4.5 };
+    const HISTORY_FRAME_LIMIT = 50;
+    const HISTORY_DB_NAME = 'newsletter-history-db';
+    const HISTORY_STORE = 'frames';
+    const DARK_EXPORT_VARS = {
+      '--bg-primary': '#0f1218',
+      '--bg-secondary': '#161922',
+      '--bg-tertiary': '#1c1f29',
+      '--bg-quaternary': '#252a36',
+      '--bg-elevated': '#1e222c',
+      '--text-primary': '#e8e9ec',
+      '--text-secondary': '#a0aec0',
+      '--text-muted': '#6b7280',
+      '--border': '#2a2e3a',
+      '--border-subtle': '#22262f'
+    };
+
+    let _historyDB = null;
+    function openHistoryDB() {
+      return new Promise((resolve, reject) => {
+        if (_historyDB) return resolve(_historyDB);
+        if (!window.indexedDB) return reject(new Error('IndexedDB unavailable'));
+        const req = indexedDB.open(HISTORY_DB_NAME, 1);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains(HISTORY_STORE)) {
+            db.createObjectStore(HISTORY_STORE, { keyPath: 'id' });
+          }
+        };
+        req.onsuccess = (e) => { _historyDB = e.target.result; resolve(_historyDB); };
+        req.onerror = () => reject(req.error);
+      });
+    }
+    function saveFrameToDB(frame) {
+      return openHistoryDB().then(db => new Promise((resolve, reject) => {
+        const tx = db.transaction(HISTORY_STORE, 'readwrite');
+        tx.objectStore(HISTORY_STORE).put(frame);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      }));
+    }
+    function getAllFramesFromDB() {
+      return openHistoryDB().then(db => new Promise((resolve, reject) => {
+        const tx = db.transaction(HISTORY_STORE, 'readonly');
+        const req = tx.objectStore(HISTORY_STORE).getAll();
+        req.onsuccess = () => resolve(req.result || []);
+        req.onerror = () => reject(req.error);
+      }));
+    }
+    function deleteFrameFromDB(id) {
+      return openHistoryDB().then(db => new Promise((resolve, reject) => {
+        const tx = db.transaction(HISTORY_STORE, 'readwrite');
+        tx.objectStore(HISTORY_STORE).delete(id);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      }));
+    }
+    function clearAllFramesFromDB() {
+      return openHistoryDB().then(db => new Promise((resolve, reject) => {
+        const tx = db.transaction(HISTORY_STORE, 'readwrite');
+        tx.objectStore(HISTORY_STORE).clear();
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      }));
+    }
+    async function pruneOldFrames() {
+      const frames = await getAllFramesFromDB();
+      if (frames.length <= HISTORY_FRAME_LIMIT) return;
+      frames.sort((a, b) => a.ts - b.ts);
+      const toDelete = frames.slice(0, frames.length - HISTORY_FRAME_LIMIT);
+      for (const f of toDelete) await deleteFrameFromDB(f.id);
+    }
+
+    let _darkPreviewActive = false;
+    function toggleDarkPreview() {
+      const checkbox = document.getElementById('darkPreviewToggle');
+      _darkPreviewActive = checkbox && checkbox.checked;
+      const canvasFrame = document.querySelector('.canvas-frame');
+      if (!canvasFrame) return;
+      let style = document.getElementById('dark-preview-injected');
+      if (_darkPreviewActive) {
+        if (!style) {
+          style = document.createElement('style');
+          style.id = 'dark-preview-injected';
+          document.head.appendChild(style);
+        }
+        const vars = Object.entries(DARK_EXPORT_VARS)
+          .map(([k, v]) => k + ':' + v).join(';');
+        style.textContent = '.dark-preview-active .canvas-sheet{' + vars + '}';
+        canvasFrame.classList.add('dark-preview-active');
+      } else {
+        canvasFrame.classList.remove('dark-preview-active');
+      }
+    }
+
+    function runAccessibilityAudit() {
+      const reportEl = document.getElementById('a11yReport');
+      if (!reportEl) return;
+      const failures = [];
+      let totalChecks = 0;
+      const canvasComponents = document.querySelectorAll('.canvas-component');
+      canvasComponents.forEach(comp => {
+        const compId = comp.id && comp.id.replace('wrap-', '');
+        const compType = comp.querySelector('[data-type]');
+        const typeLabel = compType ? compType.dataset.type : 'unknown';
+        const walker = document.createTreeWalker(comp, NodeFilter.SHOW_TEXT, null);
+        let node;
+        while ((node = walker.nextNode())) {
+          const text = node.nodeValue.trim();
+          if (!text) continue;
+          const el = node.parentElement;
+          if (!el) continue;
+          const cs = getComputedStyle(el);
+          const fg = cs.color;
+          let bgEl = el;
+          let bg = 'rgba(0, 0, 0, 0)';
+          while (bgEl && bgEl !== document.body) {
+            const b = getComputedStyle(bgEl).backgroundColor;
+            if (b && b !== 'rgba(0, 0, 0, 0)' && b !== 'transparent') { bg = b; break; }
+            bgEl = bgEl.parentElement;
+          }
+          if (bg === 'rgba(0, 0, 0, 0)') {
+            const sheet = document.querySelector('.canvas-sheet');
+            if (sheet) bg = getComputedStyle(sheet).backgroundColor;
+          }
+          const fgHex = rgbToHex(fg);
+          const bgHex = rgbToHex(bg);
+          if (!fgHex || !bgHex) continue;
+          const ratio = getContrastRatio(bgHex, fgHex);
+          if (!Number.isFinite(ratio)) continue;
+          const fontSize = parseFloat(cs.fontSize);
+          const fontWeight = parseInt(cs.fontWeight);
+          const isLarge = fontSize >= 18 || (fontSize >= 14 && fontWeight >= 700);
+          const aaRequired = isLarge ? A11Y_THRESHOLDS.AA_LARGE : A11Y_THRESHOLDS.AA;
+          const aaaRequired = isLarge ? A11Y_THRESHOLDS.AAA_LARGE : A11Y_THRESHOLDS.AAA;
+          totalChecks++;
+          const truncatedText = text.slice(0, 24) + (text.length > 24 ? '…' : '');
+          const elementLabel = el.tagName.toLowerCase() + ' "' + truncatedText + '"';
+          if (ratio < aaRequired) {
+            failures.push({
+              componentId: compId, componentType: typeLabel,
+              element: elementLabel,
+              bg: bgHex, fg: fgHex, ratio: Math.round(ratio * 100) / 100,
+              required: aaRequired, isLarge,
+              severity: 'AA',
+              suggestion: a11ySuggestion(bgHex, fgHex, aaRequired)
+            });
+          } else if (ratio < aaaRequired) {
+            failures.push({
+              componentId: compId, componentType: typeLabel,
+              element: elementLabel,
+              bg: bgHex, fg: fgHex, ratio: Math.round(ratio * 100) / 100,
+              required: aaaRequired, isLarge,
+              severity: 'AAA',
+              suggestion: a11ySuggestion(bgHex, fgHex, aaaRequired)
+            });
+          }
+        }
+      });
+      renderA11yReport({ totalChecks, failures, passed: totalChecks - failures.length });
+    }
+    function rgbToHex(rgb) {
+      if (!rgb) return null;
+      const m = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      if (!m) return null;
+      return '#' + [1, 2, 3].map(i => parseInt(m[i]).toString(16).padStart(2, '0')).join('');
+    }
+    function a11ySuggestion(bgHex, fgHex, required) {
+      let cur = fgHex;
+      for (let i = 0; i < 20; i++) {
+        cur = shiftLightness(cur, 5);
+        if (getContrastRatio(bgHex, cur) >= required) {
+          return '把文字色调至 ' + cur.toUpperCase() + ' 可达 ' + required + ':1';
+        }
+      }
+      cur = bgHex;
+      for (let i = 0; i < 20; i++) {
+        cur = shiftLightness(cur, -5);
+        if (getContrastRatio(cur, fgHex) >= required) {
+          return '把背景调至 ' + cur.toUpperCase() + ' 可达 ' + required + ':1';
+        }
+      }
+      return '建议手动调整颜色满足 ' + required + ':1';
+    }
+    function shiftLightness(hex, delta) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
+      if (max === min) { h = s = 0; }
+      else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+      }
+      l = Math.max(0, Math.min(1, l + delta / 100));
+      const hue2rgb = (p, q, t) => {
+        if (t < 0) t += 1; if (t > 1) t -= 1;
+        if (t < 1 / 6) return p + (q - p) * 6 * t;
+        if (t < 1 / 2) return q;
+        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+        return p;
+      };
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      const nr = Math.round(hue2rgb(p, q, h + 1 / 3) * 255);
+      const ng = Math.round(hue2rgb(p, q, h) * 255);
+      const nb = Math.round(hue2rgb(p, q, h - 1 / 3) * 255);
+      return '#' + [nr, ng, nb].map(x => x.toString(16).padStart(2, '0')).join('');
+    }
+    function renderA11yReport(report) {
+      const el = document.getElementById('a11yReport');
+      if (!el) return;
+      if (!report.failures.length) {
+        el.innerHTML = '<div class="a11y-pass">✓ 全部 ' + report.totalChecks + ' 项文字对比度通过 WCAG-AA</div>';
+        return;
+      }
+      const aaFails = report.failures.filter(f => f.severity === 'AA');
+      const aaaFails = report.failures.filter(f => f.severity === 'AAA');
+      let html = '<div class="a11y-summary">检查 ' + report.totalChecks + ' 项，通过 ' + report.passed + ' 项，失败 ' + report.failures.length + ' 项</div>';
+      if (aaFails.length) {
+        html += '<div class="a11y-group a11y-fail-aa"><div class="a11y-group-title">AA 不达标（必须修复）</div>';
+        aaFails.forEach(f => {
+          html += '<div class="a11y-item"><div class="a11y-item-head">' + escapeHtml(f.componentType) + ' · ' + escapeHtml(f.element) + '</div>' +
+            '<div class="a11y-item-detail">对比度 ' + f.ratio + ':1 / 需要 ' + f.required + ':1' + (f.isLarge ? '（大字）' : '') + '</div>' +
+            '<div class="a11y-item-fix">' + escapeHtml(f.suggestion) + '</div></div>';
+        });
+        html += '</div>';
+      }
+      if (aaaFails.length) {
+        html += '<div class="a11y-group a11y-fail-aaa"><div class="a11y-group-title">AAA 不达标（建议修复）</div>';
+        aaaFails.forEach(f => {
+          html += '<div class="a11y-item"><div class="a11y-item-head">' + escapeHtml(f.componentType) + ' · ' + escapeHtml(f.element) + '</div>' +
+            '<div class="a11y-item-detail">对比度 ' + f.ratio + ':1 / 需要 ' + f.required + ':1' + (f.isLarge ? '（大字）' : '') + '</div>' +
+            '<div class="a11y-item-fix">' + escapeHtml(f.suggestion) + '</div></div>';
+        });
+        html += '</div>';
+      }
+      el.innerHTML = html;
     }
 
     // ===== CUSTOM CONFIRM (replaces blocking confirm()) =====
@@ -3111,6 +3721,80 @@
         overlay.addEventListener('click', onOverlayClick);
         okBtn.focus();
       });
+    }
+
+    // ===== WELCOME MODAL =====
+    function getTodayKey() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    }
+
+    function shouldSkipWelcomeToday() {
+      if (!_storageOk) return false;
+      try {
+        return localStorage.getItem('newsletter-v3-welcome-date') === getTodayKey();
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function setWelcomeSkipToday() {
+      if (!_storageOk) return;
+      try {
+        localStorage.setItem('newsletter-v3-welcome-date', getTodayKey());
+        localStorage.removeItem('newsletter-v3-welcomed');
+      } catch (e) {}
+    }
+
+    function showWelcome() {
+      if (shouldSkipWelcomeToday()) return;
+      const overlay = document.getElementById('welcomeOverlay');
+      if (!overlay) return;
+      overlay.classList.add('open');
+      const loadDemoBtn = document.getElementById('welcomeLoadDemo');
+      const startBlankBtn = document.getElementById('welcomeStartBlank');
+      const closeOnceBtn = document.getElementById('welcomeCloseOnce');
+      const closeTodayBtn = document.getElementById('welcomeCloseToday');
+      if (!loadDemoBtn || !startBlankBtn || !closeOnceBtn || !closeTodayBtn) return;
+
+      function hide() {
+        overlay.classList.remove('open');
+        loadDemoBtn.removeEventListener('click', onLoadDemo);
+        startBlankBtn.removeEventListener('click', onStartBlank);
+        closeOnceBtn.removeEventListener('click', onCloseOnce);
+        closeTodayBtn.removeEventListener('click', onCloseToday);
+        overlay.removeEventListener('click', onOverlayClick);
+      }
+
+      function onLoadDemo() {
+        loadTemplate('template_1');
+        applyPreset('tech');
+        hide();
+        showToast('已加载示例模板，开始探索吧', 'success');
+      }
+
+      function onStartBlank() {
+        hide();
+        showToast('已创建空白画布', 'success');
+      }
+
+      function onCloseOnce() {
+        hide();
+      }
+
+      function onCloseToday() {
+        setWelcomeSkipToday();
+        hide();
+      }
+
+      function onOverlayClick(e) {
+        if (e.target === overlay) hide();
+      }
+      loadDemoBtn.addEventListener('click', onLoadDemo);
+      startBlankBtn.addEventListener('click', onStartBlank);
+      closeOnceBtn.addEventListener('click', onCloseOnce);
+      closeTodayBtn.addEventListener('click', onCloseToday);
+      overlay.addEventListener('click', onOverlayClick);
     }
 
     // ===== STORAGE AVAILABILITY =====
@@ -3447,6 +4131,8 @@
     function setAssistantTab(tabName) {
       document.querySelectorAll('.nav-item').forEach(t => t.classList.toggle('active', t.dataset.tab === tabName));
       document.querySelectorAll('.assistant-page').forEach(p => p.classList.toggle('active', p.dataset.page === tabName));
+      const scrollContainer = document.querySelector('.assistant-content');
+      if (scrollContainer) scrollContainer.scrollTop = 0;
     }
 
     // ===== THEME =====
@@ -3495,7 +4181,8 @@
       };
       updateUITheme();
       renderCanvas();
-      document.querySelectorAll('.color-swatch').forEach((s, i) => s.classList.toggle('selected', i === Object.keys(PRESETS).indexOf(name)));
+      checkContrast();
+      document.querySelectorAll('.color-swatch').forEach(s => s.classList.toggle('selected', s.dataset.preset === name));
       showToast('已应用预设配色');
     }
 
@@ -3505,7 +4192,14 @@
       if (type === 'analogous') colors = [hslToHex(h, 70, 60), hslToHex((h + 30) % 360, 70, 60), hslToHex((h - 30 + 360) % 360, 70, 60)];
       if (type === 'complementary') colors = [hslToHex(h, 70, 60), hslToHex((h + 180) % 360, 70, 60)];
       if (type === 'triadic') colors = [hslToHex(h, 70, 60), hslToHex((h + 120) % 360, 70, 60), hslToHex((h + 240) % 360, 70, 60)];
-      showToast('已生成协调配色，查看主色选择器');
+      if (colors.length >= 2) {
+        theme.primary = colors[0];
+        theme.accent2 = colors[1];
+      }
+      updateUITheme();
+      renderCanvas();
+      checkContrast();
+      showToast('已生成协调配色并应用到主题');
     }
 
     function updateUITheme() {
@@ -3577,6 +4271,9 @@
 
     function setGridBase(v) {
       spacing.gridBase = v;
+      document.querySelectorAll('.assistant-page[data-page="styles"] .preset-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.includes(v + 'px'));
+      });
       renderCanvas();
     }
 
@@ -4018,7 +4715,7 @@
         case 'product-list':
           const cols = parseInt(c.props.columns) || 2;
           const w = Math.floor(100 / cols);
-          let prodRows = c.props.products.map((p, i) => `<td width="${w}%" align="center" style="padding:8px" ${i>0?'width="2%"':''}><img src="${p.image}" width="100%" style="display:block;border-radius:8px;margin-bottom:8px" alt="${p.name}"><div style="font-weight:${font.weight};color:${theme.text};font-size:${font.body}px">${S(p.name)}</div><div style="color:${theme.primary};font-size:${font.h3}px;font-weight:${font.weight}">${S(p.price)}</div></td>`).join('');
+          let prodRows = c.props.products.map((p, i) => `<td width="${w}%" align="center" style="padding:8px"><img src="${p.image}" width="100%" style="display:block;border-radius:8px;margin-bottom:8px" alt="${S(p.name)}"><div style="font-weight:${font.weight};color:${theme.text};font-size:${font.body}px">${S(p.name)}</div><div style="color:${theme.primary};font-size:${font.h3}px;font-weight:${font.weight}">${S(p.price)}</div></td>`).join('');
           html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:${theme.bg}"><tr><td style="padding:${pad}px;font-family:${fontStack}"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>${prodRows}</tr></table></td></tr></table>`;
           break;
         case 'divider':
@@ -4065,7 +4762,7 @@
           html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:${theme.bg}"><tr><td style="padding:${pad}px;font-family:${fontStack}"><div style="font-size:${font.h3}px;font-weight:${font.weight};color:${theme.text};margin-bottom:10px">${S(c.props.title||'目录')}</div><table width="100%" cellpadding="0" cellspacing="0" border="0">${tocItems}</table></td></tr></table>`;
           break;
         case 'editor-note':
-          const notePars = (c.props.paragraphs || []).map(p => `<tr><td style="width:20px"></td><td style="padding:0 0 12px;font-size:13px;line-height:1.6;font-family:${fontStack};color:${theme.text};text-align:justify;vertical-align:top">${p.text}</td><td style="width:20px"></td></tr>`).join('');
+          const notePars = (c.props.paragraphs || []).map(p => `<tr><td style="width:20px"></td><td style="padding:0 0 12px;font-size:13px;line-height:1.6;font-family:${fontStack};color:${theme.text};text-align:justify;vertical-align:top">${S(p.text)}</td><td style="width:20px"></td></tr>`).join('');
           const noteImg = c.props.imageUrl ? `<tr><td colspan="3"><img src="${c.props.imageUrl}" width="100%" style="display:block;border-radius:10px 10px 0 0;margin:-4px;border:1px solid #f2f2f2" alt=""/></td></tr>` : '';
           html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:#f2f2f2;border-radius:10px">${noteImg}${notePars}<tr><td style="width:20px"></td><td style="padding:0 0 15px;font-size:12px;color:${theme.text};font-family:${fontStack};opacity:.7;text-align:right">${S(c.props.signature||'')}</td><td style="width:20px"></td></tr></table>`;
           break;
@@ -4116,7 +4813,7 @@
             if (p.layout === 'right') {
               return `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px"><tr><td style="width:10px"></td><td style="width:320px;text-align:justify;vertical-align:top;padding-top:10px;font-family:${fontStack}"><a style="color:${acc4};text-decoration:none" href="${p.url||'#'}"><strong>${S(p.title)}</strong></a></td><td style="width:10px"></td><td rowspan="3" style="width:260px;text-align:right;vertical-align:top"><a href="${p.url||'#'}" style="color:black;text-decoration:none"><img src="${p.imageUrl}" width="260" height="150" style="border-radius:0 10px 10px 0;margin:-3px;border:1px solid #f2f2f2" alt=""/></a></td></tr><tr><td style="width:10px"></td><td style="font-size:13px;text-align:justify;vertical-align:top;padding-bottom:8px;font-family:${fontStack};color:${theme.text}">${S(p.authors)}</td><td style="width:10px"></td></tr><tr><td style="width:10px"></td><td style="padding-bottom:10px"><a style="color:${acc4};text-decoration:none;border:thin ${acc4} solid;border-radius:20px;padding:8px 20px;font-size:12px;display:inline-block" href="${p.url||'#'}">Read more →</a></td><td style="width:10px"></td></tr></table>`;
             }
-            return `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;background:${c.props.bgColor||'#f2f2f2'};border-radius:10px"><tr><td rowspan="3" style="width:260px;vertical-align:top"><a href="${p.url||'#'}" style="color:black;text-decoration:none"><img src="${p.imageUrl}" width="260" height="150" style="border-radius:10px 0 0 10px;margin:-3px;border:1px solid #f2f2f2" alt=""/></a></td><td style="width:10px"></td><td style="font-size:13px;text-align:justify;vertical-align:top;padding-top:10px;font-family:${fontStack}"><a style="color:${acc4};text-decoration:none" href="${p.url||'#'}"><strong>${p.title}</strong></a></td><td style="width:10px"></td></tr><tr><td style="width:10px"></td><td style="font-size:13px;text-align:justify;vertical-align:top;padding-bottom:8px;font-family:${fontStack};color:${theme.text}">${p.authors}</td><td style="width:10px"></td></tr><tr><td style="width:10px"></td><td style="padding-bottom:10px"><a style="color:${acc4};text-decoration:none;border:thin ${acc4} solid;border-radius:20px;padding:8px 20px;font-size:12px;display:inline-block" href="${p.url||'#'}">Read more →</a></td><td style="width:10px"></td></tr></table>`;
+            return `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;background:${c.props.bgColor||'#f2f2f2'};border-radius:10px"><tr><td rowspan="3" style="width:260px;vertical-align:top"><a href="${p.url||'#'}" style="color:black;text-decoration:none"><img src="${p.imageUrl}" width="260" height="150" style="border-radius:10px 0 0 10px;margin:-3px;border:1px solid #f2f2f2" alt=""/></a></td><td style="width:10px"></td><td style="font-size:13px;text-align:justify;vertical-align:top;padding-top:10px;font-family:${fontStack}"><a style="color:${acc4};text-decoration:none" href="${p.url||'#'}"><strong>${S(p.title)}</strong></a></td><td style="width:10px"></td></tr><tr><td style="width:10px"></td><td style="font-size:13px;text-align:justify;vertical-align:top;padding-bottom:8px;font-family:${fontStack};color:${theme.text}">${S(p.authors)}</td><td style="width:10px"></td></tr><tr><td style="width:10px"></td><td style="padding-bottom:10px"><a style="color:${acc4};text-decoration:none;border:thin ${acc4} solid;border-radius:20px;padding:8px 20px;font-size:12px;display:inline-block" href="${p.url||'#'}">Read more →</a></td><td style="width:10px"></td></tr></table>`;
           }).join('');
           html = rp;
           break;
@@ -4130,8 +4827,8 @@
               e2 = evs[i + 1];
             const left = e1 ? `<td style="width:295px;vertical-align:top;border:1px solid #ddd;border-bottom:none;padding:20px;border-radius:10px 10px 0 0;font-family:${fontStack}"><a style="font-size:14px;color:black;text-decoration:none;line-height:18.2px" href="${e1.ctaUrl||'#'}"><strong>${S(e1.title)}</strong></a><p style="font-size:13px;margin-top:8px"><strong>Date:</strong> ${S(e1.date)}<br/><strong>Location:</strong> ${S(e1.location)}</p></td>` : '<td></td>';
             const right = e2 ? `<td style="width:295px;vertical-align:top;border:1px solid #ddd;border-bottom:none;padding:20px;border-radius:10px 10px 0 0;font-family:${fontStack}"><a style="font-size:14px;color:black;text-decoration:none;line-height:18.2px" href="${e2.ctaUrl||'#'}"><strong>${S(e2.title)}</strong></a><p style="font-size:13px;margin-top:8px"><strong>Date:</strong> ${S(e2.date)}<br/><strong>Location:</strong> ${S(e2.location)}</p></td>` : '<td></td>';
-            const leftBtn = e1 ? `<td style="width:295px;vertical-align:middle;border:1px solid #ddd;border-top:none;padding:20px;padding-top:0;border-radius:0 0 10px 10px"><a href="${e1.ctaUrl||'#'}" style="background-color:${acc5};color:white;padding:10px 20px;text-decoration:none;border-radius:5px;display:block;text-align:center;font-size:13px;font-family:${fontStack}">${e1.ctaText||'Learn more'}</a></td>` : '<td></td>';
-            const rightBtn = e2 ? `<td style="width:295px;vertical-align:middle;border:1px solid #ddd;border-top:none;padding:20px;padding-top:0;border-radius:0 0 10px 10px"><a href="${e2.ctaUrl||'#'}" style="background-color:${acc5};color:white;padding:10px 20px;text-decoration:none;border-radius:5px;display:block;text-align:center;font-size:13px;font-family:${fontStack}">${e2.ctaText||'Learn more'}</a></td>` : '<td></td>';
+            const leftBtn = e1 ? `<td style="width:295px;vertical-align:middle;border:1px solid #ddd;border-top:none;padding:20px;padding-top:0;border-radius:0 0 10px 10px"><a href="${e1.ctaUrl||'#'}" style="background-color:${acc5};color:white;padding:10px 20px;text-decoration:none;border-radius:5px;display:block;text-align:center;font-size:13px;font-family:${fontStack}">${S(e1.ctaText||'Learn more')}</a></td>` : '<td></td>';
+            const rightBtn = e2 ? `<td style="width:295px;vertical-align:middle;border:1px solid #ddd;border-top:none;padding:20px;padding-top:0;border-radius:0 0 10px 10px"><a href="${e2.ctaUrl||'#'}" style="background-color:${acc5};color:white;padding:10px 20px;text-decoration:none;border-radius:5px;display:block;text-align:center;font-size:13px;font-family:${fontStack}">${S(e2.ctaText||'Learn more')}</a></td>` : '<td></td>';
             rows.push(`<tr>${left}<td style="width:10px"></td>${right}</tr><tr>${leftBtn}<td style="width:10px"></td>${rightBtn}</tr>`);
           }
           html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px">${rows.join('')}</table>`;
@@ -4147,7 +4844,7 @@
       const selected = c.id === selectedComponentId ? 'selected' : '';
       const html = renderComponentHTML(c);
       const isMobile = ('ontouchstart' in window);
-      return `<div class="canvas-component ${selected}" id="wrap-${c.id}" data-id="${c.id}" role="article" aria-label="${c.type} 组件">${html}<div class="canvas-component-draghandle" draggable="true" title="拖拽排序" role="button" aria-label="拖拽排序">&#8942;</div><div class="canvas-component-actions">${isMobile?`<button class="btn mobile-only" onclick="moveUp('${c.id}')" aria-label="向上移动">&#9650;</button><button class="btn mobile-only" onclick="moveDown('${c.id}')" aria-label="向下移动">&#9660;</button>`:''}<button class="btn" onclick="event.stopPropagation();saveAsBlock('${c.id}')" title="保存为组件" aria-label="保存为组件">&#9733;</button><button class="btn" onclick="duplicateComponent('${c.id}')" title="复制" aria-label="复制组件">&#128465;</button><button class="btn" onclick="deleteComponent('${c.id}')" title="删除" aria-label="删除组件">&#10005;</button></div></div>`;
+      return `<div class="canvas-component ${selected}" id="wrap-${c.id}" data-id="${c.id}" role="article" aria-label="${c.type} 组件">${html}<div class="canvas-component-draghandle" draggable="true" title="拖拽排序" role="button" aria-label="拖拽排序">&#8942;</div><div class="canvas-component-actions">${isMobile?`<button class="btn mobile-only" onclick="moveUp('${c.id}')" aria-label="向上移动">&#9650;</button><button class="btn mobile-only" onclick="moveDown('${c.id}')" aria-label="向下移动">&#9660;</button>`:''}<button class="btn" onclick="event.stopPropagation();saveAsBlock('${c.id}')" title="保存为组件" aria-label="保存为组件">&#9733;</button><button class="btn" onclick="duplicateComponent('${c.id}')" title="复制" aria-label="复制组件">&#128203;</button><button class="btn" onclick="deleteComponent('${c.id}')" title="删除" aria-label="删除组件">&#10005;</button></div></div>`;
     }
 
     function selectComponent(id) {
@@ -4250,99 +4947,146 @@
     }
 
     // ===== TEMPLATES =====
+    const COATINGS_INTRO = [
+      'To keep you abreast of advancements in coatings and thin films research, <em>Coatings</em> is pleased to present the highly cited papers from 2024.',
+      'This curated selection covers the following topics:<ul><li><a style="font-size:13px;color:#3F2904;text-decoration:none;padding-left:0px" href="https://www.mdpi.com/journal/coatings/sections/Surface_Characterization_Deposition_Modification">Surface Characterization, Deposition and Modification</a>;</li><li><a style="font-size:13px;color:#3F2904;text-decoration:none;padding-left:0px" href="https://www.mdpi.com/journal/coatings/sections/energy">Surface Engineering for Energy Harvesting, Conversion, and Storage</a>;</li><li><a style="font-size:13px;color:#3F2904;text-decoration:none;padding-left:0px" href="https://www.mdpi.com/journal/coatings/sections/polymer">Functional Polymer Coatings and Films</a>;</li><li><a style="font-size:13px;color:#3F2904;text-decoration:none;padding-left:0px" href="https://www.mdpi.com/journal/coatings/sections/food">Coatings for Food Technology and System</a>;</li><li><a style="font-size:13px;color:#3F2904;text-decoration:none;padding-left:0px" href="https://www.mdpi.com/journal/coatings/sections/Laser_Coatings">Laser Coatings</a>.</li></ul>',
+      'We hope you find inspiration in these cutting-edge studies.'
+    ];
+    const COATINGS_PAPERS = [
+      { title: 'Interaction Regularity of Biomolecules on Mg and Mg-Based Alloy Surfaces: A First-Principls Study', authors: 'Zhe Fang et al.', url: 'https://www.mdpi.com/2079-6412/14/1/25', imageUrl: 'https://res.mdpi.com/data/251107-grey-border-monthly-template-1.jpg' },
+      { title: 'Functionalization of Plasma Electrolytic Oxidation/Sol–Gel Coatings on AZ31 with Organic Corrosion Inhibitors', authors: 'Borja Pillado et al.', url: 'https://www.mdpi.com/2079-6412/14/1/84', imageUrl: 'https://res.mdpi.com/data/251107-grey-border-monthly-template-2.jpg' },
+      { title: 'Albumin–Rutin Nanoparticles: Design, Characterization, and Biophysical Evaluation', authors: 'Claudia G. Chilom et al.', url: 'https://www.mdpi.com/2079-6412/14/2/220', imageUrl: 'https://res.mdpi.com/data/251107-grey-border-monthly-template-3.jpg' },
+      { title: 'Influence of Organic Coating Thickness on Electrochemical Impedance Spectroscopy Response', authors: 'Amanda Suellen de Paula et al.', url: 'https://www.mdpi.com/2079-6412/14/3/285', imageUrl: 'https://res.mdpi.com/data/251107-grey-border-monthly-template-4.jpg' },
+      { title: 'On the Limits of the EIS Low-Frequency Impedance Modulus as a Tool to Describe the Protection Properties of Organic Coatings Exposed to Accelerated Aging Tests', authors: 'Andrea Cristoforetti et al.', url: 'https://www.mdpi.com/2079-6412/13/3/598', imageUrl: 'https://res.mdpi.com/data/251107-grey-border-monthly-template-5.jpg' },
+      { title: 'Impact of High Concentrations of Cellulose Fibers on the Morphology, Durability and Protective Properties of Wood Paint', authors: 'Massimo Calovi and Stefano Rossi', url: 'https://www.mdpi.com/2079-6412/13/4/721', imageUrl: 'https://res.mdpi.com/data/251107-grey-border-monthly-template-6.jpg' },
+      { title: 'Novel Approach for Improving Papaya Fruit Storage with Carnauba Wax Nanoemulsion in Combination with <em>Syzigium aromaticum</em> and <em>Mentha spicata</em> Essential Oils', authors: 'Josemar Gonçalves de Oliveira Filho et al.', url: 'https://www.mdpi.com/2079-6412/13/5/847', imageUrl: 'https://res.mdpi.com/data/251107-grey-border-monthly-template-7.jpg' },
+      { title: 'Preservative Effects of Flaxseed Gum-Sodium Alginate Active Coatings Containing Carvacrol on Quality of Turbot (<em>Scophthalmus maximus</em>) during Cold Storage', authors: 'Xinrui Yang et al.', url: 'https://www.mdpi.com/2079-6412/14/3/338', imageUrl: 'https://res.mdpi.com/data/251107-grey-border-monthly-template-8.jpg' },
+      { title: 'Surface Texturing and Wettability Modification by Nanosecond Pulse Laser Ablation of Stainless Steels', authors: 'Jialin Dong, Yang Liu and Manuela Pacella', url: 'https://www.mdpi.com/2079-6412/14/4/467', imageUrl: 'https://res.mdpi.com/data/251107-grey-border-monthly-template-9.jpg' },
+      { title: 'Antifouling Coatings Fabricated by Laser Cladding', authors: 'Shuwen Wang et al.', url: 'https://www.mdpi.com/2079-6412/13/2/397', imageUrl: 'https://res.mdpi.com/data/251107-grey-border-monthly-template-10-200x120.jpg' }
+    ];
+    const COATINGS_SPECIAL_ISSUES = [
+      { title: 'Advanced Coating Technology by Physical Vapor Deposition and Applications', editor: 'Chuen-Lin Tien', deadline: '20 September 2025', url: 'https://www.mdpi.com/journal/coatings/special_issues/35EK1266QR', imageUrl: 'https://res.mdpi.com/data/2025-08-15_coatings_newsletter_35ek1266qr_abstract.jpg' },
+      { title: 'Shape Memory Alloy Films and High-Entropy Alloy Films', editor: 'Ana Sofia Ramos', deadline: '30 December 2025', url: 'https://www.mdpi.com/journal/coatings/special_issues/G53DMCA8I2', imageUrl: 'https://res.mdpi.com/data/2025-08-12_coatings_newsletter_g53dmca8i2.jpg' }
+    ];
+    const COATINGS_HIGHLIGHTS = [
+      { title: 'Open Access', desc: 'Unlimited and free access for readers' },
+      { title: 'No Copyright Constraints', desc: 'Retain copyright of your work and free use of your article' },
+      { title: '2024 Impact Factor: 2.8', desc: '(Journal Citation Reports – Clarivate, 2025)' },
+      { title: '2024 CiteScore: 5.4', desc: '(Scopus, 2025)' },
+      { title: 'Rapid Publication', desc: 'Manuscripts are peer-reviewed and a first decision is provided to authors approximately 14.7 days after submission; acceptance to publication is undertaken in 2.4 days (median values for papers published in this journal in the first half of 2025).' },
+      { title: 'Thorough Peer-Review' },
+      { title: 'Coverage by Leading Indexing Services', desc: 'Scopus, SCIE (Web of Science), Ei Compendex, CAPlus / SciFinder, and other databases' },
+      { title: 'No Space Constraints, No Extra Space or Color Charges', desc: 'No restriction on the maximum length of the papers, number of figures or colors' },
+      { title: 'Discounts on Article Processing Charges (APC)', desc: 'If you belong to an institute that participates with the MDPI Institutional Open Access Program (IOAP), please visit mdpi.com/ioap' }
+    ];
+
     const TEMPLATES = {
-      general: [
-        { type: 'header', id: 'h1', props: { title: '欢迎订阅', subtitle: '每周精选内容，直达你的邮箱' } },
-        { type: 'image-text', id: 'it1', props: { layout: 'top', imageUrl: 'https://via.placeholder.com/600x200', title: '本期精选', content: '在这里输入你的精彩内容...', buttonText: '阅读更多' } },
-        { type: 'cta', id: 'c1', props: { text: '立即订阅', url: '#' } },
-        { type: 'footer', id: 'f1' }
+      template_1: [
+        { type: 'banner', id: 'b1', props: { imageUrl: 'https://res.mdpi.com/data/20251128-newsletter-banner-paper-promotion-20251128.png', url: '#' } },
+        { type: 'image-text', id: 'it1', props: { layout: 'top', title: 'Current Trends in Diagnosis, Treatment and Prognosis of Canine Insulinoma', content: 'Dogs can develop a tumour of the pancreas that produces too much insulin, which is called an “insulinoma”. These tumours cause signs such as collapse at exercise and very low blood sugar. Insulinomas are difficult to cure because they spread to other tissues very commonly.', imageUrl: 'https://res.mdpi.com/data/happy-pet-dogs-playing-grass.jpg', buttonText: 'Read Article' } },
+        { type: 'image-text', id: 'it2', props: { layout: 'top', title: 'Proteomics Evaluation of Semen of Clinically Healthy Beagle-Breed Dogs', content: 'Proteomics aims to identify proteins present in a sample and to study their expression during various physiological or pathological conditions. The proteome includes all proteins present in a cell or a tissue at any given time; this takes into account all post-translational modifications that occur, and is highly dynamic.', imageUrl: 'https://res.mdpi.com/data/selective-focus-shot-young-tricolor-beagle-lying-grass-his-ball.jpg', buttonText: 'Read Article' } },
+        { type: 'paper-list', id: 'pl1', props: { papers: [{ title: 'Sexual Dimorphic Innate Immune Response to a Viral–Bacterial Respiratory Disease Challenge in Beef Calves', authors: 'Nicole C. Burdick Sanchez et al.', url: 'https://www.mdpi.com/2306-7381/9/12/696' }, { title: 'A New Sampling Approach for the Detection of Swine Influenza a Virus on European Sow Farms', authors: 'Kathrin Lillie-Jaschniski et al.', url: 'https://www.mdpi.com/2306-7381/9/7/338' }, { title: 'Canine Leishmaniasis: Update on Epidemiology, Diagnosis, Treatment, and Prevention', authors: 'Manuel Morales-Yuste et al.', url: 'https://www.mdpi.com/2306-7381/9/8/387' }, { title: 'Pituitary Pars Intermedia Dysfunction (PPID) in Horses', authors: 'Naomi C. Kirkwood et al.', url: 'https://www.mdpi.com/2306-7381/9/10/556' }, { title: 'The Kitty Microbiome Project: Defining the Healthy Fecal “Core Microbiome” in Pet Domestic Cats', authors: 'Holly H. Ganz et al.', url: 'https://www.mdpi.com/2306-7381/9/11/635' }], bgColor: '#f2f2f2', accentColor: '#660C62' } },
+        { type: 'banner', id: 'b2', props: { imageUrl: 'https://res.mdpi.com/data/24conf-iocvs-2025-banner2-logo.jpg', url: 'https://sciforum.net/event/IOCVS2025' } }
       ],
-      ecommerce: [
-        { type: 'header', id: 'h1', props: { title: '双11大促', subtitle: '全场低至5折，限时抢购' } },
-        { type: 'cta', id: 'c1', props: { text: '立即抢购', url: '#' } },
-        { type: 'product-list', id: 'pl1', props: { columns: 2, products: [{ name: '爆款A', price: '¥99', image: 'https://via.placeholder.com/150' }, { name: '爆款B', price: '¥199', image: 'https://via.placeholder.com/150' }] } },
-        { type: 'cta', id: 'c2', props: { text: '查看全部商品', url: '#' } },
-        { type: 'footer', id: 'f1' }
+      template_2: [
+        { type: 'academic-hero', id: 'ah1', props: { imageUrl: 'https://res.mdpi.com/data/251026-cm-monthly-template-top-banner.jpg', introLines: COATINGS_INTRO } },
+        { type: 'section-title', id: 'st1', props: { title: 'Surface Characterization, Deposition and Modification', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'image-text', id: 'itc1', props: { layout: 'left', title: COATINGS_PAPERS[0].title, content: COATINGS_PAPERS[0].authors, imageUrl: COATINGS_PAPERS[0].imageUrl, buttonText: 'Read Article' } },
+        { type: 'image-text', id: 'itc2', props: { layout: 'left', title: COATINGS_PAPERS[1].title, content: COATINGS_PAPERS[1].authors, imageUrl: COATINGS_PAPERS[1].imageUrl, buttonText: 'Read Article' } },
+        { type: 'section-title', id: 'st2', props: { title: 'Surface Engineering for Energy Harvesting, Conversion, and Storage', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'image-text', id: 'itc3', props: { layout: 'left', title: COATINGS_PAPERS[2].title, content: COATINGS_PAPERS[2].authors, imageUrl: COATINGS_PAPERS[2].imageUrl, buttonText: 'Read Article' } },
+        { type: 'section-title', id: 'st3', props: { title: 'Functional Polymer Coatings and Films', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'image-text', id: 'itc4', props: { layout: 'left', title: COATINGS_PAPERS[3].title, content: COATINGS_PAPERS[3].authors, imageUrl: COATINGS_PAPERS[3].imageUrl, buttonText: 'Read Article' } },
+        { type: 'image-text', id: 'itc5', props: { layout: 'left', title: COATINGS_PAPERS[4].title, content: COATINGS_PAPERS[4].authors, imageUrl: COATINGS_PAPERS[4].imageUrl, buttonText: 'Read Article' } },
+        { type: 'image-text', id: 'itc6', props: { layout: 'left', title: COATINGS_PAPERS[5].title, content: COATINGS_PAPERS[5].authors, imageUrl: COATINGS_PAPERS[5].imageUrl, buttonText: 'Read Article' } },
+        { type: 'section-title', id: 'st4', props: { title: 'Coatings for Food Technology and System', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'image-text', id: 'itc7', props: { layout: 'left', title: COATINGS_PAPERS[6].title, content: COATINGS_PAPERS[6].authors, imageUrl: COATINGS_PAPERS[6].imageUrl, buttonText: 'Read Article' } },
+        { type: 'image-text', id: 'itc8', props: { layout: 'left', title: COATINGS_PAPERS[7].title, content: COATINGS_PAPERS[7].authors, imageUrl: COATINGS_PAPERS[7].imageUrl, buttonText: 'Read Article' } },
+        { type: 'section-title', id: 'st5', props: { title: 'Laser Coatings', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'image-text', id: 'itc9', props: { layout: 'left', title: COATINGS_PAPERS[8].title, content: COATINGS_PAPERS[8].authors, imageUrl: COATINGS_PAPERS[8].imageUrl, buttonText: 'Read Article' } },
+        { type: 'image-text', id: 'itc10', props: { layout: 'left', title: COATINGS_PAPERS[9].title, content: COATINGS_PAPERS[9].authors, imageUrl: COATINGS_PAPERS[9].imageUrl, buttonText: 'Read Article' } },
+        { type: 'banner', id: 'b1', props: { imageUrl: 'https://res.mdpi.com/data/2025-05-15_coatings_travel-awards_newsletter_600x102.jpg', url: 'https://www.mdpi.com/journal/coatings/awards/3376' } },
+        { type: 'special-issue', id: 'si1', props: { title: 'Call for Papers', issues: COATINGS_SPECIAL_ISSUES, columns: 2 } },
+        { type: 'highlight-box', id: 'hb1', props: { title: 'Why Submit to Coatings?', items: COATINGS_HIGHLIGHTS, icon: '&#x2B9A;', accentColor: '#3F2904' } },
+        { type: 'bottom-banner', id: 'bb1', props: { imageUrl: 'https://res.mdpi.com/data/materials-proceedings-20250512.jpg', url: 'https://www.mdpi.com/journal/materproc' } }
       ],
-      education: [
-        { type: 'header', id: 'h1', props: { title: '新课程上线', subtitle: '掌握前沿技能，开启职业新篇章' } },
-        { type: 'image-text', id: 'it1', props: { layout: 'left', imageUrl: 'https://via.placeholder.com/200x150', title: 'Web 开发进阶', content: '深入学习现代前端框架与工程化实践', buttonText: '了解课程' } },
-        { type: 'image-text', id: 'it2', props: { layout: 'left', imageUrl: 'https://via.placeholder.com/200x150', title: '数据分析入门', content: '从零开始学习数据驱动的决策方法', buttonText: '了解课程' } },
-        { type: 'cta', id: 'c1', props: { text: '浏览全部课程', url: '#' } },
-        { type: 'footer', id: 'f1' }
+      template_3_1: [
+        { type: 'academic-hero', id: 'ah1', props: { imageUrl: 'https://res.mdpi.com/data/c-m-monthly-template-250821-600_250.jpg', introLines: COATINGS_INTRO } },
+        { type: 'section-title', id: 'st1', props: { title: 'Surface Characterization, Deposition and Modification', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'paper-list', id: 'pl1', props: { papers: COATINGS_PAPERS.slice(0, 2), bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'section-title', id: 'st2', props: { title: 'Surface Engineering for Energy Harvesting, Conversion, and Storage', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'paper-list', id: 'pl2', props: { papers: COATINGS_PAPERS.slice(2, 3), bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'section-title', id: 'st3', props: { title: 'Functional Polymer Coatings and Films', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'paper-list', id: 'pl3', props: { papers: COATINGS_PAPERS.slice(3, 6), bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'section-title', id: 'st4', props: { title: 'Coatings for Food Technology and System', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'paper-list', id: 'pl4', props: { papers: COATINGS_PAPERS.slice(6, 8), bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'section-title', id: 'st5', props: { title: 'Laser Coatings', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'paper-list', id: 'pl5', props: { papers: COATINGS_PAPERS.slice(8, 10), bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'banner', id: 'b1', props: { imageUrl: 'https://res.mdpi.com/data/2025-05-15_coatings_travel-awards_newsletter_600x102.jpg', url: 'https://www.mdpi.com/journal/coatings/awards/3376' } },
+        { type: 'special-issue', id: 'si1', props: { title: 'Call for Papers', issues: COATINGS_SPECIAL_ISSUES, columns: 2 } },
+        { type: 'highlight-box', id: 'hb1', props: { title: 'Why Submit to Coatings?', items: COATINGS_HIGHLIGHTS, icon: '&#x2B9A;', accentColor: '#3F2904' } },
+        { type: 'bottom-banner', id: 'bb1', props: { imageUrl: 'https://res.mdpi.com/data/materials-proceedings-20250512.jpg', url: 'https://www.mdpi.com/journal/materproc' } }
       ],
-      saas: [
-        { type: 'header', id: 'h1', props: { title: '产品更新', subtitle: 'V3.0 正式发布，10+ 项新功能' } },
-        { type: 'image-text', id: 'it1', props: { layout: 'left', imageUrl: 'https://via.placeholder.com/200x150', title: '智能助手', content: '全新 AI 驱动的智能助手，帮你提升效率', buttonText: '查看详情' } },
-        { type: 'divider', id: 'd1' },
-        { type: 'image-text', id: 'it2', props: { layout: 'left', imageUrl: 'https://via.placeholder.com/200x150', title: '协作空间', content: '团队实时协作，项目管理更高效', buttonText: '查看详情' } },
-        { type: 'cta', id: 'c1', props: { text: '更新日志', url: '#' } },
-        { type: 'footer', id: 'f1' }
+      template_3_2: [
+        { type: 'academic-hero', id: 'ah1', props: { imageUrl: 'https://res.mdpi.com/data/c-m-monthly-template-250821-600_250.jpg', introLines: ['To keep you abreast of advancements in coatings and thin films research, <em>Coatings</em> is pleased to present the highly cited papers from 2024.', 'This curated selection covers a range of topics, including surface deposition, polymer coatings, coatings for food, and laser coatings, among others.', 'We hope you find inspiration in these cutting-edge studies.'] } },
+        { type: 'divider-heading', id: 'dh1', props: { title: 'Research Digest', bgColor: '#3F2904', textColor: 'white', icon: '&#x2590;', hasBottomBorder: true } },
+        { type: 'paper-list', id: 'pl1', props: { papers: COATINGS_PAPERS, bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'banner', id: 'b1', props: { imageUrl: 'https://res.mdpi.com/data/2025-05-15_coatings_travel-awards_newsletter_600x102.jpg', url: 'https://www.mdpi.com/journal/coatings/awards/3376' } },
+        { type: 'special-issue', id: 'si1', props: { title: 'Call for Papers', issues: COATINGS_SPECIAL_ISSUES, columns: 2 } },
+        { type: 'highlight-box', id: 'hb1', props: { title: 'Why Submit to Coatings?', items: COATINGS_HIGHLIGHTS, icon: '&#x2B9A;', accentColor: '#3F2904' } },
+        { type: 'bottom-banner', id: 'bb1', props: { imageUrl: 'https://res.mdpi.com/data/materials-proceedings-20250512.jpg', url: 'https://www.mdpi.com/journal/materproc' } }
       ],
-      festival: [
-        { type: 'header', id: 'h1', props: { title: '春节快乐', subtitle: '恭贺新禧，万事如意' } },
-        { type: 'cta', id: 'c1', props: { text: '领取红包', url: '#' } },
-        { type: 'image-text', id: 'it1', props: { layout: 'top', imageUrl: 'https://via.placeholder.com/600x200', title: '新年特惠', content: '春节期间全场8折，限时7天', buttonText: '立即选购' } },
-        { type: 'social', id: 's1' },
-        { type: 'footer', id: 'f1' }
+      template_4: [
+        { type: 'banner', id: 'b1', props: { imageUrl: 'https://res.mdpi.com/data/250818_coatings-mcst-2025_newsletter_conference-banner2.jpg', url: 'https://sciforum.net/event/MCST-2025' } },
+        { type: 'editor-note', id: 'en1', props: { paragraphs: COATINGS_INTRO.map(text => ({ text })) } },
+        { type: 'section-title', id: 'st1', props: { title: 'Surface Characterization, Deposition and Modification', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'image-text', id: 'itc1', props: { layout: 'left', title: COATINGS_PAPERS[0].title, content: COATINGS_PAPERS[0].authors, imageUrl: COATINGS_PAPERS[0].imageUrl, buttonText: 'Read Article' } },
+        { type: 'image-text', id: 'itc2', props: { layout: 'left', title: COATINGS_PAPERS[1].title, content: COATINGS_PAPERS[1].authors, imageUrl: COATINGS_PAPERS[1].imageUrl, buttonText: 'Read Article' } },
+        { type: 'section-title', id: 'st2', props: { title: 'Surface Engineering for Energy Harvesting, Conversion, and Storage', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'image-text', id: 'itc3', props: { layout: 'left', title: COATINGS_PAPERS[2].title, content: COATINGS_PAPERS[2].authors, imageUrl: COATINGS_PAPERS[2].imageUrl, buttonText: 'Read Article' } },
+        { type: 'section-title', id: 'st3', props: { title: 'Functional Polymer Coatings and Films', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'image-text', id: 'itc4', props: { layout: 'left', title: COATINGS_PAPERS[3].title, content: COATINGS_PAPERS[3].authors, imageUrl: COATINGS_PAPERS[3].imageUrl, buttonText: 'Read Article' } },
+        { type: 'image-text', id: 'itc5', props: { layout: 'left', title: COATINGS_PAPERS[4].title, content: COATINGS_PAPERS[4].authors, imageUrl: COATINGS_PAPERS[4].imageUrl, buttonText: 'Read Article' } },
+        { type: 'image-text', id: 'itc6', props: { layout: 'left', title: COATINGS_PAPERS[5].title, content: COATINGS_PAPERS[5].authors, imageUrl: COATINGS_PAPERS[5].imageUrl, buttonText: 'Read Article' } },
+        { type: 'section-title', id: 'st4', props: { title: 'Coatings for Food Technology and System', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'image-text', id: 'itc7', props: { layout: 'left', title: COATINGS_PAPERS[6].title, content: COATINGS_PAPERS[6].authors, imageUrl: COATINGS_PAPERS[6].imageUrl, buttonText: 'Read Article' } },
+        { type: 'image-text', id: 'itc8', props: { layout: 'left', title: COATINGS_PAPERS[7].title, content: COATINGS_PAPERS[7].authors, imageUrl: COATINGS_PAPERS[7].imageUrl, buttonText: 'Read Article' } },
+        { type: 'section-title', id: 'st5', props: { title: 'Laser Coatings', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'image-text', id: 'itc9', props: { layout: 'left', title: COATINGS_PAPERS[8].title, content: COATINGS_PAPERS[8].authors, imageUrl: COATINGS_PAPERS[8].imageUrl, buttonText: 'Read Article' } },
+        { type: 'image-text', id: 'itc10', props: { layout: 'left', title: COATINGS_PAPERS[9].title, content: COATINGS_PAPERS[9].authors, imageUrl: COATINGS_PAPERS[9].imageUrl, buttonText: 'Read Article' } },
+        { type: 'banner', id: 'b2', props: { imageUrl: 'https://res.mdpi.com/data/2025-05-15_coatings_travel-awards_newsletter_600x102.jpg', url: 'https://www.mdpi.com/journal/coatings/awards/3376' } },
+        { type: 'special-issue', id: 'si1', props: { title: 'Call for Papers', issues: COATINGS_SPECIAL_ISSUES, columns: 2 } },
+        { type: 'highlight-box', id: 'hb1', props: { title: 'Why Submit to Coatings?', items: COATINGS_HIGHLIGHTS, icon: '&#x2B9A;', accentColor: '#3F2904' } },
+        { type: 'bottom-banner', id: 'bb1', props: { imageUrl: 'https://res.mdpi.com/data/materials-proceedings-20250512.jpg', url: 'https://www.mdpi.com/journal/materproc' } }
       ],
-      academic_journal: [
-        { type: 'academic-hero', id: 'ah1', props: { imageUrl: 'https://via.placeholder.com/600x250', introLines: ['这是期刊 Newsletter 的封面引言区域。您可以在此介绍本期内容亮点、研究领域或机构动态。', '第二段可以补充更多背景信息或致谢内容。'] } },
-        { type: 'news-toc', id: 'toc1', props: { title: '本期目录', items: [{ title: '示例文章标题 1', url: '#' }, { title: '示例文章标题 2', url: '#' }, { title: '示例文章标题 3', url: '#' }], style: 'numbered' } },
-        { type: 'divider-heading', id: 'dh1', props: { title: 'Research Digest', bgColor: '#004F6F', textColor: 'white', icon: '&#x2590;', hasBottomBorder: true } },
-        { type: 'paper-list', id: 'pl1', props: { title: 'Research Digest', papers: [{ title: '示例论文标题 1：研究方向与展望', authors: '作者A et al.', url: '#' }, { title: '示例论文标题 2：实验方法与数据分析', authors: '作者B et al.', url: '#' }], bgColor: '#f2f2f2', accentColor: '#004F6F' } },
-        { type: 'banner', id: 'b1', props: { imageUrl: 'https://via.placeholder.com/600x102', url: '#' } },
-        { type: 'divider-heading', id: 'dh2', props: { title: 'Call for Papers', bgColor: '#004F6F', textColor: 'white', icon: '&#x2590;', hasBottomBorder: true } },
-        { type: 'special-issue', id: 'si1', props: { title: 'Call for Papers', issues: [{ imageUrl: 'https://via.placeholder.com/260x150', title: '征稿方向示例 1', editor: '编辑姓名', deadline: '30 June 2026', url: '#' }, { imageUrl: 'https://via.placeholder.com/260x150', title: '征稿方向示例 2', editor: '编辑姓名', deadline: '30 November 2026', url: '#' }], columns: 2 } },
-        { type: 'divider-heading', id: 'dh3', props: { title: 'Why Submit?', bgColor: '#004F6F', textColor: 'white', icon: '&#x2590;', hasBottomBorder: true } },
-        { type: 'highlight-box', id: 'hb1', props: { title: 'Journal Highlights', items: [{ title: 'Open Access', desc: 'Unlimited and free access for readers', url: '' }, { title: 'Rapid Publication', desc: 'Fast peer review and publication', url: '' }, { title: 'Wide Coverage', desc: 'Indexed by major indexing services', url: '' }], icon: '&#x2B9A;', accentColor: '#004F6F' } },
-        { type: 'sponsor-banner', id: 'sb1', props: { imageUrl: 'https://via.placeholder.com/600x102', url: '#', topText: '', bottomText: '' } }
+      template_5_1: [
+        { type: 'banner', id: 'b1', props: { imageUrl: 'https://res.mdpi.com/data/250818_coatings-mcst-2025_newsletter_conference-banner2.jpg', url: 'https://sciforum.net/event/MCST-2025' } },
+        { type: 'editor-note', id: 'en1', props: { paragraphs: COATINGS_INTRO.map(text => ({ text })) } },
+        { type: 'section-title', id: 'st1', props: { title: 'Surface Characterization, Deposition and Modification', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'paper-list', id: 'pl1', props: { papers: COATINGS_PAPERS.slice(0, 2), bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'section-title', id: 'st2', props: { title: 'Surface Engineering for Energy Harvesting, Conversion, and Storage', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'paper-list', id: 'pl2', props: { papers: COATINGS_PAPERS.slice(2, 3), bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'section-title', id: 'st3', props: { title: 'Functional Polymer Coatings and Films', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'paper-list', id: 'pl3', props: { papers: COATINGS_PAPERS.slice(3, 6), bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'section-title', id: 'st4', props: { title: 'Coatings for Food Technology and System', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'paper-list', id: 'pl4', props: { papers: COATINGS_PAPERS.slice(6, 8), bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'section-title', id: 'st5', props: { title: 'Laser Coatings', bgColor: '#3F2904', textColor: 'white' } },
+        { type: 'paper-list', id: 'pl5', props: { papers: COATINGS_PAPERS.slice(8, 10), bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'banner', id: 'b2', props: { imageUrl: 'https://res.mdpi.com/data/2025-05-15_coatings_travel-awards_newsletter_600x102.jpg', url: 'https://www.mdpi.com/journal/coatings/awards/3376' } },
+        { type: 'special-issue', id: 'si1', props: { title: 'Call for Papers', issues: COATINGS_SPECIAL_ISSUES, columns: 2 } },
+        { type: 'highlight-box', id: 'hb1', props: { title: 'Why Submit to Coatings?', items: COATINGS_HIGHLIGHTS, icon: '&#x2B9A;', accentColor: '#3F2904' } },
+        { type: 'bottom-banner', id: 'bb1', props: { imageUrl: 'https://res.mdpi.com/data/materials-proceedings-20250512.jpg', url: 'https://www.mdpi.com/journal/materproc' } }
       ],
-      academic_empty: [
-        { type: 'academic-hero', id: 'ah1' },
-        { type: 'editor-note', id: 'en1' },
-        { type: 'news-toc', id: 'toc1' },
-        { type: 'divider-heading', id: 'dh1' },
-        { type: 'paper-list', id: 'pl1' },
-        { type: 'paper-list', id: 'pl2' },
-        { type: 'banner', id: 'b1' },
-        { type: 'divider-heading', id: 'dh2' },
-        { type: 'special-issue', id: 'si1' },
-        { type: 'divider-heading', id: 'dh3' },
-        { type: 'highlight-box', id: 'hb1' },
-        { type: 'sponsor-banner', id: 'sb1' }
-      ],
-      quarterly_journal: [
-        { type: 'cover-hero', id: 'ch1', props: { imageUrl: 'https://via.placeholder.com/600x250', title: 'Quarterly Newsletter', summary: 'A brief summary of the featured article or announcement. You can highlight key points to engage readers and encourage them to learn more.', ctaText: 'Learn more →', ctaUrl: '#', accentColor: '#660C62', bgColor: '#f2f2f2' } },
-        { type: 'editor-note', id: 'en1', props: { imageUrl: 'https://via.placeholder.com/600x200', paragraphs: [{ text: 'Welcome to the latest edition of our quarterly newsletter. In this issue, we highlight recent publications, upcoming conferences, and exciting developments in our community.' }], signature: '— Editor-in-Chief' } },
-        { type: 'divider-heading', id: 'dh1', props: { title: 'Current Publications', bgColor: '#660C62', textColor: 'white', icon: '&#x2590;', hasBottomBorder: true } },
-        { type: 'paper-list', id: 'pl1', props: { papers: [{ title: 'Example Publication Title One', authors: 'Author A et al.', url: '#' }, { title: 'Example Publication Title Two', authors: 'Author B et al.', url: '#' }, { title: 'Example Publication Title Three', authors: 'Author C et al.', url: '#' }, { title: 'Example Publication Title Four', authors: 'Author D et al.', url: '#' }, { title: 'Example Publication Title Five', authors: 'Author E et al.', url: '#' }], accentColor: '#660C62', bgColor: '#f2f2f2' } },
-        { type: 'divider-heading', id: 'dh2', props: { title: 'Top Research of the Quarter', bgColor: '#660C62', textColor: 'white', icon: '&#x2590;', hasBottomBorder: true } },
-        { type: 'research-alt', id: 'ra1', props: { papers: [{ title: 'Example Research Article Title One', authors: 'Author A et al.', imageUrl: 'https://via.placeholder.com/260x150', url: '#', layout: 'left' }, { title: 'Example Research Article Title Two', authors: 'Author B et al.', imageUrl: 'https://via.placeholder.com/260x150', url: '#', layout: 'right' }], accentColor: '#660C62', bgColor: '#f2f2f2' } },
-        { type: 'divider-heading', id: 'dh3', props: { title: 'Articles', bgColor: '#660C62', textColor: 'white', icon: '&#x2590;', hasBottomBorder: true } },
-        { type: 'paper-list', id: 'pl2', props: { papers: [{ title: 'Example Article Title One', authors: 'Author F et al.', url: '#' }, { title: 'Example Article Title Two', authors: 'Author G et al.', url: '#' }, { title: 'Example Article Title Three', authors: 'Author H et al.', url: '#' }, { title: 'Example Article Title Four', authors: 'Author I et al.', url: '#' }, { title: 'Example Article Title Five', authors: 'Author J et al.', url: '#' }], accentColor: '#660C62', bgColor: '#f2f2f2' } },
-        { type: 'divider-heading', id: 'dh4', props: { title: 'News & Updates', bgColor: '#660C62', textColor: 'white', icon: '&#x2590;', hasBottomBorder: true } },
-        { type: 'news-stack', id: 'ns1', props: { items: [{ title: '10th Anniversary Celebration', summary: 'Join us in celebrating the 10th anniversary of the journal with special events and content.', ctaText: 'Read more', ctaUrl: '#' }, { title: 'Author Training Program', summary: 'We successfully hosted an author training session to provide insights into open access publishing.', ctaText: 'Read more', ctaUrl: '#' }], accentColor: '#660C62' } },
-        { type: 'divider-heading', id: 'dh5', props: { title: 'Upcoming Conferences', bgColor: '#660C62', textColor: 'white', icon: '&#x2590;', hasBottomBorder: true } },
-        { type: 'event-grid', id: 'eg1', props: { events: [{ title: 'Conference Name Example One', date: '18–20 September 2024', location: 'City, Country', ctaText: 'Learn more', ctaUrl: '#' }, { title: 'Conference Name Example Two', date: '6–9 October 2024', location: 'City, Country', ctaText: 'Learn more', ctaUrl: '#' }], accentColor: '#660C62' } },
-        { type: 'editor-board', id: 'eb1', props: { title: 'New Editorial Board Members', members: [{ name: 'Prof. Dr. Example A', affiliation: 'University of Example, USA', imageUrl: 'https://via.placeholder.com/100', url: '#' }, { name: 'Prof. Dr. Example B', affiliation: 'Institute of Example, USA', imageUrl: 'https://via.placeholder.com/100', url: '#' }, { name: 'Prof. Dr. Example C', affiliation: 'University of Example, USA', imageUrl: 'https://via.placeholder.com/100', url: '#' }], accentColor: '#660C62', bgColor: '#f2f2f2' } }
-      ],
-      quarterly_empty: [
-        { type: 'cover-hero', id: 'ch1' },
-        { type: 'editor-note', id: 'en1' },
-        { type: 'divider-heading', id: 'dh1' },
-        { type: 'paper-list', id: 'pl1' },
-        { type: 'divider-heading', id: 'dh2' },
-        { type: 'research-alt', id: 'ra1' },
-        { type: 'divider-heading', id: 'dh3' },
-        { type: 'paper-list', id: 'pl2' },
-        { type: 'divider-heading', id: 'dh4' },
-        { type: 'news-stack', id: 'ns1' },
-        { type: 'divider-heading', id: 'dh5' },
-        { type: 'event-grid', id: 'eg1' },
-        { type: 'editor-board', id: 'eb1' }
-      ],
-      skeleton: []
+      template_5_2: [
+        { type: 'banner', id: 'b1', props: { imageUrl: 'https://res.mdpi.com/data/250818_coatings-mcst-2025_newsletter_conference-banner2.jpg', url: 'https://sciforum.net/event/MCST-2025' } },
+        { type: 'editor-note', id: 'en1', props: { paragraphs: ['To keep you abreast of advancements in coatings and thin films research, <em>Coatings</em> is pleased to present the highly cited papers from 2024.', 'This curated selection covers a range of topics, including surface deposition, polymer coatings, coatings for food, and laser coatings, among others.', 'We hope you find inspiration in these cutting-edge studies.'].map(text => ({ text })) } },
+        { type: 'divider-heading', id: 'dh1', props: { title: 'Research Digest', bgColor: '#3F2904', textColor: 'white', icon: '&#x2590;', hasBottomBorder: true } },
+        { type: 'paper-list', id: 'pl1', props: { papers: COATINGS_PAPERS, bgColor: '#f2f2f2', accentColor: '#3F2904' } },
+        { type: 'banner', id: 'b2', props: { imageUrl: 'https://res.mdpi.com/data/2025-05-15_coatings_travel-awards_newsletter_600x102.jpg', url: 'https://www.mdpi.com/journal/coatings/awards/3376' } },
+        { type: 'special-issue', id: 'si1', props: { title: 'Call for Papers', issues: COATINGS_SPECIAL_ISSUES, columns: 2 } },
+        { type: 'highlight-box', id: 'hb1', props: { title: 'Why Submit to Coatings?', items: COATINGS_HIGHLIGHTS, icon: '&#x2B9A;', accentColor: '#3F2904' } },
+        { type: 'bottom-banner', id: 'bb1', props: { imageUrl: 'https://res.mdpi.com/data/materials-proceedings-20250512.jpg', url: 'https://www.mdpi.com/journal/materproc' } }
+      ]
     };
 
     function loadTemplate(name) {
@@ -4357,7 +5101,7 @@
         });
       }
       components.forEach(c => {
-        c.id = 'comp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+        c.id = getId('comp');
       });
       saveHistory();
       renderCanvas();
@@ -4430,40 +5174,30 @@
         const tData = t.data || {};
         let previewHTML = '';
         try {
-          const savedComps = JSON.parse(JSON.stringify(components));
-          const savedTheme = {
-              ...theme
-            },
-            savedFont = {
-              ...font
-            },
-            savedSpacing = {
-              ...spacing
-            };
-          components.length = 0;
-          components.push(...JSON.parse(JSON.stringify(tData.components || [])));
-          if (tData.theme) Object.assign(theme, tData.theme);
-          if (tData.font) Object.assign(font, tData.font);
-          if (tData.spacing) Object.assign(spacing, tData.spacing);
+          const localComps = JSON.parse(JSON.stringify(tData.components || []));
+          const localTheme = { ...theme, ...(tData.theme || {}) };
+          const localFont = { ...font, ...(tData.font || {}) };
+          const localSpacing = { ...spacing, ...(tData.spacing || {}) };
+          const realComps = components;
+          const realTheme = theme;
+          const realFont = font;
+          const realSpacing = spacing;
+          components = localComps;
+          theme = localTheme;
+          font = localFont;
+          spacing = localSpacing;
           previewHTML = generateHTML();
-          components.length = 0;
-          components.push(...savedComps);
-          Object.assign(theme, savedTheme);
-          Object.assign(font, savedFont);
-          Object.assign(spacing, savedSpacing);
+          components = realComps;
+          theme = realTheme;
+          font = realFont;
+          spacing = realSpacing;
         } catch (e) {
-          components.length = 0;
-          try {
-            components.push(...JSON.parse(localStorage.getItem('newsletter-v3-components') || '[]'));
-          } catch (e2) {}
-          Object.assign(theme, DEFAULT_THEME);
-          Object.assign(font, DEFAULT_FONT);
-          Object.assign(spacing, DEFAULT_SPACING);
           previewHTML = '<!DOCTYPE html><html><body style="padding:20px;text-align:center;color:#999">预览不可用</body></html>';
         }
         const cw = tData.spacing ? tData.spacing.containerWidth : 600;
         const scale = Math.min(0.32, 100 / cw * 0.95);
-        return `<div class="template-card" style="position:relative" onmouseenter="this.querySelector('.template-delete').style.opacity=1" onmouseleave="this.querySelector('.template-delete').style.opacity=0"><div class="template-thumb" style="height:120px;padding:0;overflow:hidden;position:relative;background:var(--bg-quaternary)"><iframe srcdoc="${previewHTML.replace(/"/g,'&quot;').replace(/&/g,'&amp;')}" style="width:${cw}px;height:${Math.round(120/scale)}px;border:none;transform:scale(${scale});transform-origin:top left;pointer-events:none" sandbox="allow-same-origin" scrolling="no"></iframe></div><div class="template-info"><div class="template-name">${escapeHtml(t.name)}</div><div class="template-desc">${new Date(t.createdAt).toLocaleDateString('zh-CN')}</div></div><button class="template-delete" onclick="event.stopPropagation();deleteCustomTemplate('${t.id}')">&#10005;</button><div style="position:absolute;top:0;left:0;right:0;bottom:0;cursor:pointer" onclick="loadCustomTemplate('${t.id}')"></div></div>`;
+        const previewAttr = previewHTML.replace(/&/g, '&').replace(/"/g, '"');
+        return `<div class="template-card" style="position:relative" onmouseenter="this.querySelector('.template-delete').style.opacity=1" onmouseleave="this.querySelector('.template-delete').style.opacity=0"><div class="template-thumb" style="height:120px;padding:0;overflow:hidden;position:relative;background:var(--bg-quaternary)"><iframe srcdoc="${previewAttr}}" style="width:${cw}px;height:${Math.round(120/scale)}px;border:none;transform:scale(${scale});transform-origin:top left;pointer-events:none" sandbox="allow-same-origin" scrolling="no"></iframe></div><div class="template-info"><div class="template-name">${escapeHtml(t.name)}</div><div class="template-desc">${new Date(t.createdAt).toLocaleDateString('zh-CN')}</div></div><button class="template-delete" onclick="event.stopPropagation();deleteCustomTemplate('${t.id}')">&#10005;</button><div style="position:absolute;top:0;left:0;right:0;bottom:0;cursor:pointer" onclick="loadCustomTemplate('${t.id}')"></div></div>`;
       }).join('');
     }
 
@@ -4765,41 +5499,50 @@
 
     // ===== PREFLIGHT =====
     function runPreflight(e) {
-      const btn = e && e.target || event && event.target;
+      const btn = (e && e.target) || (typeof event !== 'undefined' && event && event.target);
       if (btn) showButtonLoading(btn, '检查中...');
       requestAnimationFrame(() => {
-        const checks = [];
         const html = generateHTML();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const images = Array.from(doc.querySelectorAll('img'));
+        const links = Array.from(doc.querySelectorAll('a'));
+        const missingSrc = images.filter(img => !img.getAttribute('src') || img.getAttribute('src').trim() === '');
+        const missingAlt = images.filter(img => !img.getAttribute('alt') || img.getAttribute('alt').trim() === '');
+        const emptyLinks = links.filter(a => {
+          const href = (a.getAttribute('href') || '').trim();
+          return href === '#' || href === '';
+        });
+        const checks = [];
         checks.push({
           name: '图片完整性',
-          pass: !html.includes('src=""') && !html.includes('alt=""'),
-          detail: html.includes('src=""') ? '有图片缺失src' : '通过'
+          pass: missingSrc.length === 0,
+          detail: missingSrc.length > 0 ? `${missingSrc.length} 张图片缺失 src` : '通过'
         });
         checks.push({
           name: '链接空值',
-          pass: !html.includes('href="#"'),
-          detail: html.includes('href="#"') ? '有链接未设置URL' : '通过'
+          pass: emptyLinks.length === 0,
+          detail: emptyLinks.length > 0 ? `${emptyLinks.length} 个链接未设置 URL` : '通过'
         });
         checks.push({
-          name: 'Alt属性',
-          pass: !html.includes('alt=""'),
-          detail: html.includes('alt=""') ? '有图片缺少alt' : '通过'
+          name: 'Alt 属性',
+          pass: missingAlt.length === 0,
+          detail: missingAlt.length > 0 ? `${missingAlt.length} 张图片缺少 alt` : '通过'
         });
         checks.push({
           name: '移动端适配',
           pass: true,
-          detail: '已包含响应式meta'
+          detail: '已包含响应式 meta'
         });
         const ratio = getContrastRatio(theme.bg, theme.text);
         checks.push({
           name: '对比度合规',
           pass: ratio >= 4.5,
-          detail: ratio >= 4.5 ? 'AA级通过' : '对比度不足'
+          detail: ratio >= 4.5 ? 'AA 级通过' : '对比度不足'
         });
         checks.push({
-          name: 'Outlook兼容',
-          pass: html.includes('<table'),
-          detail: html.includes('<table') ? '使用table布局' : '未检测到table布局'
+          name: 'Outlook 兼容',
+          pass: doc.querySelectorAll('table').length > 0,
+          detail: doc.querySelectorAll('table').length > 0 ? '使用 table 布局' : '未检测到 table 布局'
         });
         checks.push({
           name: '垃圾邮件评分',
@@ -4807,7 +5550,9 @@
           detail: '预估低风险'
         });
         const list = document.getElementById('checkList');
-        list.innerHTML = checks.map(c => `<div class="check-item"><div class="check-icon ${c.pass?'check-pass':'check-fail'}">${c.pass?'&#10003;':'&#10005;'}</div><div class="check-text">${c.name}</div><div class="check-detail">${c.detail}</div></div>`).join('');
+        if (list) {
+          list.innerHTML = checks.map(c => `<div class="check-item"><div class="check-icon ${c.pass?'check-pass':'check-fail'}">${c.pass?'&#10003;':'&#10005;'}</div><div class="check-text">${c.name}</div><div class="check-detail">${c.detail}</div></div>`).join('');
+        }
         setAssistantTab('inspect');
         if (btn) hideButtonLoading(btn);
         showToast('检查完成', 'success');
@@ -4818,24 +5563,17 @@
     function generateHTML() {
       const fontStack = getFontStack();
       const body = components.map(c => renderComponentHTML(c)).join('');
-      return `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Newsletter</title>
+      const fontLinks = font.stack === 'system' ? '' : `
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
-</head><body style="margin:0;padding:0;background:#f5f7fa;font-family:${fontStack}"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:20px 10px"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:${spacing.containerWidth}px">${body}</table></td></tr></table></body></html>`;
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">`;
+      return `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Newsletter</title>${fontLinks}
+</head><body style="margin:0;padding:0;background:${theme.bg};font-family:${fontStack}"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:20px 10px"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:${spacing.containerWidth}px">${body}</table></td></tr></table></body></html>`;
     }
 
     function syncCodeFromDesign() {
       document.getElementById('codeEditor').value = generateHTML();
       updateStats();
-    }
-
-    function syncDesignFromCode() {
-      // Simplified: attempt to parse basic components from HTML
-      const code = document.getElementById('codeEditor').value;
-      // If code matches our generated pattern, we could parse it back
-      // For now, this is a best-effort sync
-      showToast('代码已更新，切换设计模式可查看');
     }
 
     // ===== CODE MODE (V2 legacy) =====
@@ -4899,11 +5637,22 @@
       showToast('已格式化');
     }
 
+    const DARK_MEDIA_QUERY = '@media (prefers-color-scheme: dark){:root{' +
+      Object.entries(DARK_EXPORT_VARS).map(([k, v]) => k + ':' + v).join(';') + '}}';
+
     function exportHTML() {
-      withButtonLoading(event && event.target, function() {
+      withButtonLoading('#exportBtn', function() {
         let code;
         if (currentMode === 'design') code = generateHTML();
         else code = document.getElementById('codeEditor').value;
+        const darkStyleTag = '<style>' + DARK_MEDIA_QUERY + '</style>';
+        if (code.includes('</head>')) {
+          code = code.replace('</head>', darkStyleTag + '</head>');
+        } else if (code.includes('<style>')) {
+          code = code.replace('</style>', DARK_MEDIA_QUERY + '</style>');
+        } else {
+          code = code.replace('<head>', '<head>' + darkStyleTag);
+        }
         const blob = new Blob([code], {
           type: 'text/html;charset=utf-8'
         });
@@ -4981,7 +5730,8 @@
         el.querySelector('.fullscreen-close').focus();
         fullscreenFocusTrap();
       } else {
-        document.getElementById('mode' + currentMode.charAt(0).toUpperCase() + currentMode.slice(1)).focus();
+        const modeEl = document.getElementById(currentMode + 'Mode');
+        if (modeEl) modeEl.focus();
       }
     }
 
@@ -5025,6 +5775,105 @@
       historyIndex = history.length - 1;
       hasUnsavedChanges = true;
       scheduleSave();
+      // 异步镜像到 IndexedDB（不阻塞 undo/redo）
+      scheduleIdle(() => {
+        saveFrameToDB({
+          id: 'frame_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+          ts: Date.now(),
+          thumbnail: generateSVGThumbnail(),
+          snapshot: {
+            components: JSON.parse(JSON.stringify(components)),
+            theme: Object.assign({}, theme),
+            font: Object.assign({}, font),
+            spacing: Object.assign({}, spacing)
+          }
+        }).then(() => pruneOldFrames())
+          .then(() => renderHistoryTimeline())
+          .catch(e => console.warn('history frame save failed:', e));
+      });
+    }
+
+    function generateSVGThumbnail() {
+      const W = 140, H = 100;
+      const parts = ['<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '">'];
+      parts.push('<rect width="' + W + '" height="' + H + '" fill="#f8f7f4"/>');
+      const accent = theme.primary || '#1e3a5f';
+      const gold = theme.accent2 || '#d4af37';
+      const barH = Math.max(3, H / Math.max(components.length, 1) - 1);
+      components.forEach((c, i) => {
+        const y = i * (barH + 1);
+        const isImage = c.type === 'image' || c.type === 'image-text' || c.type === 'gallery';
+        const isHeading = c.type === 'heading' || c.type === 'title';
+        const isCta = c.type === 'cta';
+        const color = isCta ? accent : isImage ? gold + '55' : isHeading ? accent : '#d8d6ce';
+        const w = Math.min(W - 4, 20 + (c.props.title || c.props.text || '').length * 2);
+        parts.push('<rect x="2" y="' + y + '" width="' + w + '" height="' + barH + '" fill="' + color + '" rx="1"/>');
+      });
+      parts.push('</svg>');
+      const svgBytes = new TextEncoder().encode(parts.join(''));
+      let binary = '';
+      for (let i = 0; i < svgBytes.length; i++) binary += String.fromCharCode(svgBytes[i]);
+      return 'data:image/svg+xml;base64,' + btoa(binary);
+    }
+
+    async function renderHistoryTimeline() {
+      const container = document.getElementById('historyTimeline');
+      if (!container) return;
+      let frames = [];
+      try { frames = await getAllFramesFromDB(); } catch (e) { return; }
+      frames.sort((a, b) => b.ts - a.ts);
+      if (!frames.length) {
+        container.innerHTML = '<div style="font-size:11px;color:var(--text-muted);padding:8px">暂无历史，每编辑一次会自动记录</div>';
+        return;
+      }
+      container.innerHTML = frames.map(f => {
+        const time = new Date(f.ts).toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+        const count = f.snapshot.components.length;
+        return '<div class="history-item" onclick="restoreFrame(\'' + f.id + '\')" title="点击恢复到此版本">' +
+          '<img src="' + f.thumbnail + '" alt="缩略图">' +
+          '<div class="history-item-info"><div class="history-item-time">' + time + '</div>' +
+          '<div class="history-item-meta">' + count + ' 组件</div></div>' +
+          '<button class="history-item-delete" onclick="event.stopPropagation();deleteFrame(\'' + f.id + '\')">×</button>' +
+          '</div>';
+      }).join('');
+    }
+
+    async function restoreFrame(id) {
+      try {
+        const frames = await getAllFramesFromDB();
+        const f = frames.find(x => x.id === id);
+        if (!f) return;
+        components.length = 0;
+        components.push(...JSON.parse(JSON.stringify(f.snapshot.components)));
+        Object.assign(theme, f.snapshot.theme);
+        Object.assign(font, f.snapshot.font);
+        Object.assign(spacing, f.snapshot.spacing);
+        renderCanvas();
+        showToast('已回到 ' + new Date(f.ts).toLocaleTimeString('zh-CN'), 'success');
+      } catch (e) {
+        showToast('恢复失败：' + e.message, 'error');
+      }
+    }
+
+    async function deleteFrame(id) {
+      try {
+        await deleteFrameFromDB(id);
+        renderHistoryTimeline();
+        showToast('已删除', 'success');
+      } catch (e) {
+        showToast('删除失败', 'error');
+      }
+    }
+
+    async function clearHistory() {
+      if (!await customConfirm('确定清空全部历史？此操作不可撤销。', '清空历史')) return;
+      try {
+        await clearAllFramesFromDB();
+        renderHistoryTimeline();
+        showToast('历史已清空', 'success');
+      } catch (e) {
+        showToast('清空失败', 'error');
+      }
     }
 
     function undoDesign() {
@@ -5144,7 +5993,8 @@
       }
     });
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'F5' || (e.key.toLowerCase() === 'r' && (e.ctrlKey || e.metaKey))) {
+      const inEditor = e.target && e.target.id === 'codeEditor';
+      if (inEditor && (e.key === 'F5' || (e.key.toLowerCase() === 'r' && (e.ctrlKey || e.metaKey)))) {
         e.preventDefault();
         updatePreview();
         showToast('已刷新预览', 'success');
@@ -5162,6 +6012,8 @@
       }
     });
     loadFromStorage();
+    showWelcome();
+    if (typeof renderHistoryTimeline === 'function') renderHistoryTimeline().catch(() => {});
     document.querySelectorAll('.mode-btn').forEach(btn => {
       btn.addEventListener('click', () => setMode(btn.dataset.mode));
     });
