@@ -1,289 +1,221 @@
-# Newsletter Builder
+# Newsletter Builder V0.1.2
 
-**单文件 · 零依赖 · 开箱即用的学术期刊网站简报制作工具**
+> **单文件 · 零依赖 · 开箱即用**  
+> 面向学术期刊的 HTML 简报可视化构建工具
 
-[![GitHub release](https://img.shields.io/badge/version-1.1.0-blue.svg?style=flat-square)]()
+[![Version](https://img.shields.io/badge/version-0.1.2-blue.svg?style=flat-square)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)]()
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)]()
-[![Features](https://img.shields.io/badge/features-3%20new-orange.svg?style=flat-square)](docs/USER_GUIDE.md)
 
-> 无需后端 · 无需安装 · 无需注册 · 打开即用。
+---
 
 ## 项目简介
 
-Newsletter Builder 是一款面向学术期刊编辑和开发者的网站简报制作工具。专为学术期刊官网设计，用于制作期刊 Highlights、最新录用、虚拟专刊等 HTML 内容页面，直接嵌入期刊网站或通过 GitHub Pages 独立发布。项目采用单文件架构，所有代码封装在单个 HTML 文件中，无需后端服务、无需安装依赖、无需注册账号，直接打开即可运行。
+Newsletter Builder 是一个单文件 HTML 应用，用于可视化构建学术期刊风格的 HTML 简报页面。无需后端、无需构建、无需安装，浏览器打开即用。
 
-项目同时服务两类用户：
+**典型产出**：期刊 Highlights 页面、最新录用列表、虚拟专刊展示、会议征稿页、年度报告页面等静态 HTML 内容。
 
-- **期刊编辑 / 内容运营** — 通过可视化设计模式，拖拽组件、选择模板、调整配色，零代码产出专业期刊简报页面
-- **前端开发者** — 手写 HTML 代码，实时预览效果，精细控制布局与样式
+**服务对象**：
+- **期刊编辑/内容运营** — 拖拽组件、选择模板、调整配色，零代码产出专业简报
+- **前端开发者** — 代码模式手写 HTML，实时预览，精细控制布局
 
-**交付物**：[`index.html`](index.html)（主入口，打开即用）
-
-**典型使用场景**：MDPI 期刊官网的"Highlights"页面、"Recent Articles"展示栏、"Special Issue"征稿页、期刊年度报告、编委会名单等静态 HTML 内容块。
-
-## 功能特性
-
-- **三种工作模式** — 代码模式、设计模式、预览模式一键切换，内容实时同步不丢失
-- **丰富组件库** — 学术期刊专用组件：论文卡片、作者列表、期刊封面、目录、CTA 按钮、图表等；也支持通用文本与媒体组件
-- **预设模板** — 期刊 Highlights、最新录用、虚拟专刊、征稿启事、年度报告、编委会等，快速起步
-- **智能标识助手** — 颜色、字体、间距、组件、模板、检查六大面板，精细调控
-- **HTML 导出** — 生成内联 CSS + 语义化 HTML，可直接嵌入期刊网站或部署到 GitHub Pages
-- **本地持久化** — 自动保存至 `localStorage`，支持多步历史撤销
-- **暗色主题** — 编辑器亮色/暗色主题自由切换，设置自动持久化
-- **设备预览** — 预览模式下支持桌面 / 手机 / 平板宽度切换，确保多端阅读体验
-- **隐私安全** — 纯本地处理，不上传任何代码到服务器
-
-### 1.1.0 新增三项功能
-
-> 详见 [用户使用指南](docs/USER_GUIDE.md)。三项功能均位于"检查"面板，纯前端实现，不引入外部依赖。
-
-- **🌃 暗色网站模式预览** — 在"检查"页一键预览简报页面在读者浏览器暗色模式下的效果；导出 HTML 时自动注入 `@media (prefers-color-scheme: dark)` 媒体查询，让网站自动适配暗色主题。固定学术编辑暗色调色板（`--bg-primary: #0f1218` 等），零配置开箱即用
-- **♿ WCAG-AA 无障碍审计** — 遍历画布每个组件，用 `getComputedStyle` + `TreeWalker` 算每对（背景色, 文字色）的对比度，按 WCAG 2.1 AA/AAA 评级并给出可操作修复建议（如"把文字色调至 #6C7989 可达 4.5:1"）。复制对照评级：正文 < 4.5:1 / 大字 < 3:1 即标记 AA 失败
-- **⏱️ 版本历史时间线** — 每次编辑自动通过 IndexedDB 持久化一帧（含 components + theme + font + spacing 完整快照 + SVG 抽象缩略图 + 时间戳），可滚动浏览、点击任意帧一键恢复、删除单帧或清空全部。最多保留 50 帧，自动淘汰最旧的；刷新浏览器、关闭再打开仍在
+---
 
 ## 快速开始
 
-### 环境要求
-
-- 任意现代浏览器（Chrome / Firefox / Safari / Edge 最新版本）
-
-### 方式一：直接打开
-
-1. 下载本仓库中的 [`index.html`](index.html) 文件
-2. 双击打开即可使用
-
 ```bash
-# Windows
-start index.html
+# 方式一：直接下载
+# 下载 index.html，双击打开即可
 
-# macOS
-open index.html
-
-# Linux
-xdg-open index.html
+# 方式二：克隆仓库
+git clone https://github.com/CarlosZhou6767/Newsletter-Builder.git
+cd Newsletter-Builder
+# 双击 index.html 打开
 ```
 
-### 方式二：克隆仓库
+**无需 `npm install`、无需构建、无需启动服务器。**
 
-```bash
-git clone https://github.com/CarlosZhou6767/Newsletter-HTML.git
-cd Newsletter-HTML
-# 直接打开 index.html 文件
+---
+
+## 技术架构
+
+### 单文件架构
+
+所有代码封装在单个 `index.html` 中：
+
+```
+index.html
+├── HTML 结构（~300 行）
+│   ├── 工具栏、模式切换
+│   ├── 代码编辑器/预览面板
+│   ├── 助手面板（组件/模板/样式/检查）
+│   ├── 画布/属性面板
+│   ├── 弹窗（欢迎/确认/全屏/Toast）
+│   └── 状态栏
+├── CSS 样式（~900 行）
+│   ├── CSS 变量（主题/间距/字体）
+│   ├── 布局系统（Flex/Grid）
+│   ├── 组件样式
+│   ├── 响应式适配
+│   └── 暗色主题
+└── JavaScript 逻辑（~3400 行）
+    ├── 工具函数（XSS 转义、debounce、颜色转换等）
+    ├── 核心系统（模式切换、主题管理、组件管理）
+    ├── 渲染引擎（全量渲染 + 组件级 Diff 增量渲染）
+    ├── 拖放系统（排序/插入）
+    ├── 模板系统（内置/自定义）
+    ├── 样式系统（配色/字体/间距）
+    ├── 检查系统（WCAG 审计/发送前检查/暗色预览）
+    ├── 历史系统（内存 undo/redo + IndexedDB 持久化）
+    ├── 导出系统（HTML 生成/下载）
+    └── 初始化（数据加载/事件绑定）
 ```
 
-**无需 `npm install`、无需构建、无需启动服务器。下载即用。**
+### 技术栈
 
-## 使用指南
-
-### 代码模式
-
-适合开发者手写 HTML 进行精细化控制。
-
-- **布局**：左右分栏 — 左侧代码编辑器（带行号与语法高亮）、右侧实时预览
-- **功能**：
-  - Tab 缩进支持
-  - 代码实时预览更新
-  - HTML 统计信息（字符数、行数）
-  - 底部错误控制台，捕获并显示渲染错误
-- **操作**：导出 HTML、复制代码、格式化代码
-
-### 设计模式
-
-适合非技术用户通过可视化界面构建内容。
-
-- **布局**：三栏结构
-  - **左侧**：智能标识助手面板（6 个 Tab）
-  - **中间**：画布区，组件可按需排列，支持拖拽排序
-  - **右侧**：实时预览 + 微编辑面板（选中组件后显示）
-- **底部**：状态栏（组件数、主题色、操作提示）
-
-**设计模式六个面板：**
-
-| 面板 | 功能 |
+| 层级 | 技术 |
 |------|------|
-| **颜色** | 主题色/背景色/文字色拾取器；预设配色；智能和谐配色生成；实时对比度检查 |
-| **字体** | 字体栈切换；H1/H2/H3 字号滑块；字重 300–700；正文字号 12–20px；行高 1.4–2.0 |
-| **间距** | 容器宽度 480–680px；区块间距 8–64px；内边距 8–48px；网格基准 8/12/16px |
-| **组件** | 组件卡片网格，点击插入到画布；支持自定义区块保存与复用 |
-| **模板** | 预设模板 + 自定义模板保存/加载/删除 |
-| **检查** | 运行发送前检查：图片完整性、链接空值、Alt 属性、移动端适配、对比度合规；**1.1.0 新增**：邮件暗色客户端预览 toggle、WCAG-AA 审计按钮、底部新增版本历史时间线 section |
+| 语言 | HTML5 + CSS3 + ES6+ |
+| 存储 | localStorage（设计数据/模板）+ IndexedDB（版本历史） |
+| 渲染 | 全量渲染 + 组件级 Diff 引擎（基于 JSON 签名比对） |
+| 安全 | XSS 转义 `S()`、URL 白名单 `safeUrl()`、iframe sandbox |
+| 性能 | 事件委托、防抖节流、`structuredClone` 深拷贝、`requestAnimationFrame` 批量更新 |
 
-### 预览模式
+### 版本历史
 
-模拟最终页面效果，全面检查呈现质量。
-
-- 全屏预览最终页面效果
-- **设备预览**：支持桌面 / 手机 / 平板宽度切换
-- 支持全屏弹窗预览
-- **暗色模式预览**（1.1.0）：一键切换暗色模式，提前查看读者端暗色效果
-
-## 组件交互
-
-| 操作 | 说明 |
+| 版本 | 亮点 |
 |------|------|
-| **插入** | 点击组件卡片 → 添加到画布末尾 |
-| **选中** | 点击画布上组件 → 边框高亮 + 微编辑面板 |
-| **排序** | 拖拽左侧拖拽手柄调整组件上下顺序 |
-| **操作** | 上移 / 下移 / 复制 / 删除 |
-| **编辑** | 微编辑面板修改文字、图片 URL、颜色等属性 |
-| **保存为区块** | 单个组件可保存为自定义区块，供后续复用 |
+| **v0.1.2** | 组件级 Diff 渲染引擎、事件委托、防抖节流、XSS 修复、iframe 沙箱加固、JSDoc 注释规范 |
+| **v0.1.1** | 安全修复、逻辑 Bug 修复、左侧面板布局优化、欢迎弹窗、版本号统一 |
+| **v0.1.0** | 初始版本：三种模式、组件库、模板系统、样式系统、导出、历史撤销 |
 
-## 模板系统
+---
 
-模板 = 预设组件序列 + 预设样式配置。
+## 核心功能
 
-| 模板 ID | 说明 |
-|---------|------|
-| `academic_journal` | 期刊 Highlights：封面 + 目录 + 论文列表 + 征稿 + 亮点 + 横幅 |
-| `academic_empty` | 期刊 Highlights（空白版）：同上结构，内容为空 |
-| `quarterly_journal` | 季刊完整版：封面 + 寄语 + 论文 + 研究 + 新闻 + 会议 + 编委会 |
-| `quarterly_empty` | 季刊空白版：同上结构，内容为空 |
-| `general` | 通用简报：标题 + 图文 + CTA + 页脚 |
-| `ecommerce` | 商品推广：标题 + CTA + 产品列表 + CTA + 页脚 |
-| `education` | 课程介绍：标题 + 双图文卡片 + CTA + 页脚 |
-| `saas` | 产品更新：标题 + 双图文 + 分隔线 + CTA + 页脚 |
-| `festival` | 节日活动：标题 + CTA + 图文 + 社交 + 页脚 |
-| `skeleton` | 纯骨架：空画布 |
+### 三种工作模式
 
-### 自定义模板
+| 模式 | 适用人群 | 说明 |
+|------|----------|------|
+| **代码模式** | 开发者 | 左右分栏：代码编辑器 + 实时预览，支持 Tab 缩进、语法高亮、格式化 |
+| **设计模式** | 内容运营 | 三栏布局：助手面板 + 画布 + 属性编辑，拖拽式操作 |
+| **预览模式** | 所有人 | 全屏预览最终效果，桌面/手机设备切换，暗色模式预览 |
 
-- 可将当前设计保存为个人模板，存储于 `localStorage`
-- 支持命名、加载、删除
+### 组件系统
 
-## 样式系统
+19 种内置组件，覆盖学术期刊常见内容块：
 
-### 主题色
+`heading` · `text` · `image` · `image-text` · `cta` · `divider` · `spacer` · `list` · `quote` · `callout` · `gallery` · `author` · `journal-cover` · `toc` · `paper-list` · `paper-card` · `event-card` · `banner` · `footer`
 
-| 变量 | 说明 | 默认值 |
-|------|------|--------|
-| `primary` | 主色 | `#667eea` |
-| `bg` | 背景色 | `#ffffff` |
-| `text` | 文字色 | `#1f2937` |
-| `accent2` | 副色（用于和谐配色生成） | — |
+每个组件支持：拖拽排序、复制、删除、保存为自定义区块、属性编辑。
 
-**预设配色方案**（共 12 套）：科技蓝 · 电商红 · 教育绿 · 节日橙 · SaaS蓝 · 创意粉 · 靛蓝 · 青绿 · 橙色 · 紫罗兰 · 青色 · 草绿
+### 渲染引擎
 
-### 字体栈
+- **全量渲染** `renderCanvasLegacy()`：组件数量变化超 50% 或首次渲染时触发，重建全部 DOM
+- **Diff 增量渲染** `patchCanvas()`：常规编辑时触发，比对组件 JSON 签名，只更新变化的节点
+- 渲染调度 `renderCanvas()`：`requestAnimationFrame` 合并批量更新，避免布局抖动
 
-| 标识 | 字体栈 |
-|------|--------|
-| `system` | `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif` |
-| `pingfang` | 苹方优先 |
-| `microsoft` | 微软雅黑优先 |
-| `serif` | Georgia 衬线 |
-| `mono` | Consolas 等宽 |
+### 模板系统
 
-### 间距与网格
+- **内置模板**：7 个预设模板（期刊精选、封面+图文、封面+列表、会议横幅等）
+- **自定义模板**：保存当前设计为模板，存储在 localStorage，支持命名/加载/删除
 
-| 参数 | 默认值 | 范围 |
-|------|--------|------|
-| 容器宽度 | `600px` | 480–680px |
-| 区块间距 | `24px` | 8–64px（8px 倍数） |
-| 内边距 | `24px` | 8–48px |
-| 网格基准 | `8px` | 8 / 12 / 16px |
+### 样式系统
 
-### 输出格式
+- **主题色**：主色/背景色/文字色拾取器 + 12 套预设配色 + 3 种智能配色（类比/互补/三角）
+- **字体**：5 种字体栈、H1-H3 字号滑块、字重/字号/行高调节
+- **间距**：容器宽度(480-680px)、区块间距(8-64px)、内边距(8-48px)、网格基准(8/12/16px)
 
-- 所有组件渲染为语义化 HTML（`<section>`、`<article>`、`<h1>`—`<h3>`、`<p>` 等）
-- 样式内联，可直接嵌入期刊网站 CMS 系统（如 MDPI 自有平台、WordPress 等）
-- 默认 600px 内容宽度，适配期刊官网常见内容栏宽度（480–680px 可调）
-- 导出 HTML 可通过 GitHub Pages / 期刊网站后台 / `<iframe>` 嵌入三种方式发布
+### 检查系统
 
-## 导出与持久化
-
-### 导出操作
-
-| 操作 | 说明 |
+| 功能 | 说明 |
 |------|------|
-| **导出 HTML** | 生成内联 CSS + 语义化 HTML 页面，可直接嵌入期刊网站或部署到 GitHub Pages |
-| **复制代码** | 复制完整 HTML 到剪贴板 |
-| **格式化代码** | 简易 HTML 格式化（代码模式下） |
+| **暗色预览** | 一键切换画布暗色模式，预览读者端暗色效果 |
+| **WCAG-AA 审计** | 遍历所有组件，计算文字/背景对比度，按 WCAG 2.1 评级并给出修复建议 |
+| **发送前检查** | 7 项检查：图片完整性、链接空值、Alt 属性、移动端适配、对比度、Outlook 兼容、垃圾邮件评分 |
+| **版本历史** | 每次编辑自动保存快照到 IndexedDB（最多 50 帧），支持浏览、恢复、删除 |
 
 ### 数据持久化
 
-| 机制 | 说明 |
-|------|------|
-| **设计内容** | 浏览器 `localStorage`，自动保存间隔 5 秒；历史撤销支持多步回退 |
-| **自定义模板** | `localStorage` key `newsletter-custom-templates`，永久保留直到清缓存 |
-| **自定义区块** | `localStorage`，与设计内容共享配额（~5MB）|
-| **版本历史帧**（1.1.0 新增） | 浏览器 `IndexedDB` database `newsletter-history-db`，独立配额几十至几百 MB；最多 50 帧自动淘汰 |
+| 数据 | 存储 | 说明 |
+|------|------|------|
+| 设计内容/模板/主题 | localStorage | 自动保存（防抖 2s），刷新不丢失 |
+| 版本历史 | IndexedDB | 最多 50 帧，自动淘汰最旧 |
+| 编辑器主题 | localStorage | 亮/暗主题偏好持久化 |
 
-**数据范围**：组件序列、主题配色、字体配置、间距配置、自定义模板、自定义区块、版本历史帧
+### 导出
 
-**注意**：localStorage / IndexedDB 均为浏览器本地存储，不同设备、不同浏览器各自独立，不跨设备同步。清除浏览器数据会丢失；建议通过"导出 HTML"做异地备份。
+- 生成内联 CSS + 语义化 HTML
+- 自动注入暗色模式适配（`@media (prefers-color-scheme: dark)`）
+- 一键下载 `newsletter.html`
+- 支持嵌入 CMS、GitHub Pages、iframe 三种发布方式
 
-## 常见问题
+---
 
-**Q: 数据存储在哪里？**  
-A: 所有数据存储在浏览器本地：设计内容、自定义模板、自定义区块在 `localStorage`（~5MB，清缓存会丢失）；版本历史帧在 `IndexedDB`（独立配额几十 MB 级）。建议定期用"导出 HTML"做异地备份。
+## 开发指南
 
-**Q: 我的自定义模板/历史能跨设备同步吗？**  
-A: **不能**。`localStorage` 与 `IndexedDB` 均为浏览器本地，不同设备、不同浏览器各自独立。GitHub Pages 仅托管单文件静态资源。
+### 环境
 
-**Q: 暗色网站模式预览 toggle 切回去后编辑器变暗了？**  
-A: 不应该。`darkPreviewToggle` 只对 `.canvas-frame` 加 `.dark-preview-active` class；编辑器外壳由 `document.documentElement.data-theme` 控制，两者完全独立。如出现请刷新页面。
+- 任意现代浏览器（Chrome / Firefox / Safari / Edge）
+- 无需构建工具、无需包管理器
 
-**Q: WCAG-AA 审计里出现大量 `unknown · div "⋮"` 失败项怎么处理？**  
-A: 那是组件内部装饰性元素（如拖拽 handle `⋮`），导出 HTML 时不会出现。重点关注带内容的组件（`text`、`image-text`、`heading`），忽略 `div "⋮"` 这类。
+### 项目结构
 
-**Q: 版本历史里找不到刚才那个版本？**  
-A: 1. 只有调用 `saveHistory`（如工具栏 undo/redo、save）才会入帧，纯拖拽不触发；2. 超过 50 帧后最旧帧被自动淘汰；3. 若 IndexedDB 配额错误会 console.warn，但内存 undo/redo 仍工作。
-
-**Q: 支持导入已有的 HTML 吗？**  
-A: 代码模式下可直接粘贴 HTML，设计模式暂不支持从 HTML 反向解析。
-
-## 贡献指南
-
-欢迎为 Newsletter Builder 贡献代码、提交 Issue 或提出建议。
-
-### 提报 Issue
-
-- 使用 [GitHub Issues](https://github.com/CarlosZhou6767/Newsletter-HTML/issues) 提交 bug 报告或功能请求
-- 描述问题时请提供：
-  - 浏览器型号与版本
-  - 复现步骤
-  - 预期行为与实际表现
-  - 控制台错误信息（如有）
-
-### 提交 Pull Request
-
-1. Fork 本仓库
-2. 创建特性分支：
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. 提交更改：
-   ```bash
-   git commit -m 'feat: add some feature'
-   ```
-4. 推送分支：
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. 发起 Pull Request 至 `main` 分支
-
-### 开发须知
-
-- 本项目为单文件架构，所有核心代码位于 [`index.html`](index.html) 中
-- 修改时请确保不引入外部依赖
-- 导出的 HTML 应保持语义化标签，方便嵌入期刊 CMS
-- 使用 `escapeHtml()` 处理用户输入文本
+```
+Newsletter-Builder/
+├── index.html              # 主入口（单文件应用）
+├── README.md               # 本文档
+├── docs/
+│   ├── USER_MANUAL.md      # 用户使用手册
+│   ├── USER_GUIDE.md       # 旧版功能说明
+│   └── superpowers/
+│       ├── specs/           # 设计文档
+│       └── plans/           # 实施计划
+└── .gitignore
+```
 
 ### 代码规范
 
 - JavaScript 使用 ES6+ 语法
 - CSS 变量优先，避免硬编码色值
 - 组件渲染函数返回 HTML 字符串，不直接操作 DOM
+- 用户输入必须通过 `escapeHtml()` / `S()` 转义
+- 公共函数使用 JSDoc 注释（`@param` + `@returns`）
+
+### 构建与部署
+
+本项目为零构建项目，直接修改 `index.html` 即可。提交后通过 GitHub Pages 部署：
+
+```bash
+git add index.html
+git commit -m "feat: add some feature"
+git push
+```
+
+启用 GitHub Pages 后，访问 `https://<username>.github.io/Newsletter-Builder/` 即可使用最新版本。
+
+### 贡献
+
+欢迎提交 Issue 和 Pull Request：
+
+1. Fork 本仓库
+2. 创建特性分支：`git checkout -b feature/your-feature`
+3. 提交变更：`git commit -m 'feat: add some feature'`
+4. 推送分支：`git push origin feature/your-feature`
+5. 发起 Pull Request
+
+提报 Issue 时请提供：浏览器版本、复现步骤、预期行为与实际表现、控制台错误信息。
+
+---
 
 ## 许可证
 
-本项目基于 MIT 许可证开源。
+[MIT](LICENSE)
 
 ```
 MIT License
 
-Copyright (c) 2026 Newsletter-HTML
+Copyright (c) 2026 Newsletter-Builder
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -306,19 +238,8 @@ SOFTWARE.
 
 ---
 
-## 联系方式
+## 项目链接
 
-- **项目主页**：[GitHub - CarlosZhou6767/Newsletter-HTML](https://github.com/CarlosZhou6767/Newsletter-HTML)
-- **提交 Issue**：[GitHub Issues](https://github.com/CarlosZhou6767/Newsletter-HTML/issues)
-- **用户指南**：[docs/USER_GUIDE.md](docs/USER_GUIDE.md)（三项新功能详细说明）
-- **设计文档**：[docs/superpowers/specs/2026-07-03-builder-features-2-3-4-design.md](docs/superpowers/specs/2026-07-03-builder-features-2-3-4-design.md)
-- **实施计划**：[docs/superpowers/plans/2026-07-03-builder-features-2-3-4.md](docs/superpowers/plans/2026-07-03-builder-features-2-3-4.md)
+- **GitHub**：[https://github.com/CarlosZhou6767/Newsletter-Builder](https://github.com/CarlosZhou6767/Newsletter-Builder)
+- **用户手册**：[docs/USER_MANUAL.md](docs/USER_MANUAL.md)
 - **作者**：Carlos Zhou
-
----
-
-<div align="center">
-
-**如果这个项目对你有帮助，欢迎 Star ⭐ 支持！**
-
-</div>

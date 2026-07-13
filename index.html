@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Newsletter Builder V0.1.0</title>
+  <title>Newsletter Builder V0.1.2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -137,7 +137,7 @@
       background: var(--text-muted)
     }
 
-    /* ===== Toolbar ===== */
+    /* ===== Toolbar —— 顶部导航栏：品牌标识、模式切换、操作按钮 ===== */
     .toolbar {
       height: 66px;
       background: var(--bg-secondary);
@@ -397,36 +397,7 @@
       flex: 1
     }
 
-    .status-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--text-muted);
-      padding: 0 12px
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--success);
-      animation: pulse 2s infinite
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1
-      }
-
-      50% {
-        opacity: 0.5
-      }
-    }
-
-    /* ===== Theme Toggle ===== */
+    /* ===== Theme Toggle —— 亮色/暗色主题切换按钮 ===== */
     .theme-toggle {
       border: none;
       background: none;
@@ -648,7 +619,7 @@
       opacity: 0.4
     }
 
-    /* ===== Main ===== */
+    /* ===== Main —— 主内容区域：三栏弹性布局容器 ===== */
     .main-container {
       flex: 1;
       display: flex;
@@ -656,7 +627,7 @@
       position: relative
     }
 
-    /* ===== Code Mode ===== */
+    /* ===== Code Mode —— 代码编辑器：左侧行号、右侧编辑区、底部预览面板 ===== */
     .code-mode {
       display: flex;
       width: 100%;
@@ -804,7 +775,7 @@
       width: 100%
     }
 
-    /* ===== Design Mode ===== */
+    /* ===== Design Mode —— 设计模式：左侧助手面板 + 中间画布 + 右侧属性编辑器 ===== */
     .design-mode {
       display: flex;
       width: 100%;
@@ -1212,7 +1183,7 @@
       box-shadow: 0 0 0 3px var(--accent-soft)
     }
 
-    /* Component library */
+    /* Component library —— 左侧助手面板中的组件库卡片网格 */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(6px) }
       to { opacity: 1; transform: translateY(0) }
@@ -1363,7 +1334,7 @@
       color: white
     }
 
-    /* Template grid */
+    /* Template grid —— 模板选择页中的模板卡片网格 */
     .template-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -1437,7 +1408,7 @@
       line-height: 1.3
     }
 
-    /* Design canvas */
+    /* Design canvas —— 中间画布：信纸风格的邮件内容预览区 */
     .design-canvas {
       flex: 1;
       display: flex;
@@ -1497,7 +1468,7 @@
       border-color: var(--border)
     }
 
-    /* Component in canvas */
+    /* Component in canvas —— 画布中组件的选中态、拖拽手柄、操作按钮 */
     .canvas-component {
       position: relative;
       border: 2px solid transparent;
@@ -1591,7 +1562,7 @@
       touch-action: manipulation
     }
 
-    /* ===== Properties Panel ===== */
+    /* ===== Properties Panel —— 右侧属性编辑器：组件属性、样式、操作按钮 ===== */
     .properties-panel {
       width: 280px;
       min-width: 240px;
@@ -1762,7 +1733,7 @@
       resize: vertical
     }
 
-    /* Check results */
+    /* Check results —— 预检结果列表：通过/失败项的样式 */
     .check-list {
       display: flex;
       flex-direction: column;
@@ -1827,7 +1798,7 @@
       font-weight: 500
     }
 
-    /* ===== Preview Mode ===== */
+    /* ===== Preview Mode —— 预览模式：设备切换（桌面/移动端）、全屏预览 ===== */
     .preview-mode {
       display: flex;
       flex-direction: column;
@@ -1905,7 +1876,7 @@
       border-radius: var(--radius-sm)
     }
 
-    /* ===== Console ===== */
+    /* ===== Console —— 底部控制台：错误日志、警告信息、时间戳 ===== */
     .console-panel {
       height: 0;
       min-height: 0;
@@ -1999,7 +1970,7 @@
       color: var(--success)
     }
 
-    /* ===== Status bar ===== */
+    /* ===== Status bar —— 底部状态栏：模式指示、字符/行数统计 ===== */
     .status-bar {
       height: 32px;
       background: linear-gradient(90deg, var(--accent) 0%, #2a4a73 100%);
@@ -2034,7 +2005,7 @@
       letter-spacing: .02em
     }
 
-    /* ===== Fullscreen ===== */
+    /* ===== Fullscreen —— 全屏预览：遮罩层 + iframe + 焦点陷阱 ===== */
     .fullscreen-overlay {
       display: none;
       position: fixed;
@@ -2090,7 +2061,7 @@
       outline-offset: 3px
     }
 
-    /* ===== Toast ===== */
+    /* ===== Toast —— 浮动通知：位于右下角的消息提示队列 ===== */
     .toast {
       position: fixed;
       bottom: 64px;
@@ -2118,12 +2089,7 @@
       transform: translateX(-50%) translateY(0)
     }
 
-    .no-select {
-      user-select: none;
-      -webkit-user-select: none
-    }
-
-    /* Empty Canvas guide */
+    /* Empty Canvas guide —— 空画布提示：图标 + 引导文字 */
     .canvas-empty-guide {
       position: absolute;
       inset: 0;
@@ -2160,68 +2126,7 @@
       border: 1px solid var(--border)
     }
 
-    /* Empty Editor guide */
-    .editor-empty-guide {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      text-align: center;
-      padding: 32px 24px;
-      color: var(--text-muted)
-    }
-
-    .editor-empty-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: var(--bg-quaternary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      transition: background-color .2s, color .2s, box-shadow .2s
-    }
-
-    .editor-empty-guide:hover .editor-empty-icon {
-      background: var(--gold-soft);
-      color: var(--accent);
-      box-shadow: 0 0 0 4px var(--gold-soft)
-    }
-
-    .editor-empty-title {
-      font-family: var(--font-display);
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--accent)
-    }
-
-    .editor-empty-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.5
-    }
-
-    .editor-empty-shortcut {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 4px
-    }
-
-    .editor-empty-shortcut kbd {
-      background: var(--bg-quaternary);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 3px 8px;
-      font-size: 11px;
-      font-family: var(--font-mono);
-      color: var(--text-muted)
-    }
-
-    /* Built-in blocks reuse .component-grid/.component-item styles */
+    /* Built-in blocks —— 内置区块复用组件库卡片样式 */
 
     .my-templates-grid {
       display: grid;
@@ -2347,7 +2252,7 @@
       }
     }
 
-    /* Accessibility */
+    /* Accessibility —— 无障碍检查报告：对比度结果、修复建议 */
     :focus-visible {
       outline: 2px solid var(--gold);
       outline-offset: 2px
@@ -2435,7 +2340,7 @@
       }
     }
 
-    /* ===== Custom Confirm Modal ===== */
+    /* ===== Custom Confirm Modal —— 异步确认弹窗：替代原生 confirm() ===== */
     .confirm-overlay {
       position: fixed;
       top: 0;
@@ -2513,7 +2418,7 @@
       justify-content: center
     }
 
-    /* ===== Welcome Modal ===== */
+    /* ===== Welcome Modal —— 首次访问欢迎弹窗：加载示例、新建空白、今日关闭 ===== */
     .welcome-overlay {
       position: fixed;
       top: 0;
@@ -2705,7 +2610,7 @@
       }
     }
 
-    /* Responsive */
+    /* Responsive —— 响应式断点：平板、手机端适配 */
     @media(max-width:1024px) {
       .toolbar {
         padding: 0 16px;
@@ -2947,7 +2852,7 @@
       <div class="preview-panel">
         <div class="panel-header"><span>实时预览</span></div>
         <div class="preview-container">
-          <iframe id="previewFrame" sandbox="allow-scripts allow-modals allow-same-origin"></iframe>
+          <iframe id="previewFrame" sandbox="allow-scripts allow-modals"></iframe>
           <div class="console-panel" id="consolePanel">
             <div class="console-header">
               <div class="console-title">控制台</div>
@@ -3320,7 +3225,7 @@
       </div>
     </div>
 
-    <!-- ===== PREVIEW MODE ===== -->
+    <!-- ===== PREVIEW MODE —— 最终预览视图：设备切换、全屏预览 ===== -->
     <div class="preview-mode" id="previewMode" style="display:none">
       <div class="preview-toolbar">
         <span style="font-size:12px;font-weight:600;color:var(--text-primary)">邮件客户端预览</span>
@@ -3329,7 +3234,7 @@
         <button class="preview-device-btn" onclick="setPreviewDevice('mobile',event)">手机</button>
 </div>
       <div class="preview-frame-wrapper">
-        <iframe id="previewModeFrame" sandbox="allow-scripts allow-modals allow-same-origin" style="width:100%;max-width:680px"></iframe>
+        <iframe id="previewModeFrame" sandbox="allow-scripts allow-modals" style="width:100%;max-width:680px"></iframe>
 </div>
 </div>
 </div>
@@ -3346,7 +3251,7 @@
   <!-- Fullscreen -->
   <div class="fullscreen-overlay" id="fullscreenOverlay">
     <button class="fullscreen-close" onclick="toggleFullscreen()">&#10005;</button>
-    <iframe id="fullscreenFrame" sandbox="allow-scripts allow-modals allow-same-origin"></iframe>
+    <iframe id="fullscreenFrame" sandbox="allow-scripts allow-modals"></iframe>
 </div>
 
   <!-- Custom Confirm Modal -->
@@ -3367,7 +3272,7 @@
       <div class="welcome-body">
         <div class="welcome-title" id="welcomeTitle">
           欢迎使用 Newsletter Builder
-          <span class="version">V0.1.0</span>
+          <span class="version">V0.1.2</span>
         </div>
         <div class="welcome-subtitle">
           为学术期刊与学术邮件场景打造的可视化排版工具。拖拽组件、套用预设、一键导出邮件 HTML，无需手写代码即可生成专业的学术快讯。
@@ -3413,20 +3318,36 @@
   <!-- Toast Queue -->
   <div class="toast-queue" id="toastQueue"></div>
 <script>
+    'use strict';
     // ===== SAFE HTML ESCAPE (S = sanitize for XSS prevention) =====
+    /**
+     * HTML 转义包装器，用于 XSS 防护。将任意值转为安全的 HTML 字符串。
+     * @param {*} t - 需要转义的值，null/undefined 返回空字符串
+     * @returns {string} 转义后的安全 HTML 字符串
+     */
     function S(t) {
       if (t == null) return '';
       return escapeHtml(String(t));
     }
 
+    /**
+     * URL 安全白名单过滤器。仅允许 http/https/mailto/相对路径等安全协议。
+     * @param {string} u - 待校验的 URL
+     * @returns {string} 合法的 URL 或 '#'
+     */
     function safeUrl(u) {
       if (!u || typeof u !== 'string') return '#';
       u = u.trim();
-      if (/^javascript:/i.test(u) || /^data:/i.test(u)) return '#';
-      return u;
+      if (/^(https?:|mailto:|#|\/|\.\/)/i.test(u)) return u;
+      return '#';
     }
 
-    const IDLE_BUDGET_MS = 3;
+    /**
+     * 空闲回调调度器。利用 requestIdleCallback 或 setTimeout 延迟执行非关键任务。
+     * @param {Function} task - 待执行的任务函数
+     * @param {Object} [opts] - 可选配置
+     * @param {number} [opts.timeout=1000] - 最大等待超时（毫秒）
+     */
     function scheduleIdle(task, opts) {
       if (window.requestIdleCallback) {
         window.requestIdleCallback(task, { timeout: (opts && opts.timeout) || 1000 });
@@ -3452,6 +3373,10 @@
     };
 
     let _historyDB = null;
+    /**
+     * 打开 IndexedDB 历史记录数据库。使用单例缓存，避免重复连接。
+     * @returns {Promise<IDBDatabase>} 数据库实例
+     */
     function openHistoryDB() {
       return new Promise((resolve, reject) => {
         if (_historyDB) return resolve(_historyDB);
@@ -3467,6 +3392,11 @@
         req.onerror = () => reject(req.error);
       });
     }
+    /**
+     * 保存历史帧到 IndexedDB。
+     * @param {Object} frame - 历史帧对象，需包含 id 属性
+     * @returns {Promise<void>}
+     */
     function saveFrameToDB(frame) {
       return openHistoryDB().then(db => new Promise((resolve, reject) => {
         const tx = db.transaction(HISTORY_STORE, 'readwrite');
@@ -3475,6 +3405,10 @@
         tx.onerror = () => reject(tx.error);
       }));
     }
+    /**
+     * 获取所有历史帧。
+     * @returns {Promise<Array<Object>>} 历史帧数组
+     */
     function getAllFramesFromDB() {
       return openHistoryDB().then(db => new Promise((resolve, reject) => {
         const tx = db.transaction(HISTORY_STORE, 'readonly');
@@ -3483,6 +3417,11 @@
         req.onerror = () => reject(req.error);
       }));
     }
+    /**
+     * 删除指定历史帧。
+     * @param {string} id - 历史帧 ID
+     * @returns {Promise<void>}
+     */
     function deleteFrameFromDB(id) {
       return openHistoryDB().then(db => new Promise((resolve, reject) => {
         const tx = db.transaction(HISTORY_STORE, 'readwrite');
@@ -3491,6 +3430,10 @@
         tx.onerror = () => reject(tx.error);
       }));
     }
+    /**
+     * 清空所有历史帧。
+     * @returns {Promise<void>}
+     */
     function clearAllFramesFromDB() {
       return openHistoryDB().then(db => new Promise((resolve, reject) => {
         const tx = db.transaction(HISTORY_STORE, 'readwrite');
@@ -3499,6 +3442,10 @@
         tx.onerror = () => reject(tx.error);
       }));
     }
+    /**
+     * 裁剪旧历史帧，保留最近 HISTORY_FRAME_LIMIT 条记录。
+     * @returns {Promise<void>}
+     */
     async function pruneOldFrames() {
       const frames = await getAllFramesFromDB();
       if (frames.length <= HISTORY_FRAME_LIMIT) return;
@@ -3508,6 +3455,9 @@
     }
 
     let _darkPreviewActive = false;
+    /**
+     * 切换暗色模式预览。注入/移除 dark-preview-injected 样式，将 canvas-sheet 替换为暗色变量。
+     */
     function toggleDarkPreview() {
       const checkbox = document.getElementById('darkPreviewToggle');
       _darkPreviewActive = checkbox && checkbox.checked;
@@ -3529,12 +3479,46 @@
       }
     }
 
+    /**
+     * WCAG 对比度检查器。遍历所有 canvas-component 文本节点，计算与背景的对比度，
+     * 生成 AA/AAA 不达标报告。使用 computedStyle 缓存和 TreeWalker 优化性能。
+     */
     function runAccessibilityAudit() {
       const reportEl = document.getElementById('a11yReport');
       if (!reportEl) return;
       const failures = [];
       let totalChecks = 0;
       const canvasComponents = document.querySelectorAll('.canvas-component');
+      // 预计算 canvas-sheet 背景色（只查一次）
+      const sheet = document.querySelector('.canvas-sheet');
+      const sheetBgColor = sheet ? getComputedStyle(sheet).backgroundColor : 'rgb(255, 255, 255)';
+      const sheetBgHex = rgbToHex(sheetBgColor) || '#ffffff';
+      // 缓存元素的 computedStyle 和背景色
+      const styleCache = new Map();
+      const bgCache = new Map();
+      function getCachedBg(el) {
+        if (bgCache.has(el)) return bgCache.get(el);
+        let bgEl = el;
+        let bg = 'rgba(0, 0, 0, 0)';
+        while (bgEl && bgEl !== document.body) {
+          let b;
+          if (bgCache.has(bgEl)) {
+            b = bgCache.get(bgEl);
+            if (b && b !== 'rgba(0, 0, 0, 0)' && b !== 'transparent') { bg = b; break; }
+            // 缓存了透明，继续向上找
+          } else {
+            let cs = styleCache.get(bgEl);
+            if (!cs) { cs = getComputedStyle(bgEl); styleCache.set(bgEl, cs); }
+            b = cs.backgroundColor;
+            bgCache.set(bgEl, b);
+            if (b && b !== 'rgba(0, 0, 0, 0)' && b !== 'transparent') { bg = b; break; }
+          }
+          bgEl = bgEl.parentElement;
+        }
+        if (bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent') bg = sheetBgHex;
+        bgCache.set(el, bg);
+        return bg;
+      }
       canvasComponents.forEach(comp => {
         const compId = comp.id && comp.id.replace('wrap-', '');
         const compType = comp.querySelector('[data-type]');
@@ -3546,19 +3530,10 @@
           if (!text) continue;
           const el = node.parentElement;
           if (!el) continue;
-          const cs = getComputedStyle(el);
+          let cs = styleCache.get(el);
+          if (!cs) { cs = getComputedStyle(el); styleCache.set(el, cs); }
           const fg = cs.color;
-          let bgEl = el;
-          let bg = 'rgba(0, 0, 0, 0)';
-          while (bgEl && bgEl !== document.body) {
-            const b = getComputedStyle(bgEl).backgroundColor;
-            if (b && b !== 'rgba(0, 0, 0, 0)' && b !== 'transparent') { bg = b; break; }
-            bgEl = bgEl.parentElement;
-          }
-          if (bg === 'rgba(0, 0, 0, 0)') {
-            const sheet = document.querySelector('.canvas-sheet');
-            if (sheet) bg = getComputedStyle(sheet).backgroundColor;
-          }
+          const bg = getCachedBg(el);
           const fgHex = rgbToHex(fg);
           const bgHex = rgbToHex(bg);
           if (!fgHex || !bgHex) continue;
@@ -3595,20 +3570,36 @@
       });
       renderA11yReport({ totalChecks, failures, passed: totalChecks - failures.length });
     }
+    /**
+     * 解析 CSS rgb()/rgba() 字符串为 hex 颜色。忽略 alpha 通道。
+     * @param {string} rgb - CSS 颜色字符串（如 'rgb(255,255,255)'）
+     * @returns {string|null} hex 颜色值或 null
+     */
     function rgbToHex(rgb) {
       if (!rgb) return null;
+      // 匹配 rgb(r,g,b) 或 rgba(r,g,b,a) 格式，提取 R/G/B 分量
       const m = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
       if (!m) return null;
+      // 各自转为两位十六进制并拼接
       return '#' + [1, 2, 3].map(i => parseInt(m[i]).toString(16).padStart(2, '0')).join('');
     }
+    /**
+     * 生成对比度修复建议。优先调整文字色，再尝试调整背景色。
+     * @param {string} bgHex - 背景色 hex
+     * @param {string} fgHex - 前景色（文字）hex
+     * @param {number} required - 目标对比度阈值
+     * @returns {string} 修复建议文本
+     */
     function a11ySuggestion(bgHex, fgHex, required) {
       let cur = fgHex;
+      // 尝试逐步调亮文字色，最多 20 步
       for (let i = 0; i < 20; i++) {
         cur = shiftLightness(cur, 5);
         if (getContrastRatio(bgHex, cur) >= required) {
           return '把文字色调至 ' + cur.toUpperCase() + ' 可达 ' + required + ':1';
         }
       }
+      // 文字色调整无果，尝试逐步调暗背景色
       cur = bgHex;
       for (let i = 0; i < 20; i++) {
         cur = shiftLightness(cur, -5);
@@ -3618,12 +3609,20 @@
       }
       return '建议手动调整颜色满足 ' + required + ':1';
     }
+    /**
+     * 通过 HSL 空间偏移颜色亮度，保持色相和饱和度不变。
+     * @param {string} hex - 原始 hex 颜色
+     * @param {number} delta - 亮度偏移量（百分比）
+     * @returns {string} 调整后的 hex 颜色
+     */
     function shiftLightness(hex, delta) {
+      // 提取 RGB 分量
       const r = parseInt(hex.slice(1, 3), 16);
       const g = parseInt(hex.slice(3, 5), 16);
       const b = parseInt(hex.slice(5, 7), 16);
       const max = Math.max(r, g, b), min = Math.min(r, g, b);
       let h, s, l = (max + min) / 2;
+      // 计算 HSL 的色相和饱和度
       if (max === min) { h = s = 0; }
       else {
         const d = max - min;
@@ -3635,7 +3634,9 @@
         }
         h /= 6;
       }
+      // 偏移亮度并钳位到 [0, 1]
       l = Math.max(0, Math.min(1, l + delta / 100));
+      // HSL → RGB 辅助函数
       const hue2rgb = (p, q, t) => {
         if (t < 0) t += 1; if (t > 1) t -= 1;
         if (t < 1 / 6) return p + (q - p) * 6 * t;
@@ -3650,6 +3651,13 @@
       const nb = Math.round(hue2rgb(p, q, h - 1 / 3) * 255);
       return '#' + [nr, ng, nb].map(x => x.toString(16).padStart(2, '0')).join('');
     }
+    /**
+     * 渲染无障碍检查报告。将 AA/AAA 失败项分组展示到 DOM。
+     * @param {Object} report - 检查报告对象
+     * @param {number} report.totalChecks - 总检查项数
+     * @param {Array} report.failures - 失败项数组
+     * @param {number} report.passed - 通过项数
+     */
     function renderA11yReport(report) {
       const el = document.getElementById('a11yReport');
       if (!el) return;
@@ -3684,6 +3692,12 @@
     // ===== CUSTOM CONFIRM (replaces blocking confirm()) =====
     let _confirmResolve = null;
 
+    /**
+     * 异步确认对话框，替代浏览器原生 confirm()。通过 Promise 返回用户选择。
+     * @param {string} msg - 确认消息文本
+     * @param {string} [title='确认操作'] - 对话框标题
+     * @returns {Promise<boolean>} true 确认 / false 取消
+     */
     function customConfirm(msg, title = '确认操作') {
       return new Promise(resolve => {
         const overlay = document.getElementById('confirmOverlay');
@@ -3724,6 +3738,10 @@
     }
 
     // ===== WELCOME MODAL =====
+    /**
+     * 获取当天日期键（YYYY-MM-DD 格式），用于欢迎弹窗的每日跳过逻辑。
+     * @returns {string} 日期键，如 '2026-07-12'
+     */
     function getTodayKey() {
       const d = new Date();
       return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -3738,6 +3756,9 @@
       }
     }
 
+    /**
+     * 设置今天的跳过标记。写入 localStorage 并清除旧版标记。
+     */
     function setWelcomeSkipToday() {
       if (!_storageOk) return;
       try {
@@ -3746,6 +3767,10 @@
       } catch (e) {}
     }
 
+    /**
+     * 显示欢迎弹窗。如果当天已设置跳过标记则不显示。
+     * 提供加载示例模板、新建空白画布、本次关闭、今日关闭等操作。
+     */
     function showWelcome() {
       if (shouldSkipWelcomeToday()) return;
       const overlay = document.getElementById('welcomeOverlay');
@@ -3798,6 +3823,10 @@
     }
 
     // ===== STORAGE AVAILABILITY =====
+    /**
+     * 测试 localStorage 是否可用
+     * @returns {boolean} 可用返回 true，否则返回 false
+     */
     function storageAvailable() {
       try {
         const k = '__storage_test__';
@@ -3934,7 +3963,27 @@
     let hasUnsavedChanges = false;
     let storageTimer = null;
 
+    // ===== DIFF RENDER STATE =====
+    let _lastSignatures = {};
+    let _lastComponentIds = [];
+    let _canvasInitialized = false;
+    const EMPTY_CANVAS_HTML = '<div class="canvas-empty-guide"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg><div class="canvas-empty-title">画布空空如也</div><div class="canvas-empty-desc">切换到左侧「模板」Tab 可快速加载预设模板<br>或<code>/</code>键呼出组件面板，充电宝一样快</div></div>';
+    const FORCE_FULL_RENDER = false; // 调试开关：true 时强制全量渲染
+    const _debouncedSaveHistory = debounce(() => saveHistory(), 500);
+    const _debouncedRender = debounce(() => renderCanvas(), 100);
+    const _debouncedPatchFns = {};
+    function debouncedPatchComponent(id) {
+      if (!_debouncedPatchFns[id]) {
+        _debouncedPatchFns[id] = debounce(() => patchComponent(id), 50);
+      }
+      _debouncedPatchFns[id]();
+    }
+
     // ===== UTILS =====
+    /**
+     * 获取当前字体栈 CSS 值。根据 font.stack 查找对应的 FONT_STACKS 配置。
+     * @returns {string} CSS font-family 值
+     */
     function getFontStack() {
       return FONT_STACKS[font.stack] || FONT_STACKS.system;
     }
@@ -3943,6 +3992,12 @@
       return prefix + '_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
     }
 
+    /**
+     * 创建防抖函数。在连续调用时只执行最后一次。
+     * @param {Function} fn - 需要防抖的函数
+     * @param {number} [ms=300] - 防抖延迟（毫秒）
+     * @returns {Function} 防抖后的函数
+     */
     function debounce(fn, ms = 300) {
       let t;
       return (...args) => {
@@ -3951,11 +4006,22 @@
       };
     }
 
+    /**
+     * HTML 实体转义。将 & < > " ' 替换为对应的 HTML 实体。
+     * @param {string} text - 原始文本
+     * @returns {string} 转义后的安全文本
+     */
     function escapeHtml(text) {
       const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
       return String(text).replace(/[&<>"']/g, c => map[c]);
     }
 
+    /**
+     * 计算 WCAG 对比度。使用相对亮度公式 (L1+0.05)/(L2+0.05)。
+     * @param {string} bgHex - 背景色 hex 值（如 '#ffffff'）
+     * @param {string} textHex - 文字色 hex 值（如 '#000000'）
+     * @returns {number} 对比度比值
+     */
     function getContrastRatio(bgHex, textHex) {
       const r1 = parseInt(bgHex.slice(1, 3), 16), g1 = parseInt(bgHex.slice(3, 5), 16), b1 = parseInt(bgHex.slice(5, 7), 16);
       const r2 = parseInt(textHex.slice(1, 3), 16), g2 = parseInt(textHex.slice(3, 5), 16), b2 = parseInt(textHex.slice(5, 7), 16);
@@ -3964,6 +4030,11 @@
       return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
     }
 
+    /**
+     * 将 hex 颜色转换为 HSL 数组。
+     * @param {string} hex - hex 颜色值（如 '#667eea'）
+     * @returns {Array<number>} [hue(0-360), saturation(0-100), lightness(0-100)]
+     */
     function hexToHsl(hex) {
       let r = parseInt(hex.slice(1, 3), 16) / 255,
         g = parseInt(hex.slice(3, 5), 16) / 255,
@@ -3992,6 +4063,13 @@
       return [h * 360, s * 100, l * 100];
     }
 
+    /**
+     * 将 HSL 值转换为 hex 颜色。
+     * @param {number} h - 色相（0-360）
+     * @param {number} s - 饱和度（0-100）
+     * @param {number} l - 亮度（0-100）
+     * @returns {string} hex 颜色值（如 '#667eea'）
+     */
     function hslToHex(h, s, l) {
       s /= 100;
       l /= 100;
@@ -4026,12 +4104,24 @@
       return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
     }
 
+    /**
+     * 调整颜色亮度。通过 HSL 空间偏移 lightness 分量。
+     * @param {string} hex - 原始 hex 颜色
+     * @param {number} amount - 亮度偏移量（-100 到 100）
+     * @returns {string} 调整后的 hex 颜色
+     */
     function adjustColor(hex, amount) {
       const hsl = hexToHsl(hex);
       hsl[2] = Math.max(0, Math.min(100, hsl[2] + amount));
       return hslToHex(hsl[0], hsl[1], hsl[2]);
     }
 
+    /**
+     * 显示 Toast 通知。自动排队、动画进出、定时移除。
+     * @param {string} msg - 通知消息文本
+     * @param {string} [type='info'] - 类型：'info' | 'success' | 'error'
+     * @param {number} [duration=2200] - 显示时长（毫秒）
+     */
     function showToast(msg, type = 'info', duration = 2200) {
       const q = document.getElementById('toastQueue');
       if (!q) return;
@@ -4052,6 +4142,11 @@
       }, duration);
     }
 
+    /**
+     * 显示按钮加载状态。保存原始内容、添加 loading 类、禁用按钮。
+     * @param {HTMLElement} btn - 按钮元素
+     * @param {string} [loadingText] - 加载时显示的文本
+     */
     function showButtonLoading(btn, loadingText) {
       if (!btn) return;
       btn.dataset.originalText = btn.innerHTML;
@@ -4060,6 +4155,10 @@
       if (loadingText) btn.innerHTML = `<span>${escapeHtml(loadingText)}</span>`;
     }
 
+    /**
+     * 隐藏按钮加载状态。恢复原始内容、移除 loading 类、启用按钮。
+     * @param {HTMLElement} btn - 按钮元素
+     */
     function hideButtonLoading(btn) {
       if (!btn) return;
       btn.classList.remove('loading');
@@ -4070,6 +4169,13 @@
       }
     }
 
+    /**
+     * 包装函数执行期间的按钮加载状态。自动处理同步/异步/Promise 函数，finally 中恢复按钮。
+     * @param {string|HTMLElement} selector - CSS 选择器或按钮元素
+     * @param {Function} fn - 需要执行的主函数
+     * @param {string} [loadingText='处理中...'] - 加载时显示的文本
+     * @returns {*} 原函数的返回值
+     */
     function withButtonLoading(selector, fn, loadingText = '处理中...') {
       const btn = typeof selector === 'string' ? document.querySelector(selector) : selector;
       showButtonLoading(btn, loadingText);
@@ -4090,10 +4196,21 @@
       return v.startsWith('#') ? v : '#' + v;
     }
 
+    /**
+     * 校验 hex 颜色值是否合法（6 位十六进制，可选 # 前缀）。
+     * @param {string} v - 颜色值
+     * @returns {boolean} 是否有效
+     */
     function isValidHex(v) {
       return /^#?([0-9A-Fa-f]{6})$/.test(v);
     }
 
+    /**
+     * 显示/隐藏输入框验证提示。在输入元素父级添加 .input-hint 元素。
+     * @param {HTMLElement} el - 输入元素
+     * @param {boolean} valid - 是否通过验证
+     * @param {string} msg - 验证失败时的提示信息
+     */
     function validateInput(el, valid, msg) {
       const wrap = el.closest('.property-field') || el.parentElement;
       if (!wrap) return;
@@ -4114,6 +4231,10 @@
     }
 
     // ===== MODE =====
+    /**
+     * 切换代码/设计/预览模式。
+     * @param {string} mode - 模式标识，'code'、'design' 或 'preview'
+     */
     function setMode(mode) {
       currentMode = mode;
       document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
@@ -4128,6 +4249,10 @@
     }
 
     // ===== ASSISTANT TABS =====
+    /**
+     * 切换助手面板标签页。
+     * @param {string} tabName - 标签页名称
+     */
     function setAssistantTab(tabName) {
       document.querySelectorAll('.nav-item').forEach(t => t.classList.toggle('active', t.dataset.tab === tabName));
       document.querySelectorAll('.assistant-page').forEach(p => p.classList.toggle('active', p.dataset.page === tabName));
@@ -4136,6 +4261,10 @@
     }
 
     // ===== THEME =====
+    /**
+     * 更新主题主色，并同步色板输入与衍生色。
+     * @param {string} v - 十六进制颜色值，如 '#667eea'
+     */
     function updateThemeColor(v) {
       const input = document.getElementById('primaryColorHex');
       validateInput(input, isValidHex(v), '请输入有效的 6 位十六进制颜色，如 #667eea');
@@ -4145,9 +4274,13 @@
       document.getElementById('primaryColorPicker').value = v;
       input.value = v;
       theme.accent2 = adjustColor(v, -20);
-      renderCanvas();
+      _debouncedRender();
     }
 
+    /**
+     * 更新主题背景色，并触发对比度检查。
+     * @param {string} v - 十六进制颜色值
+     */
     function updateBgColor(v) {
       const input = document.getElementById('bgColorHex');
       validateInput(input, isValidHex(v), '请输入有效的 6 位十六进制颜色');
@@ -4156,10 +4289,14 @@
       theme.bg = v;
       document.getElementById('bgColorPicker').value = v;
       input.value = v;
-      renderCanvas();
+      _debouncedRender();
       checkContrast();
     }
 
+    /**
+     * 更新主题文本颜色，并触发对比度检查。
+     * @param {string} v - 十六进制颜色值
+     */
     function updateTextColor(v) {
       const input = document.getElementById('textColorHex');
       validateInput(input, isValidHex(v), '请输入有效的 6 位十六进制颜色');
@@ -4168,10 +4305,14 @@
       theme.text = v;
       document.getElementById('textColorPicker').value = v;
       input.value = v;
-      renderCanvas();
+      _debouncedRender();
       checkContrast();
     }
 
+    /**
+     * 应用预设配色方案到主题。
+     * @param {string} name - 预设名称，对应 PRESETS 对象的键
+     */
     function applyPreset(name) {
       const p = PRESETS[name];
       if (!p) return;
@@ -4186,6 +4327,10 @@
       showToast('已应用预设配色');
     }
 
+    /**
+     * 根据当前主色生成协调配色（类似色/互补色/三角色）。
+     * @param {string} type - 协调类型：'analogous'、'complementary' 或 'triadic'
+     */
     function generateHarmony(type) {
       const h = hexToHsl(theme.primary)[0];
       let colors = [];
@@ -4202,6 +4347,9 @@
       showToast('已生成协调配色并应用到主题');
     }
 
+    /**
+     * 将主题对象中的颜色同步到 UI 控件（色板、文本框）。
+     */
     function updateUITheme() {
       document.getElementById('primaryColorPicker').value = theme.primary;
       document.getElementById('primaryColorHex').value = theme.primary;
@@ -4211,6 +4359,9 @@
       document.getElementById('textColorHex').value = theme.text;
     }
 
+    /**
+     * 检查背景与文本的对比度，更新对比度徽章（AA/Fail）。
+     */
     function checkContrast() {
       const ratio = getContrastRatio(theme.bg, theme.text);
       const badge = document.getElementById('textContrast');
@@ -4219,56 +4370,93 @@
     }
 
     // ===== FONT =====
+    /**
+     * 更新全局字体栈并重新渲染。
+     * @param {string} v - CSS font-family 字符串
+     */
     function updateFontStack(v) {
       font.stack = v;
       renderCanvas();
     }
 
+    /**
+     * 更新指定标题级别（h1/h2/h3）的字体大小。
+     * @param {string} k - 标题级别键名，如 'h1'、'h2'、'h3'
+     * @param {string|number} v - 字体大小（px）
+     */
     function updateHeadingSize(k, v) {
       font[k] = parseInt(v);
       document.getElementById(k + 'SizeVal').textContent = v;
-      renderCanvas();
+      _debouncedRender();
     }
 
+    /**
+     * 更新全局字体粗细。
+     * @param {string|number} v - 字体粗细值，如 400、700
+     */
     function updateFontWeight(v) {
       font.weight = parseInt(v);
       document.getElementById('fontWeightVal').textContent = v;
-      renderCanvas();
+      _debouncedRender();
     }
 
+    /**
+     * 更新正文字体大小。
+     * @param {string|number} v - 字体大小（px）
+     */
     function updateBodySize(v) {
       font.body = parseInt(v);
       document.getElementById('bodySizeVal').textContent = v;
-      renderCanvas();
+      _debouncedRender();
     }
 
+    /**
+     * 更新正文行高。
+     * @param {string|number} v - 行高值（无单位倍数）
+     */
     function updateLineHeight(v) {
       font.lineHeight = parseFloat(v);
       document.getElementById('lineHeightVal').textContent = v;
-      renderCanvas();
+      _debouncedRender();
     }
 
     // ===== SPACING =====
+    /**
+     * 更新画布容器宽度。
+     * @param {string|number} v - 容器宽度（px）
+     */
     function updateContainerWidth(v) {
       spacing.containerWidth = parseInt(v);
       document.getElementById('containerWidthVal').textContent = v;
       const lbl = document.getElementById('canvasSizeLabel');
       if (lbl) lbl.textContent = v + 'px';
-      renderCanvas();
+      _debouncedRender();
     }
 
+    /**
+     * 更新组件之间的间距。
+     * @param {string|number} v - 间距值（px）
+     */
     function updateSectionGap(v) {
       spacing.sectionGap = parseInt(v);
       document.getElementById('sectionGapVal').textContent = v;
-      renderCanvas();
+      _debouncedRender();
     }
 
+    /**
+     * 更新组件内边距。
+     * @param {string|number} v - 内边距值（px）
+     */
     function updatePadding(v) {
       spacing.padding = parseInt(v);
       document.getElementById('paddingVal').textContent = v;
-      renderCanvas();
+      _debouncedRender();
     }
 
+    /**
+     * 设置网格基准单位，并高亮对应预设按钮。
+     * @param {number} v - 网格基准值（px），如 4、8
+     */
     function setGridBase(v) {
       spacing.gridBase = v;
       document.querySelectorAll('.assistant-page[data-page="styles"] .preset-btn').forEach(btn => {
@@ -4278,15 +4466,25 @@
     }
 
     // ===== COMPONENTS =====
+    /**
+     * 向画布添加一个组件，自动选中并提示。
+     * @param {string} type - 组件类型，如 'header'、'cta'、'image-text' 等
+     */
     function addComponent(type) {
       const comp = createComponent(type, getId('comp'));
       components.push(comp);
-      saveHistory();
+      saveHistory({ force: true });
       renderCanvas();
       selectComponent(comp.id);
       showToast('已添加组件');
     }
 
+    /**
+     * 组件工厂，根据类型和 ID 创建带有默认属性的组件对象。
+     * @param {string} type - 组件类型
+     * @param {string} id - 组件唯一标识
+     * @returns {Object} 组件对象，包含 id、type 和 props
+     */
     function createComponent(type, id) {
       const base = {
         id,
@@ -4654,42 +4852,215 @@
       }
     }
 
+    // ===== CANVAS EVENT DELEGATION =====
+    /**
+     * 初始化画布事件委托：点击选中、拖拽排序等。
+     */
+    function initCanvasEvents() {
+      const canvas = document.getElementById('canvasContent');
+      if (!canvas) return;
+      canvas.addEventListener('click', (e) => {
+        const wrapper = e.target.closest('.canvas-component');
+        if (!wrapper) {
+          selectedComponentId = null;
+          updateSelectionState();
+          const empty = document.getElementById('propertiesEmpty');
+          const body = document.getElementById('propertiesBody');
+          if (empty) empty.style.display = 'flex';
+          if (body) body.style.display = 'none';
+          return;
+        }
+        e.stopPropagation();
+        selectComponent(wrapper.dataset.id);
+      });
+      canvas.addEventListener('dragstart', (e) => {
+        const wrapper = e.target.closest('.canvas-component');
+        if (wrapper) onDragStart(e, wrapper.dataset.id);
+      });
+      canvas.addEventListener('dragend', onDragEnd);
+      canvas.addEventListener('dragover', (e) => {
+        const wrapper = e.target.closest('.canvas-component');
+        if (wrapper) {
+          onDragOver(e, wrapper.dataset.id);
+        } else {
+          e.preventDefault();
+        }
+      });
+      canvas.addEventListener('drop', (e) => {
+        const wrapper = e.target.closest('.canvas-component');
+        if (wrapper) {
+          onDrop(e, wrapper.dataset.id);
+        } else {
+          onDropToEnd(e);
+        }
+      });
+      canvas.addEventListener('dragenter', (e) => e.preventDefault());
+    }
+
+    /**
+     * 更新画布中组件的视觉选中状态（添加/移除 .selected 类）。
+     */
+    function updateSelectionState() {
+      document.querySelectorAll('.canvas-component.selected')
+        .forEach(el => el.classList.remove('selected'));
+      if (selectedComponentId) {
+        const el = document.getElementById('wrap-' + selectedComponentId);
+        if (el) el.classList.add('selected');
+      }
+    }
+
+    /**
+     * 局部更新单个组件的 DOM 节点，并保留选中状态。
+     * @param {string} id - 组件 ID
+     */
+    function patchComponent(id) {
+      const comp = components.find(c => c.id === id);
+      const node = document.getElementById('wrap-' + id);
+      if (!comp || !node) return;
+      const isSelected = node.classList.contains('selected');
+      node.outerHTML = renderComponent(comp);
+      const newNode = document.getElementById('wrap-' + id);
+      if (isSelected && newNode) newNode.classList.add('selected');
+      _lastSignatures[id] = JSON.stringify(comp.props) + comp.type;
+    }
+
+    // 性能测量辅助（开发调试用，可在控制台调用）
+    /**
+     * 基准测试 patchComponent 性能。执行 100 次 patchComponent 并输出平均耗时。
+     * @param {string} id - 组件 ID
+     */
+    function _benchPatchComponent(id) {
+      const t0 = performance.now();
+      for (let i = 0; i < 100; i++) patchComponent(id);
+      const t1 = performance.now();
+      console.log('patchComponent x100: ' + (t1 - t0).toFixed(2) + 'ms, avg: ' + ((t1 - t0) / 100).toFixed(2) + 'ms');
+    }
+    /**
+     * 基准测试全量渲染性能。执行 100 次 renderCanvasLegacy 并输出平均耗时。
+     */
+    function _benchRenderCanvas() {
+      const t0 = performance.now();
+      for (let i = 0; i < 100; i++) renderCanvasLegacy();
+      const t1 = performance.now();
+      console.log('renderCanvasLegacy x100: ' + (t1 - t0).toFixed(2) + 'ms, avg: ' + ((t1 - t0) / 100).toFixed(2) + 'ms');
+    }
+
     let _renderScheduled = false;
 
+    /**
+     * 全量渲染：用 innerHTML 重建整个画布。用于首次渲染或大量组件变更时的回退。
+     * 同时重建签名缓存和组件 ID 列表。
+     */
+    function renderCanvasLegacy() {
+      const canvas = document.getElementById('canvasContent');
+      canvas.style.maxWidth = spacing.containerWidth + 'px';
+      const lbl = document.getElementById('canvasSizeLabel');
+      if (lbl) lbl.textContent = spacing.containerWidth + 'px';
+      if (components.length === 0) {
+        canvas.innerHTML = EMPTY_CANVAS_HTML;
+      } else {
+        canvas.innerHTML = components.map(c => renderComponent(c)).join('');
+      }
+      // 重建签名缓存
+      _lastSignatures = {};
+      _lastComponentIds = [];
+      components.forEach(c => {
+        _lastSignatures[c.id] = JSON.stringify(c.props) + c.type;
+        _lastComponentIds.push(c.id);
+      });
+      _canvasInitialized = true;
+    }
+
+    /**
+     * 组件级 diff 渲染：对比新旧组件签名，只更新变化的 DOM 节点。
+     * 50% 以上组件变化时回退到全量渲染。执行三步：删除移除的节点 → 更新变化的节点 → 插入新增的节点。
+     */
+    function patchCanvas() {
+      const canvas = document.getElementById('canvasContent');
+      canvas.style.maxWidth = spacing.containerWidth + 'px';
+      const lbl = document.getElementById('canvasSizeLabel');
+      if (lbl) lbl.textContent = spacing.containerWidth + 'px';
+
+      // 空画布
+      if (components.length === 0) {
+        if (!_lastComponentIds.length) return;
+        canvas.innerHTML = EMPTY_CANVAS_HTML;
+        _lastSignatures = {};
+        _lastComponentIds = [];
+        return;
+      }
+
+      // 全量回退条件：组件数量变化超过 50% 或首次渲染
+      const oldLen = _lastComponentIds.length;
+      const newLen = components.length;
+      if (!_canvasInitialized || (oldLen > 0 && Math.abs(newLen - oldLen) / Math.max(newLen, oldLen) > 0.5)) {
+        renderCanvasLegacy();
+        return;
+      }
+
+      // 构建旧节点映射
+      const oldIdSet = new Set(_lastComponentIds);
+      const newIds = components.map(c => c.id);
+      const newIdSet = new Set(newIds);
+
+      // 删除不再存在的节点
+      _lastComponentIds.forEach(id => {
+        if (!newIdSet.has(id)) {
+          const el = document.getElementById('wrap-' + id);
+          if (el) el.remove();
+          delete _lastSignatures[id];
+        }
+      });
+
+      // 遍历新组件：更新或插入
+      let prevNode = null;
+      components.forEach(c => {
+        const sig = JSON.stringify(c.props) + c.type;
+        const existing = document.getElementById('wrap-' + c.id);
+        if (existing && oldIdSet.has(c.id) && _lastSignatures[c.id] === sig) {
+          // 签名未变，跳过渲染
+          prevNode = existing;
+        } else if (existing) {
+          // 签名变化，原地替换 DOM
+          const isSelected = existing.classList.contains('selected');
+          existing.outerHTML = renderComponent(c);
+          const newNode = document.getElementById('wrap-' + c.id);
+          if (isSelected && newNode) newNode.classList.add('selected');
+          _lastSignatures[c.id] = sig;
+          prevNode = newNode;
+        } else {
+          // 新组件，创建 DOM 并插入到正确位置
+          const tmp = document.createElement('div');
+          tmp.innerHTML = renderComponent(c);
+          const newNode = tmp.firstElementChild;
+          if (prevNode) {
+            prevNode.after(newNode);
+          } else {
+            canvas.prepend(newNode);
+          }
+          _lastSignatures[c.id] = sig;
+          prevNode = newNode;
+        }
+      });
+
+      _lastComponentIds = newIds;
+      _canvasInitialized = true;
+    }
+
+    /**
+     * RAF 调度的渲染入口。通过 requestAnimationFrame 合并多次调用，
+     * 根据 FORCE_FULL_RENDER 标志选择全量渲染或 diff 渲染。
+     */
     function renderCanvas() {
       if (_renderScheduled) return;
       _renderScheduled = true;
       requestAnimationFrame(() => {
         _renderScheduled = false;
-        const canvas = document.getElementById('canvasContent');
-        canvas.style.maxWidth = spacing.containerWidth + 'px';
-        const lbl = document.getElementById('canvasSizeLabel');
-        if (lbl) lbl.textContent = spacing.containerWidth + 'px';
-        if (components.length === 0) {
-          canvas.innerHTML = '<div class="canvas-empty-guide"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg><div class="canvas-empty-title">画布空空如也</div><div class="canvas-empty-desc">切换到左侧「模板」Tab 可快速加载预设模板<br>或<code>/</code>键呼出组件面板，充电宝一样快</div></div>';
+        if (FORCE_FULL_RENDER) {
+          renderCanvasLegacy();
         } else {
-          canvas.innerHTML = components.map(c => renderComponent(c)).join('');
+          patchCanvas();
         }
-        components.forEach(c => {
-          const el = document.getElementById('wrap-' + c.id);
-          if (!el) return;
-          el.onclick = (e) => { e.stopPropagation(); selectComponent(c.id); };
-          const handle = el.querySelector('.canvas-component-draghandle');
-          if (handle) {
-            handle.addEventListener('dragstart', (e) => onDragStart(e, c.id));
-            handle.addEventListener('dragend', onDragEnd);
-          }
-          el.addEventListener('dragover', (e) => onDragOver(e, c.id));
-          el.addEventListener('drop', (e) => onDrop(e, c.id));
-          el.addEventListener('dragenter', (e) => e.preventDefault());
-        });
-        canvas.ondragover = (e) => { e.preventDefault(); };
-        canvas.ondrop = (e) => { e.preventDefault(); onDropToEnd(e); };
-        canvas.onclick = () => {
-          selectedComponentId = null;
-          renderCanvas();
-          selectComponent(null);
-        };
       });
     }
 
@@ -4704,55 +5075,55 @@
           break;
         case 'image-text':
           if (c.props.layout === 'left') {
-            html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:${theme.bg}"><tr><td style="padding:${pad}px;font-family:${fontStack};color:${theme.text}"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td width="40%" valign="top"><img src="${c.props.imageUrl}" width="100%" style="display:block;border-radius:8px" alt="${S(c.props.title)}"></td><td width="5%"></td><td width="55%" valign="top"><h2 style="margin:0 0 8px;font-size:${font.h2}px;font-weight:${font.weight};color:${theme.primary}">${S(c.props.title)}</h2><p style="margin:0 0 12px;font-size:${font.body}px;line-height:${font.lineHeight};color:${theme.text}">${S(c.props.content)}</p><a href="#" style="display:inline-block;padding:10px 24px;background:${theme.primary};color:white;text-decoration:none;border-radius:6px;font-size:${font.body}px">${S(c.props.buttonText)}</a></td></tr></table></td></tr></table>`;
+            html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:${theme.bg}"><tr><td style="padding:${pad}px;font-family:${fontStack};color:${theme.text}"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td width="40%" valign="top"><img src="${safeUrl(c.props.imageUrl)}" width="100%" style="display:block;border-radius:8px" alt="${S(c.props.title)}"></td><td width="5%"></td><td width="55%" valign="top"><h2 style="margin:0 0 8px;font-size:${font.h2}px;font-weight:${font.weight};color:${theme.primary}">${S(c.props.title)}</h2><p style="margin:0 0 12px;font-size:${font.body}px;line-height:${font.lineHeight};color:${theme.text}">${S(c.props.content)}</p><a href="#" style="display:inline-block;padding:10px 24px;background:${theme.primary};color:white;text-decoration:none;border-radius:6px;font-size:${font.body}px">${S(c.props.buttonText)}</a></td></tr></table></td></tr></table>`;
           } else {
-            html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:${theme.bg}"><tr><td align="center" style="padding:${pad}px;font-family:${fontStack};color:${theme.text}"><img src="${c.props.imageUrl}" width="100%" style="display:block;border-radius:8px;margin-bottom:12px" alt="${S(c.props.title)}"><h2 style="margin:0 0 8px;font-size:${font.h2}px;font-weight:${font.weight};color:${theme.primary}">${c.props.title}</h2><p style="margin:0 0 12px;font-size:${font.body}px;line-height:${font.lineHeight};color:${theme.text}">${c.props.content}</p><a href="#" style="display:inline-block;padding:10px 24px;background:${theme.primary};color:white;text-decoration:none;border-radius:6px;font-size:${font.body}px">${S(c.props.buttonText)}</a></td></tr></table>`;
+            html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:${theme.bg}"><tr><td align="center" style="padding:${pad}px;font-family:${fontStack};color:${theme.text}"><img src="${safeUrl(c.props.imageUrl)}" width="100%" style="display:block;border-radius:8px;margin-bottom:12px" alt="${S(c.props.title)}"><h2 style="margin:0 0 8px;font-size:${font.h2}px;font-weight:${font.weight};color:${theme.primary}">${S(c.props.title)}</h2><p style="margin:0 0 12px;font-size:${font.body}px;line-height:${font.lineHeight};color:${theme.text}">${S(c.props.content)}</p><a href="#" style="display:inline-block;padding:10px 24px;background:${theme.primary};color:white;text-decoration:none;border-radius:6px;font-size:${font.body}px">${S(c.props.buttonText)}</a></td></tr></table>`;
           }
           break;
         case 'cta':
-          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px"><tr><td align="${c.props.alignment||'center'}" style="padding:${pad}px;background:${theme.bg};font-family:${fontStack}"><a href="${c.props.url}" style="display:inline-block;padding:14px 32px;background:${theme.primary};color:white;text-decoration:none;border-radius:8px;font-size:${font.body+2}px;font-weight:${font.weight}">${S(c.props.text)}</a></td></tr></table>`;
+          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px"><tr><td align="${c.props.alignment||'center'}" style="padding:${pad}px;background:${theme.bg};font-family:${fontStack}"><a href="${safeUrl(c.props.url)}" style="display:inline-block;padding:14px 32px;background:${theme.primary};color:white;text-decoration:none;border-radius:8px;font-size:${font.body+2}px;font-weight:${font.weight}">${S(c.props.text)}</a></td></tr></table>`;
           break;
         case 'product-list':
           const cols = parseInt(c.props.columns) || 2;
           const w = Math.floor(100 / cols);
-          let prodRows = c.props.products.map((p, i) => `<td width="${w}%" align="center" style="padding:8px"><img src="${p.image}" width="100%" style="display:block;border-radius:8px;margin-bottom:8px" alt="${S(p.name)}"><div style="font-weight:${font.weight};color:${theme.text};font-size:${font.body}px">${S(p.name)}</div><div style="color:${theme.primary};font-size:${font.h3}px;font-weight:${font.weight}">${S(p.price)}</div></td>`).join('');
+          let prodRows = c.props.products.map((p, i) => `<td width="${w}%" align="center" style="padding:8px"><img src="${safeUrl(p.image)}" width="100%" style="display:block;border-radius:8px;margin-bottom:8px" alt="${S(p.name)}"><div style="font-weight:${font.weight};color:${theme.text};font-size:${font.body}px">${S(p.name)}</div><div style="color:${theme.primary};font-size:${font.h3}px;font-weight:${font.weight}">${S(p.price)}</div></td>`).join('');
           html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:${theme.bg}"><tr><td style="padding:${pad}px;font-family:${fontStack}"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>${prodRows}</tr></table></td></tr></table>`;
           break;
         case 'divider':
           html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px"><tr><td style="padding:0 ${pad}px"><hr style="border:none;border-top:2px solid ${c.props.color||theme.primary};opacity:0.3"></td></tr></table>`;
           break;
         case 'social':
-          const links = c.props.links.map(l => `<a href="${l.url}" style="display:inline-block;margin:0 8px;color:${theme.primary};text-decoration:none;font-size:${font.body}px">${S(l.name)}</a>`).join('');
+          const links = c.props.links.map(l => `<a href="${safeUrl(l.url)}" style="display:inline-block;margin:0 8px;color:${theme.primary};text-decoration:none;font-size:${font.body}px">${S(l.name)}</a>`).join('');
           html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px"><tr><td align="center" style="padding:${pad}px;background:${theme.bg};font-family:${fontStack}">${links}</td></tr></table>`;
           break;
         case 'footer':
-          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:${pad}px;background:${adjustColor(theme.primary,-40)};color:white;font-family:${fontStack};font-size:12px"><p style="margin:0 0 8px">&copy; ${S(c.props.copyright)} ${S(c.props.company)}</p><a href="${c.props.unsubscribe}" style="color:white;opacity:0.8">取消订阅</a></td></tr></table>`;
+          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:${pad}px;background:${adjustColor(theme.primary,-40)};color:white;font-family:${fontStack};font-size:12px"><p style="margin:0 0 8px">&copy; ${S(c.props.copyright)} ${S(c.props.company)}</p><a href="${safeUrl(c.props.unsubscribe)}" style="color:white;opacity:0.8">取消订阅</a></td></tr></table>`;
           break;
         case 'placeholder':
           html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px"><tr><td style="padding:${pad}px;background:${theme.bg};font-family:${fontStack};color:${theme.text};font-size:${font.body}px">你好，{{${S(c.props.name)}}}，欢迎阅读本期 Newsletter！</td></tr></table>`;
           break;
         case 'academic-hero':
           const introRows = c.props.introLines.map((line, i) => `<tr><td style="width:20px;font-size:13px"></td><td style="padding:${i===0?'20px 0 15px':'0 0 15px'};font-size:13px;line-height:18.2px;font-family:Arial;text-align:justify;vertical-align:top">${line}</td><td style="width:20px;font-size:13px"></td></tr>`).join('');
-          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:#f2f2f2;border-radius:10px"><tr><td colspan="3"><img src="${c.props.imageUrl}" width="100%" style="display:block;border-radius:10px 10px 0 0;margin:-4px;border:1px solid #f2f2f2" alt="${c.props.introLines?.[0]?.slice(0,30)||''}"></td></tr>${introRows}</table>`;
+          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:#f2f2f2;border-radius:10px"><tr><td colspan="3"><img src="${safeUrl(c.props.imageUrl)}" width="100%" style="display:block;border-radius:10px 10px 0 0;margin:-4px;border:1px solid #f2f2f2" alt="${c.props.introLines?.[0]?.slice(0,30)||''}"></td></tr>${introRows}</table>`;
           break;
         case 'section-title':
           html = `<p style="font-size:16px;line-height:36px;background:${c.props.bgColor||'#004F6F'};color:${c.props.textColor||'white'};width:100%;display:inline-block;margin-top:15px;margin-bottom:0;font-family:Arial"><strong>&nbsp;&#x2590; ${S(c.props.title)}</strong></p>`;
           break;
         case 'article-card':
-          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:#f2f2f2"><tr><td style="font-size:13px;text-align:justify;padding:10px 20px 0 20px;vertical-align:middle"><a style="color:#004F6F;text-decoration:none" href="${c.props.url}"><strong>${S(c.props.title)}</strong></a></td></tr><tr><td style="font-size:13px;text-align:justify;padding:0 20px 10px 20px;vertical-align:middle">${S(c.props.authors)}</td></tr></table>`;
+          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:#f2f2f2"><tr><td style="font-size:13px;text-align:justify;padding:10px 20px 0 20px;vertical-align:middle"><a style="color:#004F6F;text-decoration:none" href="${safeUrl(c.props.url)}"><strong>${S(c.props.title)}</strong></a></td></tr><tr><td style="font-size:13px;text-align:justify;padding:0 20px 10px 20px;vertical-align:middle">${S(c.props.authors)}</td></tr></table>`;
           break;
         case 'banner':
-          html = `<p style="margin-top:30px;margin-bottom:30px"><a style="color:black;text-decoration:none" href="${c.props.url}"><img src="${c.props.imageUrl}" alt="Banner" width="100%" style="display:block"/></a></p>`;
+          html = `<p style="margin-top:30px;margin-bottom:30px"><a style="color:black;text-decoration:none" href="${safeUrl(c.props.url)}"><img src="${safeUrl(c.props.imageUrl)}" alt="Banner" width="100%" style="display:block"/></a></p>`;
           break;
         case 'two-column':
-          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px"><tr><td style="width:20px"></td><td style="width:260px;vertical-align:top"><a href="${c.props.leftUrl}"><img src="${c.props.leftImage}" width="100%" style="display:block" alt="${c.props.leftTitle}"/></a><a style="color:#004F6F;text-decoration:none" href="${c.props.leftUrl}"><strong>${c.props.leftTitle}</strong></a><p style="margin-top:5px;margin-bottom:5px;font-size:13px">edited by ${c.props.leftEditor}</p><p style="margin-top:5px;margin-bottom:5px;font-size:13px">submission deadline <strong>${c.props.leftDeadline}</strong></p></td><td style="width:40px"></td><td style="width:260px;vertical-align:top"><a href="${c.props.rightUrl}"><img src="${c.props.rightImage}" width="100%" style="display:block" alt="${c.props.rightTitle}"/></a><a style="color:#004F6F;text-decoration:none" href="${c.props.rightUrl}"><strong>${c.props.rightTitle}</strong></a><p style="margin-top:5px;margin-bottom:5px;font-size:13px">edited by ${c.props.rightEditor}</p><p style="margin-top:5px;margin-bottom:5px;font-size:13px">submission deadline <strong>${c.props.rightDeadline}</strong></p></td><td style="width:20px"></td></tr></table>`;
+          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px"><tr><td style="width:20px"></td><td style="width:260px;vertical-align:top"><a href="${safeUrl(c.props.leftUrl)}"><img src="${safeUrl(c.props.leftImage)}" width="100%" style="display:block" alt="${c.props.leftTitle}"/></a><a style="color:#004F6F;text-decoration:none" href="${safeUrl(c.props.leftUrl)}"><strong>${c.props.leftTitle}</strong></a><p style="margin-top:5px;margin-bottom:5px;font-size:13px">edited by ${c.props.leftEditor}</p><p style="margin-top:5px;margin-bottom:5px;font-size:13px">submission deadline <strong>${c.props.leftDeadline}</strong></p></td><td style="width:40px"></td><td style="width:260px;vertical-align:top"><a href="${safeUrl(c.props.rightUrl)}"><img src="${safeUrl(c.props.rightImage)}" width="100%" style="display:block" alt="${c.props.rightTitle}"/></a><a style="color:#004F6F;text-decoration:none" href="${safeUrl(c.props.rightUrl)}"><strong>${c.props.rightTitle}</strong></a><p style="margin-top:5px;margin-bottom:5px;font-size:13px">edited by ${c.props.rightEditor}</p><p style="margin-top:5px;margin-bottom:5px;font-size:13px">submission deadline <strong>${c.props.rightDeadline}</strong></p></td><td style="width:20px"></td></tr></table>`;
           break;
         case 'feature-list':
           const features = c.props.features.map(f => `<tr><td style="width:10px;font-size:13px"></td><td style="width:10px;font-size:13px;vertical-align:top">&#x2B9A;</td><td style="font-size:13px;padding-left:5pt;vertical-align:top"><strong>${S(f.title)}</strong> ${S(f.desc)}</td></tr>`).join('');
           html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px">${features}</table>`;
           break;
         case 'bottom-banner':
-          html = `<p style="margin-top:15px;margin-bottom:15px"><a style="color:black;text-decoration:none" href="${c.props.url}"><img src="${c.props.imageUrl}" alt="Banner" width="100%" style="display:block"/></a></p>`;
+          html = `<p style="margin-top:15px;margin-bottom:15px"><a style="color:black;text-decoration:none" href="${safeUrl(c.props.url)}"><img src="${safeUrl(c.props.imageUrl)}" alt="Banner" width="100%" style="display:block"/></a></p>`;
           break;
         case 'news-toc':
           const tocItems = (c.props.items || []).map((item, i) => {
@@ -4763,7 +5134,7 @@
           break;
         case 'editor-note':
           const notePars = (c.props.paragraphs || []).map(p => `<tr><td style="width:20px"></td><td style="padding:0 0 12px;font-size:13px;line-height:1.6;font-family:${fontStack};color:${theme.text};text-align:justify;vertical-align:top">${S(p.text)}</td><td style="width:20px"></td></tr>`).join('');
-          const noteImg = c.props.imageUrl ? `<tr><td colspan="3"><img src="${c.props.imageUrl}" width="100%" style="display:block;border-radius:10px 10px 0 0;margin:-4px;border:1px solid #f2f2f2" alt=""/></td></tr>` : '';
+          const noteImg = c.props.imageUrl ? `<tr><td colspan="3"><img src="${safeUrl(c.props.imageUrl)}" width="100%" style="display:block;border-radius:10px 10px 0 0;margin:-4px;border:1px solid #f2f2f2" alt=""/></td></tr>` : '';
           html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:#f2f2f2;border-radius:10px">${noteImg}${notePars}<tr><td style="width:20px"></td><td style="padding:0 0 15px;font-size:12px;color:${theme.text};font-family:${fontStack};opacity:.7;text-align:right">${S(c.props.signature||'')}</td><td style="width:20px"></td></tr></table>`;
           break;
         case 'paper-list':
@@ -4779,7 +5150,7 @@
         case 'sponsor-banner':
           const sbTop = c.props.topText ? `<tr><td style="padding:8px 0;font-size:12px;color:${theme.text};font-family:${fontStack};text-align:center">${S(c.props.topText)}</td></tr>` : '';
           const sbBot = c.props.bottomText ? `<tr><td style="padding:8px 0;font-size:12px;color:${theme.text};font-family:${fontStack};text-align:center">${S(c.props.bottomText)}</td></tr>` : '';
-          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:${c.props.bgColor||theme.bg}">${sbTop}<tr><td><a style="color:black;text-decoration:none" href="${c.props.url||'#'}"><img src="${c.props.imageUrl}" alt="Banner" width="100%" style="display:block"/></a></td></tr>${sbBot}</table>`;
+          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:${c.props.bgColor||theme.bg}">${sbTop}<tr><td><a style="color:black;text-decoration:none" href="${safeUrl(c.props.url||'#')}"><img src="${safeUrl(c.props.imageUrl)}" alt="Banner" width="100%" style="display:block"/></a></td></tr>${sbBot}</table>`;
           break;
         case 'highlight-box':
           const hlItems = (c.props.items || []).map(it => `<tr><td style="width:10px"></td><td style="width:10px;font-size:13px;vertical-align:top;color:${c.props.accentColor||theme.primary}">${c.props.icon||'&#x2B9A;'}</td><td style="font-size:13px;padding-left:5pt;vertical-align:top;font-family:${fontStack};color:${theme.text}"><strong>${S(it.title)}</strong> ${S(it.desc)}${it.url?` <a href="${it.url}" style="color:${c.props.accentColor||theme.primary};text-decoration:none">[链接]</a>`:''}</td></tr>`).join('');
@@ -4791,7 +5162,7 @@
           break;
         case 'cover-hero': {
           const acc = c.props.accentColor || theme.primary;
-          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:${c.props.bgColor||'#f2f2f2'};border-radius:10px"><tr><td colspan="4"><img src="${c.props.imageUrl}" width="100%" style="display:block;border-radius:10px 10px 0 0;margin:-3px;border:1px solid ${c.props.bgColor||'#f2f2f2'}" alt=""/></td></tr><tr><td rowspan="2" style="font-size:18px;width:220px;text-align:left;vertical-align:middle;line-height:32px;padding-left:15px;font-family:${fontStack};color:${theme.text}"><strong>${S(c.props.title)}</strong></td><td style="width:10px"></td><td style="font-size:13px;text-align:justify;vertical-align:top;padding-top:10px;padding-bottom:15px;font-family:${fontStack};color:${theme.text};line-height:1.6">${S(c.props.summary)}</td><td style="width:10px"></td></tr><tr><td style="width:10px"></td><td style="padding-bottom:15px"><p style="margin-bottom:20px"><a style="color:${acc};text-decoration:none;border:thin ${acc} solid;border-radius:20px;padding:10px 30px;font-size:13px;display:inline-block" href="${c.props.ctaUrl||'#'}">${c.props.ctaText||'Learn more →'}</a></p></td><td style="width:20px"></td></tr></table>`;
+          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px;background:${c.props.bgColor||'#f2f2f2'};border-radius:10px"><tr><td colspan="4"><img src="${safeUrl(c.props.imageUrl)}" width="100%" style="display:block;border-radius:10px 10px 0 0;margin:-3px;border:1px solid ${c.props.bgColor||'#f2f2f2'}" alt=""/></td></tr><tr><td rowspan="2" style="font-size:18px;width:220px;text-align:left;vertical-align:middle;line-height:32px;padding-left:15px;font-family:${fontStack};color:${theme.text}"><strong>${S(c.props.title)}</strong></td><td style="width:10px"></td><td style="font-size:13px;text-align:justify;vertical-align:top;padding-top:10px;padding-bottom:15px;font-family:${fontStack};color:${theme.text};line-height:1.6">${S(c.props.summary)}</td><td style="width:10px"></td></tr><tr><td style="width:10px"></td><td style="padding-bottom:15px"><p style="margin-bottom:20px"><a style="color:${acc};text-decoration:none;border:thin ${acc} solid;border-radius:20px;padding:10px 30px;font-size:13px;display:inline-block" href="${safeUrl(c.props.ctaUrl||'#')}">${c.props.ctaText||'Learn more →'}</a></p></td><td style="width:20px"></td></tr></table>`;
           break;
         }
         case 'editor-board': {
@@ -4840,6 +5211,11 @@
       return html;
     }
 
+    /**
+     * 渲染组件的外层包装 HTML（含拖拽手柄和操作按钮）。
+     * @param {Object} c - 组件对象
+     * @returns {string} 组件包装 HTML 字符串
+     */
     function renderComponent(c) {
       const selected = c.id === selectedComponentId ? 'selected' : '';
       const html = renderComponentHTML(c);
@@ -4847,9 +5223,13 @@
       return `<div class="canvas-component ${selected}" id="wrap-${c.id}" data-id="${c.id}" role="article" aria-label="${c.type} 组件">${html}<div class="canvas-component-draghandle" draggable="true" title="拖拽排序" role="button" aria-label="拖拽排序">&#8942;</div><div class="canvas-component-actions">${isMobile?`<button class="btn mobile-only" onclick="moveUp('${c.id}')" aria-label="向上移动">&#9650;</button><button class="btn mobile-only" onclick="moveDown('${c.id}')" aria-label="向下移动">&#9660;</button>`:''}<button class="btn" onclick="event.stopPropagation();saveAsBlock('${c.id}')" title="保存为组件" aria-label="保存为组件">&#9733;</button><button class="btn" onclick="duplicateComponent('${c.id}')" title="复制" aria-label="复制组件">&#128203;</button><button class="btn" onclick="deleteComponent('${c.id}')" title="删除" aria-label="删除组件">&#10005;</button></div></div>`;
     }
 
+    /**
+     * 选中指定组件，更新选中状态并构建属性编辑器。
+     * @param {string} id - 组件 ID
+     */
     function selectComponent(id) {
       selectedComponentId = id;
-      renderCanvas();
+      updateSelectionState();
       const comp = components.find(c => c.id === id);
       const empty = document.getElementById('propertiesEmpty');
       const body = document.getElementById('propertiesBody');
@@ -4863,6 +5243,10 @@
       buildPropertyEditor(comp);
     }
 
+    /**
+     * 根据组件属性动态构建属性编辑器 UI。
+     * @param {Object} comp - 组件对象
+     */
     function buildPropertyEditor(comp) {
       const typeLabel = document.getElementById('propTypeLabel');
       if (typeLabel) typeLabel.textContent = COMPONENT_LABELS[comp.type] || comp.type;
@@ -4889,6 +5273,13 @@
       if (first) requestAnimationFrame(() => first.focus());
     }
 
+    /**
+     * 更新组件属性值，触发局部渲染和输入验证。
+     * @param {string} id - 组件 ID
+     * @param {string} key - 属性键名
+     * @param {*} val - 新属性值
+     * @param {Event} [e] - 触发事件的 DOM 事件对象
+     */
     function updateComponentProp(id, key, val, e) {
       const comp = components.find(c => c.id === id);
       if (!comp) return;
@@ -4897,51 +5288,68 @@
       if (input) {
         validateInput(input, true, '');
       }
-      saveHistory();
-      renderCanvas();
+      debouncedPatchComponent(id);
+      _debouncedSaveHistory();
     }
 
     function moveUp(id) {
       const idx = components.findIndex(c => c.id === id);
       if (idx > 0) {
         [components[idx - 1], components[idx]] = [components[idx], components[idx - 1]];
-        saveHistory();
+        saveHistory({ force: true });
         renderCanvas();
       }
     }
 
+    /**
+     * 将组件向下移动一个位置。
+     * @param {string} id - 组件 ID
+     */
     function moveDown(id) {
       const idx = components.findIndex(c => c.id === id);
       if (idx < components.length - 1) {
         [components[idx], components[idx + 1]] = [components[idx + 1], components[idx]];
-        saveHistory();
+        saveHistory({ force: true });
         renderCanvas();
       }
     }
 
+    /**
+     * 深拷贝并复制组件，插入到原组件之后。
+     * @param {string} id - 组件 ID
+     */
     function duplicateComponent(id) {
       const comp = components.find(c => c.id === id);
       if (!comp) return;
-      const newComp = JSON.parse(JSON.stringify(comp));
+      const newComp = structuredClone(comp);
       newComp.id = 'comp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
       const idx = components.indexOf(comp);
       components.splice(idx + 1, 0, newComp);
-      saveHistory();
+      saveHistory({ force: true });
       renderCanvas();
     }
 
+    /**
+     * 删除指定组件，若为当前选中则清除选中。
+     * @param {string} id - 组件 ID
+     */
     function deleteComponent(id) {
       components = components.filter(c => c.id !== id);
       if (selectedComponentId === id) selectedComponentId = null;
-      saveHistory();
+      saveHistory({ force: true });
       renderCanvas();
       selectComponent(null);
     }
+
+    /**
+     * 清空画布上所有组件（需用户确认）。
+     * @returns {Promise<void>}
+     */
     async function clearCanvas() {
       if (!await customConfirm('确定清空画布？此操作不可撤销。', '清空画布')) return;
       components = [];
       selectedComponentId = null;
-      saveHistory();
+      saveHistory({ force: true });
       renderCanvas();
       selectComponent(null);
     }
@@ -5089,6 +5497,10 @@
       ]
     };
 
+    /**
+     * 加载预设模板
+     * @param {string} name - 模板名称（TEMPLATES 对象的键名）
+     */
     function loadTemplate(name) {
       components = [];
       selectedComponentId = null;
@@ -5103,12 +5515,15 @@
       components.forEach(c => {
         c.id = getId('comp');
       });
-      saveHistory();
+      saveHistory({ force: true });
       renderCanvas();
       setMode('design');
       showToast('已加载模板');
     }
 
+    /**
+     * 将当前设计保存为自定义模板
+     */
     function saveAsTemplate() {
       const defaultName = '我的模板 ' + new Date().toLocaleDateString('zh-CN');
       const name = prompt('为模板命名：', defaultName);
@@ -5123,7 +5538,7 @@
         name: trimmed,
         createdAt: Date.now(),
         data: {
-          components: JSON.parse(JSON.stringify(components)),
+          components: structuredClone(components),
           theme: {
             ...theme
           },
@@ -5140,6 +5555,10 @@
       showToast('已保存模板「' + trimmed + '」', 'success');
     }
 
+    /**
+     * 从 localStorage 获取自定义模板列表
+     * @returns {Array} 自定义模板对象数组
+     */
     function getCustomTemplates() {
       try {
         const t = localStorage.getItem('newsletter-custom-templates');
@@ -5159,10 +5578,13 @@
           oldKeys.forEach(k => localStorage.removeItem(k));
           return oldTemplates;
         }
-      } catch (e) {}
+      } catch (e) { console.warn('Custom templates load failed:', e); }
       return [];
     }
 
+    /**
+     * 渲染自定义模板列表到 UI
+     */
     function renderCustomTemplates() {
       const container = document.getElementById('myTemplates');
       const templates = getCustomTemplates();
@@ -5173,26 +5595,27 @@
       container.innerHTML = templates.map(t => {
         const tData = t.data || {};
         let previewHTML = '';
+        const _savedComponents = components;
+        const _savedTheme = theme;
+        const _savedFont = font;
+        const _savedSpacing = spacing;
         try {
-          const localComps = JSON.parse(JSON.stringify(tData.components || []));
+          const localComps = structuredClone(tData.components || []);
           const localTheme = { ...theme, ...(tData.theme || {}) };
           const localFont = { ...font, ...(tData.font || {}) };
           const localSpacing = { ...spacing, ...(tData.spacing || {}) };
-          const realComps = components;
-          const realTheme = theme;
-          const realFont = font;
-          const realSpacing = spacing;
           components = localComps;
           theme = localTheme;
           font = localFont;
           spacing = localSpacing;
           previewHTML = generateHTML();
-          components = realComps;
-          theme = realTheme;
-          font = realFont;
-          spacing = realSpacing;
         } catch (e) {
           previewHTML = '<!DOCTYPE html><html><body style="padding:20px;text-align:center;color:#999">预览不可用</body></html>';
+        } finally {
+          components = _savedComponents;
+          theme = _savedTheme;
+          font = _savedFont;
+          spacing = _savedSpacing;
         }
         const cw = tData.spacing ? tData.spacing.containerWidth : 600;
         const scale = Math.min(0.32, 100 / cw * 0.95);
@@ -5201,11 +5624,15 @@
       }).join('');
     }
 
+    /**
+     * 加载指定 ID 的自定义模板
+     * @param {string} id - 模板 ID
+     */
     function loadCustomTemplate(id) {
       const templates = getCustomTemplates();
       const t = templates.find(tm => tm.id === id);
       if (!t) return;
-      components = JSON.parse(JSON.stringify(t.data.components || []));
+      components = structuredClone(t.data.components || []);
       theme = {
         ...t.data.theme
       };
@@ -5217,11 +5644,15 @@
       };
       selectedComponentId = null;
       updateUITheme();
-      saveHistory();
+      saveHistory({ force: true });
       renderCanvas();
       setMode('design');
       showToast('已加载模板「' + t.name + '」');
     }
+    /**
+     * 删除指定 ID 的自定义模板
+     * @param {string} id - 模板 ID
+     */
     async function deleteCustomTemplate(id) {
       if (!await customConfirm('确定删除此模板？', '删除模板')) return;
       const templates = getCustomTemplates().filter(t => t.id !== id);
@@ -5230,16 +5661,24 @@
       showToast('已删除模板');
     }
 
+    /**
+     * 插入一个内置区块
+     * @param {string} type - 区块类型（如 'banner', 'image-text' 等）
+     */
     function insertBlock(type) {
       const id = 'comp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
       const comp = createComponent(type, id);
       components.push(comp);
-      saveHistory();
+      saveHistory({ force: true });
       renderCanvas();
       selectComponent(id);
       showToast('已插入区块');
     }
 
+    /**
+     * 将指定组件保存为自定义区块
+     * @param {string} [id] - 组件 ID，不传则使用当前选中组件
+     */
     function saveAsBlock(id) {
       const compId = id || selectedComponentId;
       const comp = components.find(c => c.id === compId);
@@ -5254,11 +5693,15 @@
       showToast('已保存组件「' + trimmed + '」', 'success');
     }
 
+    /**
+     * 从 localStorage 获取自定义区块列表
+     * @returns {Array} 自定义区块对象数组
+     */
     function getCustomBlocks() {
       try {
         const b = localStorage.getItem('newsletter-custom-blocks');
         if (b) return JSON.parse(b);
-      } catch (e) {}
+      } catch (e) { console.warn('Custom blocks load failed:', e); }
       return [];
     }
 
@@ -5314,6 +5757,11 @@
       {type:'event-grid', name:'会议网格', desc:'会议信息卡片'}
     ];
 
+    /**
+     * 根据组件类型返回 SVG 缩略图
+     * @param {string} type - 组件类型
+     * @returns {string} SVG 缩略图 HTML 字符串
+     */
     function getComponentThumb(type) {
       switch (type) {
         case 'header': return '<div class="thumb-header"><div class="thumb-line accent" style="width:60%"></div><div class="thumb-line" style="width:90%"></div><div class="thumb-line" style="width:75%"></div></div>';
@@ -5347,12 +5795,18 @@
       }
     }
 
+    /**
+     * 渲染内置区块库到 UI
+     */
     function renderBlockLibrary() {
       const container = document.getElementById('builtinBlocks');
       if (!container) return;
       container.innerHTML = BUILTIN_BLOCKS.map((b, i) => `<div class="component-item" draggable="true" data-type="${b.type}" style="animation-delay:${i * 30}ms" onclick="insertBlock('${b.type}')" ondragstart="onLibraryDragStart(event,'${b.type}')" ondragend="onDragEnd(event)"><div class="component-thumb">${getComponentThumb(b.type)}</div><span class="component-name">${b.name}</span><span class="component-desc">${b.desc}</span></div>`).join('');
     }
 
+    /**
+     * 渲染自定义区块列表到 UI
+     */
     function renderCustomBlocks() {
       const container = document.getElementById('myComponents');
       if (!container) return;
@@ -5367,18 +5821,26 @@
       container.innerHTML = blocks.map((b, i) => `<div class="component-item" draggable="true" data-type="${b.type}" style="position:relative;animation-delay:${i * 30}ms" onmouseenter="this.querySelector('.block-delete').style.opacity=1" onmouseleave="this.querySelector('.block-delete').style.opacity=0" ondragstart="onLibraryDragStart(event,'${b.type}')" ondragend="onDragEnd(event)"><div class="component-thumb">${getComponentThumb(b.type)}</div><span class="component-name">${escapeHtml(b.name)}</span><span class="component-desc">${b.type}</span><button class="block-delete" onclick="event.stopPropagation();deleteCustomBlock('${b.id}')">&#10005;</button><div style="position:absolute;top:0;left:0;right:0;bottom:0;cursor:pointer" onclick="insertCustomBlock('${b.id}')"></div></div>`).join('');
     }
 
+    /**
+     * 插入一个自定义区块
+     * @param {string} id - 自定义区块 ID
+     */
     function insertCustomBlock(id) {
       const blocks = getCustomBlocks();
       const b = blocks.find(bl => bl.id === id);
       if (!b) return;
       const newComp = createComponent(b.type, 'comp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6));
-      newComp.props = JSON.parse(JSON.stringify(b.content));
+      newComp.props = structuredClone(b.content);
       components.push(newComp);
-      saveHistory();
+      saveHistory({ force: true });
       renderCanvas();
       selectComponent(newComp.id);
       showToast('已插入组件「' + b.name + '」');
     }
+    /**
+     * 删除指定 ID 的自定义区块
+     * @param {string} id - 自定义区块 ID
+     */
     async function deleteCustomBlock(id) {
       if (!await customConfirm('确定删除此组件？', '删除组件')) return;
       const blocks = getCustomBlocks().filter(b => b.id !== id);
@@ -5391,11 +5853,19 @@
     let draggedLibraryType = null;
     let dropIndicatorTarget = null;
 
+    /**
+     * 移除所有拖放位置指示器
+     */
     function removeDropIndicators() {
       const indicators = document.querySelectorAll('.drop-indicator');
       for (let i = indicators.length - 1; i >= 0; i--) indicators[i].remove();
     }
 
+    /**
+     * 画布组件拖拽开始处理
+     * @param {DragEvent} e - 拖拽事件
+     * @param {string} id - 被拖拽组件 ID
+     */
     function onDragStart(e, id) {
       draggedId = id;
       draggedLibraryType = null;
@@ -5408,6 +5878,11 @@
       }
     }
 
+    /**
+     * 区块库拖拽开始处理
+     * @param {DragEvent} e - 拖拽事件
+     * @param {string} type - 区块类型
+     */
     function onLibraryDragStart(e, type) {
       draggedLibraryType = type;
       draggedId = null;
@@ -5419,6 +5894,10 @@
       }
     }
 
+    /**
+     * 拖拽结束处理
+     * @param {DragEvent} e - 拖拽事件
+     */
     function onDragEnd(e) {
       const el = document.getElementById('wrap-' + draggedId);
       if (el) el.classList.remove('dragging');
@@ -5427,6 +5906,11 @@
       removeDropIndicators();
     }
 
+    /**
+     * 拖拽悬停处理
+     * @param {DragEvent} e - 拖拽事件
+     * @param {string} targetId - 目标组件 ID
+     */
     function onDragOver(e, targetId) {
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
@@ -5436,6 +5920,10 @@
       showDropIndicator(targetId);
     }
 
+    /**
+     * 在目标位置显示拖放指示器
+     * @param {string} targetId - 目标组件 ID
+     */
     function showDropIndicator(targetId) {
       removeDropIndicators();
       if (!targetId || draggedId === targetId) return;
@@ -5446,6 +5934,11 @@
       target.parentNode.insertBefore(indicator, target);
     }
 
+    /**
+     * 拖放处理（插入到目标位置之前）
+     * @param {DragEvent} e - 拖放事件
+     * @param {string} targetId - 目标组件 ID
+     */
     function onDrop(e, targetId) {
       e.preventDefault();
       e.stopPropagation();
@@ -5456,7 +5949,7 @@
         const targetIdx = components.findIndex(c => c.id === targetId);
         if (targetIdx === -1) components.push(comp);
         else components.splice(targetIdx, 0, comp);
-        saveHistory();
+        saveHistory({ force: true });
         renderCanvas();
         selectComponent(comp.id);
         showToast('已插入区块');
@@ -5469,11 +5962,15 @@
       const [dragged] = components.splice(draggedIdx, 1);
       const insertIdx = draggedIdx < targetIdx ? targetIdx - 1 : targetIdx;
       components.splice(insertIdx, 0, dragged);
-      saveHistory();
+      saveHistory({ force: true });
       renderCanvas();
       requestAnimationFrame(() => selectComponent(dragged.id));
     }
 
+    /**
+     * 拖放到末尾处理
+     * @param {DragEvent} e - 拖放事件
+     */
     function onDropToEnd(e) {
       e.preventDefault();
       removeDropIndicators();
@@ -5481,7 +5978,7 @@
       if (draggedLibraryType) {
         const comp = createComponent(draggedLibraryType, getId('comp'));
         components.push(comp);
-        saveHistory();
+        saveHistory({ force: true });
         renderCanvas();
         selectComponent(comp.id);
         showToast('已插入区块');
@@ -5492,12 +5989,16 @@
       if (idx === -1) return;
       const [dragged] = components.splice(idx, 1);
       components.push(dragged);
-      saveHistory();
+      saveHistory({ force: true });
       renderCanvas();
       requestAnimationFrame(() => selectComponent(dragged.id));
     }
 
     // ===== PREFLIGHT =====
+    /**
+     * 运行预检（检查图片完整性、链接有效性、对比度等）
+     * @param {Event} [e] - 触发事件
+     */
     function runPreflight(e) {
       const btn = (e && e.target) || (typeof event !== 'undefined' && event && event.target);
       if (btn) showButtonLoading(btn, '检查中...');
@@ -5539,10 +6040,11 @@
           pass: ratio >= 4.5,
           detail: ratio >= 4.5 ? 'AA 级通过' : '对比度不足'
         });
+        const tableCount = doc.querySelectorAll('table').length;
         checks.push({
           name: 'Outlook 兼容',
-          pass: doc.querySelectorAll('table').length > 0,
-          detail: doc.querySelectorAll('table').length > 0 ? '使用 table 布局' : '未检测到 table 布局'
+          pass: tableCount > 0,
+          detail: tableCount > 0 ? '使用 table 布局' : '未检测到 table 布局'
         });
         checks.push({
           name: '垃圾邮件评分',
@@ -5560,6 +6062,10 @@
     }
 
     // ===== CODE / SYNC =====
+    /**
+     * 生成完整的 Newsletter HTML 代码
+     * @returns {string} 生成的 HTML 字符串
+     */
     function generateHTML() {
       const fontStack = getFontStack();
       const body = components.map(c => renderComponentHTML(c)).join('');
@@ -5571,20 +6077,29 @@
 </head><body style="margin:0;padding:0;background:${theme.bg};font-family:${fontStack}"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:20px 10px"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:${spacing.containerWidth}px">${body}</table></td></tr></table></body></html>`;
     }
 
+    /**
+     * 将设计模式同步到代码编辑器
+     */
     function syncCodeFromDesign() {
       document.getElementById('codeEditor').value = generateHTML();
       updateStats();
     }
 
     // ===== CODE MODE (V2 legacy) =====
+    /**
+     * 将代码写入 iframe 预览
+     * @param {string} frameId - iframe 元素 ID
+     * @param {string} code - HTML 代码
+     */
     function writeToFrame(frameId, code) {
       const frame = document.getElementById(frameId);
-      const doc = frame.contentDocument || frame.contentWindow.document;
-      doc.open();
-      doc.write(code);
-      doc.close();
+      if (!frame) return;
+      frame.srcdoc = code;
     }
 
+    /**
+     * 更新代码预览（从编辑器读取代码并渲染到 iframe）
+     */
     function updatePreview() {
       const code = document.getElementById('codeEditor').value;
       writeToFrame('previewFrame', code);
@@ -5598,6 +6113,9 @@
       updateStats();
       scheduleSave();
     }
+    /**
+     * 清空代码编辑器
+     */
     async function clearCode() {
       if (await customConfirm('确定清空代码编辑器？', '清空代码')) {
         document.getElementById('codeEditor').value = '';
@@ -5607,10 +6125,16 @@
       }
     }
 
+    /**
+     * 复制代码到剪贴板
+     */
     function copyCode() {
       navigator.clipboard.writeText(document.getElementById('codeEditor').value).then(() => showToast('已复制')).catch(() => showToast('复制失败'));
     }
 
+    /**
+     * 格式化 HTML 代码
+     */
     function formatCode() {
       let html = document.getElementById('codeEditor').value;
       html = html.replace(/>\s+</g, '><');
@@ -5640,6 +6164,9 @@
     const DARK_MEDIA_QUERY = '@media (prefers-color-scheme: dark){:root{' +
       Object.entries(DARK_EXPORT_VARS).map(([k, v]) => k + ':' + v).join(';') + '}}';
 
+    /**
+     * 导出 HTML 文件
+     */
     function exportHTML() {
       withButtonLoading('#exportBtn', function() {
         let code;
@@ -5668,6 +6195,9 @@
       }, '导出中...');
     }
 
+    /**
+     * 更新预览模式（全屏预览）
+     */
     function updatePreviewMode() {
       let code;
       if (currentMode === 'design') code = generateHTML();
@@ -5675,6 +6205,11 @@
       writeToFrame('previewModeFrame', code);
     }
 
+    /**
+     * 设置预览设备宽度
+     * @param {string} dev - 设备类型 ('mobile' 或 'desktop')
+     * @param {Event} [e] - 触发事件
+     */
     function setPreviewDevice(dev, e) {
       document.querySelectorAll('.preview-device-btn').forEach(b => b.classList.remove('active'));
       const target = e && e.target || event && event.target;
@@ -5685,8 +6220,14 @@
     }
 
     // ===== CONSOLE =====
+    /**
+     * 添加控制台消息
+     * @param {string} msg - 消息内容
+     * @param {string} type - 消息类型 (如 'error', 'info')
+     */
     function addConsoleMsg(msg, type) {
       const cc = document.getElementById('consoleContent');
+      if (!cc) return;
       const empty = cc.querySelector('.console-empty');
       if (empty) empty.remove();
       const t = new Date().toLocaleTimeString('zh-CN', {
@@ -5694,20 +6235,29 @@
       });
       const div = document.createElement('div');
       div.className = 'console-item console-' + type;
-      div.innerHTML = `<span class="console-time">[${t}]</span>${msg}`;
+      div.innerHTML = `<span class="console-time">[${t}]</span>${escapeHtml(msg)}`;
       cc.appendChild(div);
       cc.scrollTop = cc.scrollHeight;
     }
 
+    /**
+     * 清空控制台
+     */
     function clearConsole() {
       document.getElementById('consoleContent').innerHTML = '<div class="console-empty">暂无错误</div>';
     }
 
+    /**
+     * 切换控制台面板显示/隐藏
+     */
     function toggleConsole() {
       document.getElementById('consolePanel').classList.toggle('open');
     }
 
     // ===== THEME TOGGLE =====
+    /**
+     * 切换深色/浅色主题
+     */
     function toggleTheme() {
       const cur = document.documentElement.getAttribute('data-theme');
       const next = cur === 'dark' ? '' : 'dark';
@@ -5719,6 +6269,9 @@
       scheduleSave();
     }
 
+    /**
+     * 切换全屏预览
+     */
     function toggleFullscreen() {
       const el = document.getElementById('fullscreenOverlay');
       const isActive = el.classList.toggle('active');
@@ -5735,6 +6288,9 @@
       }
     }
 
+    /**
+     * 设置全屏模式下的焦点陷阱（Tab 导航限定在全屏内）
+     */
     function fullscreenFocusTrap() {
       const overlay = document.getElementById('fullscreenOverlay');
       if (!overlay.classList.contains('active')) return;
@@ -5752,22 +6308,59 @@
     }
 
     // ===== STATS =====
+    let _statsScheduled = false;
+    /**
+     * 更新代码统计信息（字符数、行数等）
+     */
     function updateStats() {
-      const code = document.getElementById('codeEditor').value;
-      document.getElementById('charCount').textContent = code.length;
-      document.getElementById('lineCount').textContent = code.split('\n').length;
-      updateLineNumbers();
-    }
-
-    function updateLineNumbers() {
-      const lines = (document.getElementById('codeEditor').value.split('\n').length) || 1;
-      document.getElementById('lineNumbers').innerHTML = Array.from({
-        length: lines
-      }, (_, i) => i + 1).join('<br>');
+      if (_statsScheduled) return;
+      _statsScheduled = true;
+      requestAnimationFrame(() => {
+        _statsScheduled = false;
+        const editor = document.getElementById('codeEditor');
+        if (!editor) return;
+        const code = editor.value;
+        const charEl = document.getElementById('charCount');
+        const lineEl = document.getElementById('lineCount');
+        if (charEl) charEl.textContent = code.length;
+        const lines = (code.match(/\n/g) || []).length + 1;
+        if (lineEl) lineEl.textContent = lines;
+        const ln = document.getElementById('lineNumbers');
+        if (ln) ln.innerHTML = Array.from({ length: lines }, (_, i) => i + 1).join('<br>');
+      });
     }
 
     // ===== HISTORY =====
-    function saveHistory() {
+    // 历史快照节流：连续编辑500ms内合并为一次快照，离散操作用force:true强制保存。
+    const HISTORY_MIN_INTERVAL = 500;
+    let _lastHistoryTime = 0;
+    let _pendingHistoryTimer = null;
+
+    /**
+     * 保存编辑历史快照（带节流）
+     * @param {Object} [opts] - 选项
+     * @param {boolean} [opts.force] - 强制立即保存，跳过节流
+     */
+    function saveHistory(opts) {
+      if (opts && opts.force) {
+        clearTimeout(_pendingHistoryTimer);
+        _doSaveHistory();
+        return;
+      }
+      const now = Date.now();
+      if (now - _lastHistoryTime < HISTORY_MIN_INTERVAL) {
+        clearTimeout(_pendingHistoryTimer);
+        _pendingHistoryTimer = setTimeout(_doSaveHistory, HISTORY_MIN_INTERVAL);
+        return;
+      }
+      _doSaveHistory();
+    }
+
+    /**
+     * 内部历史保存实现（将当前状态压入历史栈并持久化到 IndexedDB）
+     */
+    function _doSaveHistory() {
+      _lastHistoryTime = Date.now();
       const state = structuredClone({ components, theme, font, spacing });
       if (historyIndex < history.length - 1) history = history.slice(0, historyIndex + 1);
       history.push(state);
@@ -5775,14 +6368,13 @@
       historyIndex = history.length - 1;
       hasUnsavedChanges = true;
       scheduleSave();
-      // 异步镜像到 IndexedDB（不阻塞 undo/redo）
       scheduleIdle(() => {
         saveFrameToDB({
           id: 'frame_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
           ts: Date.now(),
           thumbnail: generateSVGThumbnail(),
           snapshot: {
-            components: JSON.parse(JSON.stringify(components)),
+            components: structuredClone(components),
             theme: Object.assign({}, theme),
             font: Object.assign({}, font),
             spacing: Object.assign({}, spacing)
@@ -5793,6 +6385,10 @@
       });
     }
 
+    /**
+     * 生成当前设计的 SVG 缩略图用于历史记录
+     * @returns {string} Base64 编码的 SVG data URI
+     */
     function generateSVGThumbnail() {
       const W = 140, H = 100;
       const parts = ['<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '">'];
@@ -5816,6 +6412,9 @@
       return 'data:image/svg+xml;base64,' + btoa(binary);
     }
 
+    /**
+     * 渲染历史记录时间线到 UI
+     */
     async function renderHistoryTimeline() {
       const container = document.getElementById('historyTimeline');
       if (!container) return;
@@ -5838,13 +6437,17 @@
       }).join('');
     }
 
+    /**
+     * 恢复到指定历史版本
+     * @param {string} id - 历史帧 ID
+     */
     async function restoreFrame(id) {
       try {
         const frames = await getAllFramesFromDB();
         const f = frames.find(x => x.id === id);
         if (!f) return;
         components.length = 0;
-        components.push(...JSON.parse(JSON.stringify(f.snapshot.components)));
+        components.push(...structuredClone(f.snapshot.components));
         Object.assign(theme, f.snapshot.theme);
         Object.assign(font, f.snapshot.font);
         Object.assign(spacing, f.snapshot.spacing);
@@ -5855,6 +6458,10 @@
       }
     }
 
+    /**
+     * 删除指定历史帧
+     * @param {string} id - 历史帧 ID
+     */
     async function deleteFrame(id) {
       try {
         await deleteFrameFromDB(id);
@@ -5865,6 +6472,9 @@
       }
     }
 
+    /**
+     * 清空所有历史记录
+     */
     async function clearHistory() {
       if (!await customConfirm('确定清空全部历史？此操作不可撤销。', '清空历史')) return;
       try {
@@ -5876,6 +6486,9 @@
       }
     }
 
+    /**
+     * 撤销上一次编辑操作
+     */
     function undoDesign() {
       if (historyIndex > 0) {
         historyIndex--;
@@ -5890,6 +6503,9 @@
       }
     }
 
+    /**
+     * 重做上一次撤销的操作
+     */
     function redoDesign() {
       if (historyIndex < history.length - 1) {
         historyIndex++;
@@ -5905,11 +6521,17 @@
     }
 
     // ===== STORAGE =====
+    /**
+     * 计划自动保存（防抖延迟）
+     */
     function scheduleSave() {
       if (storageTimer) clearTimeout(storageTimer);
       storageTimer = setTimeout(saveToStorage, SAVE_INTERVAL);
     }
 
+    /**
+     * 将当前状态保存到 localStorage
+     */
     function saveToStorage() {
       if (!_storageOk) {
         if (!window._storageWarned) {
@@ -5933,42 +6555,55 @@
       }
     }
 
+    /**
+     * 从 localStorage 加载保存的状态
+     */
     function loadFromStorage() {
       if (!_storageOk) return;
+      try {
+        const t = localStorage.getItem('newsletter-v3-theme');
+        if (t) {
+          theme = { ...DEFAULT_THEME, ...JSON.parse(t) };
+          updateUITheme();
+        }
+      } catch (e) { console.warn('Theme load failed:', e); }
+      try {
+        const f = localStorage.getItem('newsletter-v3-font');
+        if (f) font = { ...DEFAULT_FONT, ...JSON.parse(f) };
+      } catch (e) { console.warn('Font load failed:', e); }
+      try {
+        const s = localStorage.getItem('newsletter-v3-spacing');
+        if (s) spacing = { ...DEFAULT_SPACING, ...JSON.parse(s) };
+      } catch (e) { console.warn('Spacing load failed:', e); }
+      try {
+        const c = localStorage.getItem('newsletter-v3-components');
+        if (c) {
+          const parsed = JSON.parse(c);
+          if (Array.isArray(parsed)) {
+            components = parsed;
+            renderCanvas();
+          }
+        }
+      } catch (e) { console.warn('Components load failed:', e); }
       try {
         const code = localStorage.getItem('newsletter-v3-code');
         if (code) {
           document.getElementById('codeEditor').value = code;
           updateStats();
         }
-        const t = localStorage.getItem('newsletter-v3-theme');
-        if (t) {
-          theme = JSON.parse(t);
-          updateUITheme();
-        }
-        const f = localStorage.getItem('newsletter-v3-font');
-        if (f) font = JSON.parse(f);
-        const s = localStorage.getItem('newsletter-v3-spacing');
-        if (s) spacing = JSON.parse(s);
-        const c = localStorage.getItem('newsletter-v3-components');
-        if (c) {
-          components = JSON.parse(c);
-          renderCanvas();
-        }
+      } catch (e) { console.warn('Code load failed:', e); }
+      try {
         const uiTheme = localStorage.getItem('newsletter-v3-ui-theme');
         if (uiTheme === 'dark') {
           document.documentElement.setAttribute('data-theme', 'dark');
         } else {
           document.documentElement.removeAttribute('data-theme');
         }
-        renderCustomTemplates();
-        renderCustomBlocks();
-      } catch (e) {
-        console.warn('Storage load failed:', e);
-      }
+      } catch (e) { console.warn('UI theme load failed:', e); }
+      renderCustomTemplates();
+      renderCustomBlocks();
     }
 
-    // ===== UTILS =====
     // ===== INIT =====
     const debouncedPreview = debounce(updatePreview, 300);
     document.getElementById('codeEditor').addEventListener('input', () => {
@@ -6011,6 +6646,7 @@
         e.returnValue = '您有未保存的更改，确定要离开吗？';
       }
     });
+    initCanvasEvents();
     loadFromStorage();
     showWelcome();
     if (typeof renderHistoryTimeline === 'function') renderHistoryTimeline().catch(() => {});
