@@ -1,9 +1,9 @@
-# Newsletter Builder V0.1.2
+# Newsletter Builder V0.1.3
 
 > **单文件 · 零依赖 · 开箱即用**  
 > 面向学术期刊的 HTML 简报可视化构建工具
 
-[![Version](https://img.shields.io/badge/version-0.1.2-blue.svg?style=flat-square)]()
+[![Version](https://img.shields.io/badge/version-0.1.3-blue.svg?style=flat-square)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)]()
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)]()
 
@@ -45,21 +45,21 @@ cd Newsletter-Builder
 
 ```
 index.html
-├── HTML 结构（~300 行）
-│   ├── 工具栏、模式切换
+├── HTML 结构（~310 行）
+│   ├── 工具栏（品牌标识、模式切换、操作按钮）
 │   ├── 代码编辑器/预览面板
 │   ├── 助手面板（组件/模板/样式/检查）
 │   ├── 画布/属性面板
 │   ├── 弹窗（欢迎/确认/全屏/Toast）
 │   └── 状态栏
-├── CSS 样式（~900 行）
-│   ├── CSS 变量（主题/间距/字体）
+├── CSS 样式（~1000 行）
+│   ├── CSS 变量（主题/间距/字体/阴影/圆角）
 │   ├── 布局系统（Flex/Grid）
-│   ├── 组件样式
+│   ├── 组件样式（工具栏/面板/画布/弹窗）
 │   ├── 响应式适配
 │   └── 暗色主题
-└── JavaScript 逻辑（~3400 行）
-    ├── 工具函数（XSS 转义、debounce、颜色转换等）
+└── JavaScript 逻辑（~3600 行）
+    ├── 工具函数（XSS 转义、debounce、颜色转换、DOM 缓存）
     ├── 核心系统（模式切换、主题管理、组件管理）
     ├── 渲染引擎（全量渲染 + 组件级 Diff 增量渲染）
     ├── 拖放系统（排序/插入）
@@ -67,7 +67,8 @@ index.html
     ├── 样式系统（配色/字体/间距）
     ├── 检查系统（WCAG 审计/发送前检查/暗色预览）
     ├── 历史系统（内存 undo/redo + IndexedDB 持久化）
-    ├── 导出系统（HTML 生成/下载）
+    ├── 导出系统（HTML/JSON 生成与下载）
+    ├── 快捷键系统（7 个全局快捷键）
     └── 初始化（数据加载/事件绑定）
 ```
 
@@ -76,15 +77,16 @@ index.html
 | 层级 | 技术 |
 |------|------|
 | 语言 | HTML5 + CSS3 + ES6+ |
-| 存储 | localStorage（设计数据/模板）+ IndexedDB（版本历史） |
+| 存储 | localStorage（设计数据/模板/组件）+ IndexedDB（版本历史） |
 | 渲染 | 全量渲染 + 组件级 Diff 引擎（基于 JSON 签名比对） |
 | 安全 | XSS 转义 `S()`、URL 白名单 `safeUrl()`、iframe sandbox |
-| 性能 | 事件委托、防抖节流、`structuredClone` 深拷贝、`requestAnimationFrame` 批量更新 |
+| 性能 | DOM 缓存 `el()`、事件委托、防抖节流、`structuredClone` 深拷贝（含 polyfill）、`requestAnimationFrame` 批量更新、IndexedDB 游标批量删除 |
 
 ### 版本历史
 
 | 版本 | 亮点 |
 |------|------|
+| **v0.1.3** | JSON 导入/导出、剪贴板复制粘贴、搜索过滤、7 键快捷键系统、DOM 缓存、IndexedDB 游标优化、深拷贝去重及 polyfill、CSS 性能优化（通配符/transition/will-change）、无障碍增强（aria-label/role/对比度修复）、Bug 修复（搜索激活/模板加载/未定义变量） |
 | **v0.1.2** | 组件级 Diff 渲染引擎、事件委托、防抖节流、XSS 修复、iframe 沙箱加固、JSDoc 注释规范 |
 | **v0.1.1** | 安全修复、逻辑 Bug 修复、左侧面板布局优化、欢迎弹窗、版本号统一 |
 | **v0.1.0** | 初始版本：三种模式、组件库、模板系统、样式系统、导出、历史撤销 |
@@ -107,7 +109,7 @@ index.html
 
 `heading` · `text` · `image` · `image-text` · `cta` · `divider` · `spacer` · `list` · `quote` · `callout` · `gallery` · `author` · `journal-cover` · `toc` · `paper-list` · `paper-card` · `event-card` · `banner` · `footer`
 
-每个组件支持：拖拽排序、复制、删除、保存为自定义区块、属性编辑。
+每个组件支持：拖拽排序、复制、删除、保存为自定义区块、属性编辑。**搜索过滤**：输入关键词实时过滤组件库和模板列表。
 
 ### 渲染引擎
 
@@ -132,7 +134,7 @@ index.html
 |------|------|
 | **暗色预览** | 一键切换画布暗色模式，预览读者端暗色效果 |
 | **WCAG-AA 审计** | 遍历所有组件，计算文字/背景对比度，按 WCAG 2.1 评级并给出修复建议 |
-| **发送前检查** | 7 项检查：图片完整性、链接空值、Alt 属性、移动端适配、对比度、Outlook 兼容、垃圾邮件评分 |
+| **发送前检查** | 6 项检查：图片完整性、链接空值、Alt 属性、移动端适配、对比度、垃圾邮件评分 |
 | **版本历史** | 每次编辑自动保存快照到 IndexedDB（最多 50 帧），支持浏览、恢复、删除 |
 
 ### 数据持久化
@@ -148,7 +150,21 @@ index.html
 - 生成内联 CSS + 语义化 HTML
 - 自动注入暗色模式适配（`@media (prefers-color-scheme: dark)`）
 - 一键下载 `newsletter.html`
+- **JSON 项目导出**：导出完整项目数据（组件、主题、字体、间距），支持跨设备迁移
+- **JSON 项目导入**：从 JSON 文件恢复完整项目，工具栏"导入"按钮
 - 支持嵌入 CMS、GitHub Pages、iframe 三种发布方式
+
+### 快捷键
+
+| 快捷键 | 功能 |
+|--------|------|
+| `Ctrl+Z` / `Ctrl+Shift+Z` | 撤销 / 重做 |
+| `Ctrl+S` | 保存到本地存储 |
+| `Ctrl+D` | 复制选中组件 |
+| `Ctrl+C` / `Ctrl+V` | 剪贴板复制 / 粘贴组件 |
+| `Delete` | 删除选中组件 |
+| `/` | 聚焦搜索框（设计模式） |
+| `Ctrl+Enter` | 刷新预览（代码模式） |
 
 ---
 
@@ -164,14 +180,10 @@ index.html
 ```
 Newsletter-Builder/
 ├── index.html              # 主入口（单文件应用）
-├── README.md               # 本文档
-├── docs/
-│   ├── USER_MANUAL.md      # 用户使用手册
-│   ├── USER_GUIDE.md       # 旧版功能说明
-│   └── superpowers/
-│       ├── specs/           # 设计文档
-│       └── plans/           # 实施计划
-└── .gitignore
+├── README.md               # 开发者文档
+├── USER_MANUAL.md          # 用户使用手册
+├── .gitignore
+└── LICENSE
 ```
 
 ### 代码规范
@@ -241,5 +253,5 @@ SOFTWARE.
 ## 项目链接
 
 - **GitHub**：[https://github.com/CarlosZhou6767/Newsletter-Builder](https://github.com/CarlosZhou6767/Newsletter-Builder)
-- **用户手册**：[docs/USER_MANUAL.md](docs/USER_MANUAL.md)
+- **用户手册**：[USER_MANUAL.md](USER_MANUAL.md)
 - **作者**：Carlos Zhou
