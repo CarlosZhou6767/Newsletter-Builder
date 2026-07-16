@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Newsletter Builder V0.1.3</title>
-  <meta name="description" content="Newsletter Builder - 可视化 Newsletter 设计工具，支持组件拖拽、模板预设、实时预览和 HTML 导出">
+  <title>期刊网页构建工具 V0.2.0</title>
+  <meta name="description" content="期刊网页构建工具 - 可视化期刊网页设计工具，支持组件拖拽、模板预设、实时预览和 HTML 导出">
   <meta name="theme-color" content="#1e3a5f" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0f1218" media="(prefers-color-scheme: dark)">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231e3a5f'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23d4af37' font-family='serif' font-weight='bold'%3EN%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231e3a5f'/%3E%3Ctext x='50' y='72' font-size='52' text-anchor='middle' fill='%23d4af37' font-family='serif' font-weight='bold'%3E%E6%9C%9F%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -1441,7 +1441,7 @@
       line-height: 1.3
     }
 
-    /* Design canvas —— 中间画布：信纸风格的邮件内容预览区 */
+    /* Design canvas -- 中间画布：期刊内容预览区 */
     .design-canvas {
       flex: 1;
       display: flex;
@@ -2809,8 +2809,8 @@
     <div class="toolbar-brand">
       <img class="logo" src="https://pub.mdpi-res.com/img/design/mdpi-pub-logo-black-small1.svg?da3a8dcae975a41c?1782821685" alt="MDPI">
       <div class="brand-text">
-        <span class="brand-name">Newsletter Builder</span>
-        <span class="brand-badge">V0.1.3</span>
+        <span class="brand-name">期刊网页构建工具</span>
+        <span class="brand-badge">V0.2.0</span>
       </div>
     </div>
 
@@ -3154,13 +3154,13 @@
             <div class="inspect-toolbar">
               <label class="theme-toggle">
                 <input type="checkbox" id="darkPreviewToggle" onchange="toggleDarkPreview()">
-                <span>邮件暗色客户端预览</span>
+                <span>暗色模式预览</span>
               </label>
               <button class="preset-btn" onclick="runAccessibilityAudit()">WCAG-AA 审计</button>
             </div>
             <div id="a11yReport" class="a11y-report"></div>
           <div class="assistant-section">
-            <div class="assistant-section-title">发送前检查</div>
+            <div class="assistant-section-title">发布前检查</div>
             <div class="check-list" id="checkList">
               <div class="check-item">
                 <div class="check-icon check-pass">&#10003;</div>
@@ -3186,16 +3186,6 @@
                 <div class="check-icon check-pass">&#10003;</div>
                 <div class="check-text">对比度合规</div>
                 <div class="check-detail">待检查</div>
-</div>
-              <div class="check-item">
-                <div class="check-icon check-pass">&#10003;</div>
-                <div class="check-text">Outlook 兼容</div>
-                <div class="check-detail">待检查</div>
-</div>
-              <div class="check-item">
-                <div class="check-icon check-warn">!</div>
-                <div class="check-text">垃圾邮件评分</div>
-                <div class="check-detail">预估</div>
 </div>
 </div>
 </div>
@@ -3256,7 +3246,7 @@
     <!-- ===== PREVIEW MODE —— 最终预览视图：设备切换、全屏预览 ===== -->
     <div class="preview-mode" id="previewMode" style="display:none">
       <div class="preview-toolbar">
-        <span style="font-size:12px;font-weight:600;color:var(--text-primary)">邮件客户端预览</span>
+        <span style="font-size:12px;font-weight:600;color:var(--text-primary)">网页预览</span>
         <div class="spacer"></div>
         <button class="preview-device-btn active" onclick="setPreviewDevice('desktop',event)">桌面</button>
         <button class="preview-device-btn" onclick="setPreviewDevice('mobile',event)">手机</button>
@@ -3299,11 +3289,11 @@
     <div class="welcome-dialog" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
       <div class="welcome-body">
         <div class="welcome-title" id="welcomeTitle">
-          欢迎使用 Newsletter Builder
-          <span class="version">V0.1.3</span>
+          欢迎使用期刊网页构建工具
+          <span class="version">V0.2.0</span>
         </div>
         <div class="welcome-subtitle">
-          为学术期刊与学术邮件场景打造的可视化排版工具。拖拽组件、套用预设、一键导出邮件 HTML，无需手写代码即可生成专业的学术快讯。
+          为学术期刊网站展示场景打造的可视化排版工具。拖拽组件、套用预设、一键导出网页 HTML，无需手写代码即可生成专业的期刊展示页面。
         </div>
 
         <div class="welcome-features">
@@ -3320,7 +3310,7 @@
           <div class="welcome-feature">
             <div class="welcome-feature-icon">📤</div>
             <div class="welcome-feature-title">导出即用</div>
-            <div class="welcome-feature-desc">一键导出兼容邮件客户端的 HTML 代码，或全屏预览最终效果。</div>
+            <div class="welcome-feature-desc">一键导出网页 HTML 代码，或全屏预览最终效果。</div>
           </div>
         </div>
 
@@ -4545,7 +4535,7 @@
         case 'header':
           return {
             ...base, props: {
-              title: 'Newsletter 标题',
+              title: '期刊标题',
               subtitle: '副标题描述',
               alignment: 'center'
             }
@@ -5147,10 +5137,10 @@
           html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px"><tr><td align="center" style="padding:${pad}px;background:${theme.bg};font-family:${fontStack}">${links}</td></tr></table>`;
           break;
         case 'footer':
-          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:${pad}px;background:${adjustColor(theme.primary,-40)};color:white;font-family:${fontStack};font-size:12px"><p style="margin:0 0 8px">&copy; ${S(c.props.copyright)} ${S(c.props.company)}</p><a href="${safeUrl(c.props.unsubscribe)}" style="color:white;opacity:0.8">取消订阅</a></td></tr></table>`;
+          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:${pad}px;background:${adjustColor(theme.primary,-40)};color:white;font-family:${fontStack};font-size:12px"><p style="margin:0 0 8px">&copy; ${S(c.props.copyright)} ${S(c.props.company)}</p></td></tr></table>`;
           break;
         case 'placeholder':
-          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px"><tr><td style="padding:${pad}px;background:${theme.bg};font-family:${fontStack};color:${theme.text};font-size:${font.body}px">你好，{{${S(c.props.name)}}}，欢迎阅读本期 Newsletter！</td></tr></table>`;
+          html = `<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:${gap}px"><tr><td style="padding:${pad}px;background:${theme.bg};font-family:${fontStack};color:${theme.text};font-size:${font.body}px">你好，{{${S(c.props.name)}}}，欢迎阅读本期内容！</td></tr></table>`;
           break;
         case 'academic-hero':
           const introRows = c.props.introLines.map((line, i) => `<tr><td style="width:20px;font-size:13px"></td><td style="padding:${i===0?'20px 0 15px':'0 0 15px'};font-size:13px;line-height:18.2px;font-family:Arial;text-align:justify;vertical-align:top">${S(line)}</td><td style="width:20px;font-size:13px"></td></tr>`).join('');
@@ -6125,17 +6115,6 @@
           pass: ratio >= 4.5,
           detail: ratio >= 4.5 ? 'AA 级通过' : '对比度不足'
         });
-        const tableCount = doc.querySelectorAll('table').length;
-        checks.push({
-          name: 'Outlook 兼容',
-          pass: tableCount > 0,
-          detail: tableCount > 0 ? '使用 table 布局' : '未检测到 table 布局'
-        });
-        checks.push({
-          name: '垃圾邮件评分',
-          pass: true,
-          detail: '预估低风险'
-        });
         const list = document.getElementById('checkList');
         if (list) {
           list.innerHTML = checks.map(c => `<div class="check-item"><div class="check-icon ${c.pass?'check-pass':'check-fail'}">${c.pass?'&#10003;':'&#10005;'}</div><div class="check-text">${c.name}</div><div class="check-detail">${c.detail}</div></div>`).join('');
@@ -6148,7 +6127,7 @@
 
     // ===== CODE / SYNC =====
     /**
-     * 生成完整的 Newsletter HTML 代码
+     * 生成完整的期刊网页 HTML 代码
      * @returns {string} 生成的 HTML 字符串
      */
     function generateHTML() {
@@ -6158,8 +6137,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">`;
-      return `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Newsletter</title>${fontLinks}
-</head><body style="margin:0;padding:0;background:${theme.bg};font-family:${fontStack}"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:20px 10px"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:${spacing.containerWidth}px">${body}</table></td></tr></table></body></html>`;
+      return `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>期刊网页</title>${fontLinks}
+</head><body style="margin:0;padding:0;background:${theme.bg};font-family:${fontStack}"><div style="max-width:${spacing.containerWidth}px;margin:0 auto;padding:20px 10px">${body}</div></body></html>`;
     }
 
     /**
@@ -6274,12 +6253,12 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'newsletter.html';
+        a.download = 'journal-page.html';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showToast('已导出 newsletter.html', 'success');
+        showToast('已导出 journal-page.html', 'success');
       }, '导出中...');
     }
 
@@ -6289,7 +6268,7 @@
     function exportJSON() {
       withButtonLoading('#exportJSONBtn', function() {
         const data = {
-          version: '0.1.3',
+          version: '0.2.0',
           components: structuredClone(components),
           theme: Object.assign({}, theme),
           font: Object.assign({}, font),
@@ -6300,7 +6279,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'newsletter-project.json';
+        a.download = 'journal-project.json';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -6860,11 +6839,11 @@
     });
     renderBlockLibrary();
     if (!document.getElementById('codeEditor').value.trim() && !components.length) {
-      document.getElementById('codeEditor').value = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Newsletter</title>
+      document.getElementById('codeEditor').value = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>期刊网页</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
-</head><body style="margin:0;padding:0;background:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:40px 20px"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px"><tr><td align="center" style="padding:48px 32px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border-radius:16px 16px 0 0"><h1 style="margin:0;font-size:32px">Newsletter Builder V3</h1><p style="margin:8px 0 0;opacity:0.9">设计模式现已可用，点击"设计"切换</p></td></tr><tr><td style="padding:32px;background:white;color:#1f2937"><h2 style="margin:0 0 12px;color:#667eea">开始使用</h2><p style="margin:0;line-height:1.6">选择上方"设计"模式，使用左侧智能标识助手快速制作 Newsletter。</p></td></tr><tr><td align="center" style="padding:24px;background:#f8f9fa;border-radius:0 0 16px 16px"><a href="#" style="display:inline-block;padding:14px 32px;background:#667eea;color:white;text-decoration:none;border-radius:8px;font-weight:600">立即尝试</a></td></tr></table></td></tr></table></body></html>`;
+</head><body style="margin:0;padding:0;background:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif"><div style="max-width:600px;margin:0 auto;padding:40px 20px"><div style="padding:48px 32px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border-radius:16px 16px 0 0;text-align:center"><h1 style="margin:0;font-size:32px">期刊网页构建工具</h1><p style="margin:8px 0 0;opacity:0.9">设计模式现已可用，点击"设计"切换</p></div><div style="padding:32px;background:white;color:#1f2937"><h2 style="margin:0 0 12px;color:#667eea">开始使用</h2><p style="margin:0;line-height:1.6">选择上方"设计"模式，使用左侧组件库快速构建期刊网页。</p></div><div style="padding:24px;background:#f8f9fa;border-radius:0 0 16px 16px;text-align:center"><a href="#" style="display:inline-block;padding:14px 32px;background:#667eea;color:white;text-decoration:none;border-radius:8px;font-weight:600">立即尝试</a></div></div></body></html>`;
       updateStats();
       updatePreview();
     }

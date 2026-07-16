@@ -1,9 +1,9 @@
-# Newsletter Builder V0.1.3
+# 期刊网页构建工具 V0.2.0
 
 > **单文件 · 零依赖 · 开箱即用**  
-> 面向学术期刊的 HTML 简报可视化构建工具
+> 面向学术期刊的网页可视化构建工具
 
-[![Version](https://img.shields.io/badge/version-0.1.3-blue.svg?style=flat-square)]()
+[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg?style=flat-square)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)]()
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)]()
 
@@ -11,12 +11,12 @@
 
 ## 项目简介
 
-Newsletter Builder 是一个单文件 HTML 应用，用于可视化构建学术期刊风格的 HTML 简报页面。无需后端、无需构建、无需安装，浏览器打开即用。
+期刊网页构建工具是一个单文件 HTML 应用，用于可视化构建学术期刊风格的网页展示页面。无需后端、无需构建、无需安装，浏览器打开即用。
 
 **典型产出**：期刊 Highlights 页面、最新录用列表、虚拟专刊展示、会议征稿页、年度报告页面等静态 HTML 内容。
 
 **服务对象**：
-- **期刊编辑/内容运营** — 拖拽组件、选择模板、调整配色，零代码产出专业简报
+- **期刊编辑/内容运营** - 拖拽组件、选择模板、调整配色，零代码产出专业网页
 - **前端开发者** — 代码模式手写 HTML，实时预览，精细控制布局
 
 ---
@@ -65,7 +65,7 @@ index.html
     ├── 拖放系统（排序/插入）
     ├── 模板系统（内置/自定义）
     ├── 样式系统（配色/字体/间距）
-    ├── 检查系统（WCAG 审计/发送前检查/暗色预览）
+    ├── 检查系统（WCAG 审计/发布前检查/暗色模式预览）
     ├── 历史系统（内存 undo/redo + IndexedDB 持久化）
     ├── 导出系统（HTML/JSON 生成与下载）
     ├── 快捷键系统（7 个全局快捷键）
@@ -86,6 +86,7 @@ index.html
 
 | 版本 | 亮点 |
 |------|------|
+| **v0.2.0** | 项目定位转型为"期刊网页构建工具"、移除邮件相关功能（垃圾邮件评分、Outlook兼容检查）、导出HTML从table布局改为现代CSS div布局、暗色模式预览重命名、发布前检查重命名、品牌全面更新 |
 | **v0.1.3** | JSON 导入/导出、剪贴板复制粘贴、搜索过滤、7 键快捷键系统、DOM 缓存、IndexedDB 游标优化、深拷贝去重及 polyfill、CSS 性能优化（通配符/transition/will-change）、无障碍增强（aria-label/role/对比度修复）、Bug 修复（搜索激活/模板加载/未定义变量） |
 | **v0.1.2** | 组件级 Diff 渲染引擎、事件委托、防抖节流、XSS 修复、iframe 沙箱加固、JSDoc 注释规范 |
 | **v0.1.1** | 安全修复、逻辑 Bug 修复、左侧面板布局优化、欢迎弹窗、版本号统一 |
@@ -132,9 +133,9 @@ index.html
 
 | 功能 | 说明 |
 |------|------|
-| **暗色预览** | 一键切换画布暗色模式，预览读者端暗色效果 |
+| **暗色模式预览** | 一键切换画布暗色模式，预览读者端暗色效果 |
 | **WCAG-AA 审计** | 遍历所有组件，计算文字/背景对比度，按 WCAG 2.1 评级并给出修复建议 |
-| **发送前检查** | 6 项检查：图片完整性、链接空值、Alt 属性、移动端适配、对比度、垃圾邮件评分 |
+| **发布前检查** | 5 项检查：图片完整性、链接空值、Alt 属性、移动端适配、对比度合规 |
 | **版本历史** | 每次编辑自动保存快照到 IndexedDB（最多 50 帧），支持浏览、恢复、删除 |
 
 ### 数据持久化
@@ -149,7 +150,7 @@ index.html
 
 - 生成内联 CSS + 语义化 HTML
 - 自动注入暗色模式适配（`@media (prefers-color-scheme: dark)`）
-- 一键下载 `newsletter.html`
+- 一键下载 `journal-page.html`
 - **JSON 项目导出**：导出完整项目数据（组件、主题、字体、间距），支持跨设备迁移
 - **JSON 项目导入**：从 JSON 文件恢复完整项目，工具栏"导入"按钮
 - 支持嵌入 CMS、GitHub Pages、iframe 三种发布方式
